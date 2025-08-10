@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 418cf8dae91b5894c88fe4d0c8298ffb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -176,7 +176,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bulletRunningTime: 05000000070000000600000005000000040000000000000000000000000000000000000000000000
-  owner: 0
+  owner: {fileID: 0}
   bulletHitEnemy:
+    m_PersistentCalls:
+      m_Calls: []
+  bulletHitNothing:
+    m_PersistentCalls:
+      m_Calls: []
+  bulletHitSelf:
+    m_PersistentCalls:
+      m_Calls: []
+  effect1end:
     m_PersistentCalls:
       m_Calls: []
