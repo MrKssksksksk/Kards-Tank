@@ -28,7 +28,11 @@ public class UIManageScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.U))
+        if (GetComponent<PausePageScript>().isPause)
+        {
+
+        }
+        else if (Input.GetKey(KeyCode.U))
         {
             if (tankDataScript.items.Count >= 1)
             {
