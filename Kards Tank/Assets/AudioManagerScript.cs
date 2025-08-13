@@ -5,6 +5,12 @@ using UnityEngine;
 public class AudioManagerScript : MonoBehaviour
 {
     [SerializeField] AudioSource BgmAudio;
+    public AudioClip japBGM;
+    public AudioClip gerBGM;
+    public AudioClip sovBGM;
+    public AudioClip engBGM;
+    public AudioClip usaBGM;
+
     [SerializeField] AudioSource SfxAudio; //Sfx:音效
 
     public AudioClip MediumTankMove; //MT中型坦克 HT重型坦克
@@ -35,5 +41,9 @@ public class AudioManagerScript : MonoBehaviour
     void Start() //只是测试
     {
         PlaySfx(gerMillitaryMusic);
+
+        BgmAudio.clip = japBGM;
+        BgmAudio.Play();
     }
+
 }
