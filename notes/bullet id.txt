@@ -1,0 +1,6 @@
+bullet id
+0---basic
+1---snow
+2---85mm
+3---ib
+4---li // 轻步兵
