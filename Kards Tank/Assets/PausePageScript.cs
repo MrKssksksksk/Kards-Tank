@@ -43,6 +43,6 @@ public class PausePageScript : MonoBehaviour
 
     public void quitToMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("StartScene");
     }
 }

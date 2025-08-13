@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: d7bb18528300d0e4b9d58d67601743a0
+  - enabled: 1
+    path: Assets/Scenes/BetweenTurnScene.unity
+    guid: a971fc96409017446a25ba52c045daaf
   m_configObjects: {}

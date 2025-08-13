@@ -45,7 +45,6 @@ public class TankDataScript : MonoBehaviour
 
     void Start()
     {
-        // for (int i = 0; i < effects.Count; i++) effects[i] = false;
         cSupply = supplyCapacity;
         cHP = HP;
         if (country == "JAP") armorIntegrity = 0.8f;

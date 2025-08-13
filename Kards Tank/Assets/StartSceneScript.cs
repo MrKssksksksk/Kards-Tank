@@ -9,6 +9,6 @@ public class StartSceneScript : MonoBehaviour
     {
         // Scene currentScene = SceneManager.GetActiveScene();
         Debug.Log("button pressed.");
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MainScene");
     }
 }
