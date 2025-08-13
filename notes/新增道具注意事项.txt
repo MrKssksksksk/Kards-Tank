@@ -1,6 +1,6 @@
 新增道具注意事项
 1. 写进“items id.txt”里面
-2.  两个 TankDataScript.ItemCosts&ItemNames中添加
+2.  两个 TankDataScript.ItemCosts&ItemNames&ItmeTags中添加
 3. Resource Point及 两个 UIManageScript中添加图片
 4. 在Resource Point Spawner中填写生成权重
 5. TankMoveScript中完成效果书写，如有需要，添加使用名为effect的bool列表并在"effects id.txt"中添加，若装填子弹，注意在BulletScript中书写相关内容以及在Tank1MoveScript中添加debug增加

@@ -142,6 +142,28 @@ public class TankLogicScript : MonoBehaviour
         tankDataScript.itemDatas.RemoveAt(index);
     }
 
+    public int developItem(string tag)
+    {
+        List<int> items = new List<int>();
+        for (int i = 0; i < tankDataScript.itemTags.Count; i++)
+        {
+            if (tankDataScript.itemTags[i] != "" && tankDataScript.itemTags[i].Contains(tag))
+            {
+                items.Add(i);
+            }
+        }
+        if (items.Count > 0)
+        {
+            int x = UnityEngine.Random.Range(0, items.Count);
+            // Debug.Log("develop " + tankDataScript.itemNames[x]);
+            return items[x];
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
     public void pushBullet(int id)
     {
         // ¶¯»­

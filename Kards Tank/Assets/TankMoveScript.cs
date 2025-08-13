@@ -111,52 +111,75 @@ public class Tank1MoveScript : MonoBehaviour
                     item0TimerEnable = true;
 
                 }
-                if (itemId == 1) // 压制炮
+                else if (itemId == 1) // 压制炮
                 {
                     // 
                     tankLogicScript.pushBullet(2); // 85mm
                 }
-                if (itemId == 2) // 蟑螂车
+                else if (itemId == 2) // 蟑螂车
                 {
                     //
                     tankLogicScript.pushBullet(3); // ib
                 }
-                if (itemId == 3) // 转折点
+                else if (itemId == 3) // 转折点
                 {
                     //
                     tankDataScript.effects[5] = true;
                     item3TimerEnable = true;
                     item3Timer = 7f;
                 }
-                if (itemId == 4) // T-35
+                else if (itemId == 4) // T-35
                 {
                     // nothing happens
                 }
-                if (itemId == 5) // 列车
+                else if (itemId == 5) // 列车
                 {
                     // nothing happens
                 }
-                if (itemId == 6) // 红魔
+                else if (itemId == 6) // 红魔
                 {
                     // nothing happens
                 }
-                if (itemId == 7) // 偷袭
+                else if (itemId == 7) // 偷袭
                 {
                     // 音效
                     tankDataScript.effects[6] = true;
                 }
-                if (itemId == 8) // 金kv
+                else if (itemId == 8) // 金kv
                 {
                     // nothing happens
                 }
-                if (itemId == 9) // 海军力量
+                else if (itemId == 9) // 海军力量
                 {
                     tankLogicScript.Enemy.GetComponent<TankLogicScript>().pin();
                     tankDataScript.cHP += 30;
                 }
-                if (itemId == 10) // 守冲
+                else if (itemId == 10) // 守冲
                 {
                     // nothing
+                }
+                else if (itemId == 11) // 闪击战法
+                {
+                    int x = tankLogicScript.developItem("TANK");
+                    if (x != -1)
+                    {
+                        tankLogicScript.giveItem(x);
+                    }
+                    tankLogicScript.giveItem(12);
+                }
+                else if (itemId == 12) // 竞争战法
+                {
+                    int x = tankLogicScript.developItem("TANK");
+                    if (x != -1)
+                    {
+                        tankLogicScript.giveItem(x);
+                    }
+                    for (int i = 0; i < tankDataScript.FireConsumption.Count; i++)
+                    {
+                        if (tankDataScript.FireConsumption[i] >= 0.5f) tankDataScript.FireConsumption[i] -= 0.5f;
+                    }
+                    tankDataScript.armorThickness += 5;
+                    tankDataScript.hardDamage += 5;
                 }
 
             }

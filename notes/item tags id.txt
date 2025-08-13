@@ -1,0 +1,9 @@
+GER
+USA
+SOV
+JAP
+BRI
+ORDER
+ART 炮兵
+INF 步兵
+TANK

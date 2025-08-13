@@ -15,7 +15,6 @@ public class ResourcePointSpawnerScript : MonoBehaviour
     void Start()
     {
         spawnTimer = 0;
-        weightSum = spawnWeight.Sum();
     }
 
     // Update is called once per frame
@@ -32,6 +31,7 @@ public class ResourcePointSpawnerScript : MonoBehaviour
 
     private int randomId()
     {
+        weightSum = spawnWeight.Sum();
         int x = Random.Range(1, weightSum + 1);
         int s = 0;
         for (int i = 0;i < spawnWeight.Count;i++)
