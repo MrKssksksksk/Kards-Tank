@@ -21,31 +21,34 @@ public class GameoverManageScript : MonoBehaviour
 
     private void saveData()
     {
-        if (Static.playerDatas.Count != 2)
-        {
-            if (Static.playerDatas.Count == 1) Static.playerDatas.RemoveAt(0);
-            Static.playerDatas.Add(p1.GetComponent<TankDataScript>());
-            Static.playerDatas.Add(p2.GetComponent<TankDataScript>());
-        }
-        else
-        {
-            Static.playerDatas[0] = p1.GetComponent<TankDataScript>();
-            Static.playerDatas[1] = p2.GetComponent<TankDataScript>();
-        }
+        Debug.Log("Save Data");
+        //for (int i = 0; i < 2 - StaticData.Instance.playerDatas.Count; i++) StaticData.Instance.playerDatas.Add(new TankEssentialData());
+        //StaticData.Instance.playerDatas[0].input(p1.GetComponent<TankDataScript>());
+        //StaticData.Instance.playerDatas[1].input(p2.GetComponent<TankDataScript>());
+        if (StaticData.Instance.playerDatas.Count < 1) StaticData.Instance.playerDatas.Add(new TankEssentialData(p1.GetComponent<TankDataScript>()));
+        else StaticData.Instance.playerDatas[0].input(p1.GetComponent<TankDataScript>());
+        if (StaticData.Instance.playerDatas.Count < 2) StaticData.Instance.playerDatas.Add(new TankEssentialData(p2.GetComponent<TankDataScript>()));
+        else StaticData.Instance.playerDatas[1].input(p2.GetComponent<TankDataScript>());
+        Debug.Log("Save Data Succeed");
     }
 
     [ContextMenu("p1 win")]
     public void p1Win()
     {
+        p2.GetComponent<TankDataScript>().cHP = 9999; // 反正TankDataScript.Start()里面会重置，这里是防止再次触发Gameover
         saveData();
-        Static.p1Score++;
+        StaticData.Instance.p1Score++;
+        StaticData.Instance.turn++;
         SceneManager.LoadScene("MainScene"); // change to "BetweenTurnScene" after its finished
     }
+
     [ContextMenu("p2 win")]
     public void p2Win()
     {
+        p1.GetComponent<TankDataScript>().cHP = 9999;
         saveData();
-        Static.p2Score++;
+        StaticData.Instance.p2Score++;
+        StaticData.Instance.turn++;
         SceneManager.LoadScene("MainScene");
     }
 }

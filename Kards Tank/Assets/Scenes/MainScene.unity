@@ -2579,8 +2579,8 @@ GameObject:
   - component: {fileID: 799548255}
   - component: {fileID: 799548254}
   - component: {fileID: 799548259}
-  - component: {fileID: 799548253}
   - component: {fileID: 799548258}
+  - component: {fileID: 799548253}
   m_Layer: 0
   m_Name: Tank1
   m_TagString: Player
@@ -2796,6 +2796,7 @@ MonoBehaviour:
   supplyIncreaseTime: 2
   supplyConsumptionPerMove: 0.6
   supplyConsumptionPerTurn: 0.2
+  supplyComsumptionBonus: 0
   FireConsumption:
   - 4
   - 4
@@ -2807,7 +2808,6 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  supplyComsumptionBonus: 0
   cSupply: 0
   cHP: 0
   armorIntegrity: 0
@@ -2870,6 +2870,53 @@ MonoBehaviour:
   effects: 00000000000000000000
   pinTime: 3
   effect1BulletNum: 0
+--- !u!1 &823710614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 823710616}
+  - component: {fileID: 823710615}
+  m_Layer: 0
+  m_Name: StaticData Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &823710615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823710614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8766c1a4895d3904b97193e4a11337e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1Score: 0
+  p2Score: 0
+  turn: 1
+--- !u!4 &823710616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823710614}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1252.7264, y: 733.05664, z: 5.4804983}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &825282372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,6 +5357,7 @@ MonoBehaviour:
   supplyIncreaseTime: 2
   supplyConsumptionPerMove: 0.6
   supplyConsumptionPerTurn: 0.2
+  supplyComsumptionBonus: 0
   FireConsumption:
   - 4
   - 4
@@ -5321,7 +5369,6 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  supplyComsumptionBonus: 0
   cSupply: 0
   cHP: 0
   armorIntegrity: 0
@@ -7070,7 +7117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60c38c4e40ef9747aab85835552d7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank1: {fileID: 799548250}
+  tank: {fileID: 799548250}
   normalPage: {fileID: 386025688}
   nHP: {fileID: 1622713901}
   nSupply: {fileID: 1780796110}
@@ -7113,6 +7160,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   specialBulletsText: {fileID: 616735381}
+  debugFixPageIndex: 0
 --- !u!4 &1866137388
 Transform:
   m_ObjectHideFlags: 0
@@ -7140,7 +7188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b257281a524fa144fb2d9953aab0e705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank2: {fileID: 1497581438}
+  tank: {fileID: 1497581438}
   normalPage: {fileID: 952988280}
   nHP: {fileID: 1983943606}
   nSupply: {fileID: 206818862}
@@ -7183,6 +7231,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   specialBulletsText: {fileID: 901217426}
+  debugFixPageIndex: 0
 --- !u!114 &1866137390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8140,3 +8189,4 @@ SceneRoots:
   - {fileID: 1536434642}
   - {fileID: 1073066321}
   - {fileID: 1112182120}
+  - {fileID: 823710616}

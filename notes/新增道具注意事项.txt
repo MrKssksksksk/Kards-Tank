@@ -5,3 +5,5 @@
 4. 在Resource Point Spawner中填写生成权重
 5. TankMoveScript中完成效果书写，如有需要，添加使用名为effect的bool列表并在"effects id.txt"中添加，若装填子弹，注意在BulletScript中书写相关内容以及在Tank1MoveScript中添加debug增加
 6. 如果使用后创造了限制条件，请把逻辑链条写在TankLogicScript中
+
+如果在TankDataScript中增加了新的public变量且需要在回合更替时传递，写进TankEssentialData.cs里面

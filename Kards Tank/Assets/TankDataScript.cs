@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TankDataScript : MonoBehaviour
 {
-    public int playerIndex; // 1 or 2
+    public int playerIndex; // 0 or 1
     public string country, ally;
     /*
      * country
@@ -26,8 +26,8 @@ public class TankDataScript : MonoBehaviour
     public int HP, armorThickness, hardDamage, softDamage, supplyCapacity, moveSpeed, turnSpeed, bulletSpeed, reloadTime,
         supplyIncreaseTime;
     public float supplyConsumptionPerMove, supplyConsumptionPerTurn;
-    public List<float> FireConsumption = new List<float>();
     public float supplyComsumptionBonus; // <0 -> benificial, only work on move and turn
+    public List<float> FireConsumption = new List<float>();
     // real-time datas
     public float cSupply; // c for current
     public int cHP;

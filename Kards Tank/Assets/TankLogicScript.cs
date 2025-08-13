@@ -14,9 +14,9 @@ public class TankLogicScript : MonoBehaviour
 
     private void Start()
     {
-        if (Static.turn > 1)
+        if (StaticData.Instance.turn > 1)
         {
-            tankDataScript = Static.playerDatas[tankDataScript.playerIndex];
+            StaticData.Instance.playerDatas[tankDataScript.playerIndex].output(tankDataScript);
             tankDataScript.supplyCapacity += 1;
         }
         supplyIncreaseTimer = 0;
