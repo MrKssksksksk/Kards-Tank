@@ -10,6 +10,14 @@ public class StaticData : MonoBehaviour
     public int p1Score = 0, p2Score = 0;
     public int turn = 1;
 
+    public void initialize() // run when quit to menu
+    {
+        playerDatas.Clear();
+        p1Score = 0;
+        p2Score = 0;
+        turn = 1;
+    }
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,4 +30,5 @@ public class StaticData : MonoBehaviour
             Destroy(gameObject); // ∑¿÷π÷ÿ∏¥
         }
     }
+
 }
