@@ -35,41 +35,11 @@ public class UIManageScript : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<PausePageScript>().isPause)
-        {
-
-        }
-        else if (debugFixPageIndex != 0)
-        {
-            Render(debugFixPageIndex);
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.U))
-            {
-                pageIndex = 3;
-            }
-            else if (Input.GetKey(KeyCode.I))
-            {
-                pageIndex = 2;
-            }
-            else
-            {
-                pageIndex = 1;
-            }
-            Render(pageIndex);
-        }
-        
+        RenderNormalPage();
+        RenderItemPage();
+        RenderInfoPage();
     }
-
-    private void Render(int index)
-    {
-        if (index == 1) RenderNormalPage();
-        else if (index == 2) RenderInformationPage();
-        else if (index == 3) RenderItemPage();
-    }
-
-
+    
     //渲染普通交互界面
     private void RenderNormalPage()
     {
@@ -100,13 +70,11 @@ public class UIManageScript : MonoBehaviour
         }
 
         nEffectsText.text = text;
-        itemPage.SetActive(false);
-        informationPage.SetActive(false);
         normalPage.SetActive(true);
     }
 
     //渲染信息界面
-    private void RenderInformationPage()
+    private void RenderInfoPage()
     {
         iCountry.text = tankDataScript.country;
         iAlly.text = tankDataScript.ally;
@@ -115,9 +83,7 @@ public class UIManageScript : MonoBehaviour
         iSoftDamage.text = tankDataScript.softDamage.ToString();
         iSupplyCapacity.text = tankDataScript.supplyCapacity.ToString();
         iSupplyBonus.text = tankDataScript.supplyComsumptionBonus.ToString();
-        itemPage.SetActive(false);
         informationPage.SetActive(true);
-        normalPage.SetActive(false);
     }
 
     //渲染道具界面
@@ -174,7 +140,5 @@ public class UIManageScript : MonoBehaviour
         }
 
         itemPage.SetActive(true);
-        informationPage.SetActive(false);
-        normalPage.SetActive(false);
     }
 }
