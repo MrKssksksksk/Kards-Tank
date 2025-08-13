@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,10 +12,10 @@ public class ResourcePointScript : MonoBehaviour
 
     /*
      * type: 
-     * 1: µÀ¾ß
-     * 2: »ØÑª
+     * 1: é“å…·
+     * 2: å›è¡€
      * 
-     * id: ²ÎÕÕ¶ÔÕÕ±í
+     * id: å‚ç…§å¯¹ç…§è¡¨
      */
 
 
@@ -48,7 +48,7 @@ public class ResourcePointScript : MonoBehaviour
             TankLogicScript tankLogicScript = collision.gameObject.GetComponent<TankLogicScript>();
             
             tankLogicScript.giveItem(id);
-            // ºóĞøÒôĞ§¿ÉÒÔÌí¼Ó
+            // åç»­éŸ³æ•ˆå¯ä»¥æ·»åŠ 
 
 
             Destroy(gameObject);

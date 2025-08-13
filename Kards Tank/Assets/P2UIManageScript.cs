@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +28,87 @@ public class P2UIManageScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.KeypadDivide))
+        if (GetComponent<PausePageScript>().isPause)
+        {
+
+        }
+        else{
+            if (Input.GetKey(KeyCode.KeypadDivide))
+            {
+                
+            }
+            else if (Input.GetKey(KeyCode.KeypadMultiply))
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        
+    }
+
+    private void RenderNormalPage(bool condition = true) //æ³¨é‡ŠåŒP1UI
+    {
+        if (condition)
+        {
+            nHP.text = tankDataScript.cHP.ToString() + "/" + tankDataScript.HP.ToString();
+            nSupply.text = (Mathf.Round(tankDataScript.cSupply * 10f) / 10f).ToString() + "/" + tankDataScript.supplyCapacity.ToString() + ".0";
+            nArmorIntegrity.text = ((Mathf.Round(100f * tankDataScript.armorIntegrity)) / 100f).ToString() + "/1.00";
+            string text = "";
+            if (tankDataScript.effects[0]) text += "åŽ‹åˆ¶";
+            if (tankDataScript.effects[1])
+            {
+                if (text != "") text += "ï¼Œ";
+                text += "å†²å‡»";
+            }
+            if (tankDataScript.effects[2])
+            {
+                if (text != "") text += "ï¼Œ";
+                text += "ä¼å‡»";
+            }
+            if (tankLogicScript.isImmune())
+            {
+                if (text != "") text += "ï¼Œ";
+                text += "å…ç–«";
+            }
+            if (!tankLogicScript.canUseItem())
+            {
+                if (text != "") text += "ï¼Œ";
+                text += "æ— æ³•ä½¿ç”¨é“å…·";
+            }
+
+            nEffectsText.text = text;
+            itemPage.SetActive(false);
+            informationPage.SetActive(false);
+            normalPage.SetActive(true);
+            itemPage.SetActive(false);
+            informationPage.SetActive(false);
+            normalPage.SetActive(true);
+        }
+    }
+
+    private void RenderInformationPage(bool condition = true)
+    {
+        if (condition)
+        {
+            iCountry.text = tankDataScript.country;
+            iAlly.text = tankDataScript.ally;
+            iArmorThickness.text = tankDataScript.armorThickness.ToString();
+            iHardDamage.text = tankDataScript.hardDamage.ToString();
+            iSoftDamage.text = tankDataScript.softDamage.ToString();
+            iSupplyCapacity.text = tankDataScript.supplyCapacity.ToString();
+            iSupplyBonus.text = tankDataScript.supplyComsumptionBonus.ToString();
+            itemPage.SetActive(false);
+            informationPage.SetActive(true);
+            normalPage.SetActive(false);
+        }
+    }
+
+    private void RenderItemPage(bool condition = true)
+    {
+        if (condition)
         {
             if (tankDataScript.items.Count >= 1)
             {
@@ -83,55 +163,6 @@ public class P2UIManageScript : MonoBehaviour
             itemPage.SetActive(true);
             informationPage.SetActive(false);
             normalPage.SetActive(false);
-        }
-        else if (Input.GetKey(KeyCode.KeypadMultiply))
-        {
-            iCountry.text = tankDataScript.country;
-            iAlly.text = tankDataScript.ally;
-            iArmorThickness.text = tankDataScript.armorThickness.ToString();
-            iHardDamage.text = tankDataScript.hardDamage.ToString();
-            iSoftDamage.text = tankDataScript.softDamage.ToString();
-            iSupplyCapacity.text = tankDataScript.supplyCapacity.ToString();
-            iSupplyBonus.text = tankDataScript.supplyComsumptionBonus.ToString();
-            itemPage.SetActive(false);
-            informationPage.SetActive(true);
-            normalPage.SetActive(false);
-        }
-        else
-        {
-            nHP.text = tankDataScript.cHP.ToString() + "/" + tankDataScript.HP.ToString();
-            nSupply.text = (Mathf.Round(tankDataScript.cSupply * 10f) / 10f).ToString() + "/" + tankDataScript.supplyCapacity.ToString() + ".0";
-            nArmorIntegrity.text = ((Mathf.Round(100f * tankDataScript.armorIntegrity)) / 100f).ToString() + "/1.00";
-            string text = "";
-            if (tankDataScript.effects[0]) text += "Ñ¹ÖÆ";
-            if (tankDataScript.effects[1])
-            {
-                if (text != "") text += "£¬";
-                text += "³å»÷";
-            }
-            if (tankDataScript.effects[2])
-            {
-                if (text != "") text += "£¬";
-                text += "·ü»÷";
-            }
-            if (tankLogicScript.isImmune())
-            {
-                if (text != "") text += "£¬";
-                text += "ÃâÒß";
-            }
-            if (!tankLogicScript.canUseItem())
-            {
-                if (text != "") text += "£¬";
-                text += "ÎÞ·¨Ê¹ÓÃµÀ¾ß";
-            }
-
-            nEffectsText.text = text;
-            itemPage.SetActive(false);
-            informationPage.SetActive(false);
-            normalPage.SetActive(true);
-            itemPage.SetActive(false);
-            informationPage.SetActive(false);
-            normalPage.SetActive(true);
         }
     }
 }
