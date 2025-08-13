@@ -176,7 +176,7 @@ public class Tank1MoveScript : MonoBehaviour
                     }
                     for (int i = 0; i < tankDataScript.FireConsumption.Count; i++)
                     {
-                        if (tankDataScript.FireConsumption[i] >= 0.5f) tankDataScript.FireConsumption[i] -= 0.5f;
+                        if (tankDataScript.FireConsumption[i] >= 2.5f) tankDataScript.FireConsumption[i] -= 0.5f; // ×î¶à¼õµ½2
                     }
                     tankDataScript.armorThickness += 5;
                     tankDataScript.hardDamage += 5;
