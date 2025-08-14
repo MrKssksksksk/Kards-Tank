@@ -2,7 +2,7 @@ GER
 USA
 SOV
 JAP
-BRI
+ENG
 ORDER
 ART 炮兵
 INF 步兵

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class TankLogicScript : MonoBehaviour
 {
+    public AudioManagerScript audioManagerScript;
     public GameObject Enemy;
     public TankDataScript tankDataScript;
     public GameObject tankEffect;
@@ -87,6 +88,7 @@ public class TankLogicScript : MonoBehaviour
             }
             for (int i = 0; i < t35Num; i++)
             {
+                audioManagerScript.PlaySfx(1); // 小坦克射击
                 Enemy.GetComponent<TankLogicScript>().damage(5);
                 damage(5);
             }
@@ -98,6 +100,7 @@ public class TankLogicScript : MonoBehaviour
             int trainNum = tankDataScript.items.FindAll(t => t == 5).Count;
             for (int i = 0; i < trainNum; i++)
             {
+                audioManagerScript.PlaySfx(5);
                 pushBullet(4);
             }
         }
@@ -128,7 +131,7 @@ public class TankLogicScript : MonoBehaviour
 
     public void giveItem(int id)
     {
-        // 后续添加显示动画及音效
+        audioManagerScript.PlaySfx(15);
         if (tankDataScript.items.Count < 3)
         {
             tankDataScript.items.Add(id);
@@ -214,7 +217,11 @@ public class TankLogicScript : MonoBehaviour
             tankDataScript.itemDatas[2]++;
             if (tankDataScript.itemDatas[2] >= 4) removeItem(2);
         }
-        for (int i = 0; i < KV1Num; i++) Enemy.GetComponent<TankLogicScript>().damage(30);
+        for (int i = 0; i < KV1Num; i++)
+        {
+            audioManagerScript.PlaySfx(14);
+            Enemy.GetComponent<TankLogicScript>().damage(30);
+        }
     }
 
     public bool canUseItem()

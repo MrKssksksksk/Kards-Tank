@@ -9,6 +9,7 @@ public class Tank1MoveScript : MonoBehaviour
     public TankDataScript tankDataScript;
     public TankLogicScript tankLogicScript;
     public Rigidbody2D rb;
+    public AudioManagerScript audioManagerScript;
     public GameObject bullet;
     public bool debug = false;
     public float degree;
@@ -116,17 +117,17 @@ public class Tank1MoveScript : MonoBehaviour
                 }
                 else if (itemId == 1) // 压制炮
                 {
-                    // 
+                    audioManagerScript.PlaySfx(18); // 苏联炮部署
                     tankLogicScript.pushBullet(2); // 85mm
                 }
                 else if (itemId == 2) // 蟑螂车
                 {
-                    //
+                    audioManagerScript.PlaySfx(0); // 小坦克移动
                     tankLogicScript.pushBullet(3); // ib
                 }
                 else if (itemId == 3) // 转折点
                 {
-                    //
+                    audioManagerScript.PlaySfx(7); // 转折点
                     tankDataScript.effects[5] = true;
                     item3TimerEnable = true;
                     item3Timer = 7f;
@@ -145,7 +146,7 @@ public class Tank1MoveScript : MonoBehaviour
                 }
                 else if (itemId == 7) // 偷袭
                 {
-                    // 音效
+                    audioManagerScript.PlaySfx(9); // 偷袭
                     tankDataScript.effects[6] = true;
                 }
                 else if (itemId == 8) // 金kv
@@ -154,6 +155,7 @@ public class Tank1MoveScript : MonoBehaviour
                 }
                 else if (itemId == 9) // 海军力量
                 {
+                    audioManagerScript.PlaySfx(13); // 海军力量
                     tankLogicScript.Enemy.GetComponent<TankLogicScript>().pin();
                     tankDataScript.cHP += 30;
                 }
@@ -163,6 +165,7 @@ public class Tank1MoveScript : MonoBehaviour
                 }
                 else if (itemId == 11) // 闪击战法
                 {
+                    audioManagerScript.PlaySfx(11); // 闪击战法
                     int x = tankLogicScript.developItem("TANK");
                     if (x != -1)
                     {
@@ -172,6 +175,7 @@ public class Tank1MoveScript : MonoBehaviour
                 }
                 else if (itemId == 12) // 竞争战法
                 {
+                    audioManagerScript.PlaySfx(12); // 竞争战法
                     int x = tankLogicScript.developItem("TANK");
                     if (x != -1)
                     {

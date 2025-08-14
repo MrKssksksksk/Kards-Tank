@@ -1939,6 +1939,7 @@ MonoBehaviour:
   tankDataScript: {fileID: 799548259}
   tankLogicScript: {fileID: 799548258}
   rb: {fileID: 799548254}
+  audioManagerScript: {fileID: 1243054046}
   bullet: {fileID: 6463646265346759255, guid: 64ecd618fa7bd564a965213c88be008d, type: 3}
   debug: 1
   degree: 0
@@ -2102,6 +2103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7804a67946704a47a66ed11408cf5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManagerScript: {fileID: 1243054046}
   Enemy: {fileID: 1497581438}
   tankDataScript: {fileID: 799548259}
   tankEffect: {fileID: 6296102505115425674, guid: e1ef18ea359c6eb4bb749dec940857ac, type: 3}
@@ -2192,7 +2194,7 @@ MonoBehaviour:
   - USA INF
   - JAP ORDER
   - SOV TANK
-  - BRI ORDER
+  - ENG ORDER
   - SOV INF
   - GER ORDER
   - GER ORDER
@@ -2771,7 +2773,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3165,6 +3167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1: {fileID: 799548250}
   p2: {fileID: 1497581438}
+  audioManagerScript: {fileID: 1243054046}
 --- !u!4 &1112182120
 Transform:
   m_ObjectHideFlags: 0
@@ -3442,26 +3445,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BgmAudio: {fileID: 1024674969}
-  japBGM: {fileID: 8300000, guid: 3734dfb7a5475c84984f6aa0c5099e92, type: 3}
-  gerBGM: {fileID: 8300000, guid: 6daab7bbdc62f9947916dd9b5d9ec894, type: 3}
-  sovBGM: {fileID: 8300000, guid: 42a40fd906dd99d46bd1431c7f042785, type: 3}
-  engBGM: {fileID: 8300000, guid: 3dbcba231967f224280233b9396ad984, type: 3}
-  usaBGM: {fileID: 8300000, guid: a25f648460993bb49a3e7e35fa35a2e3, type: 3}
+  bgmList:
+  - {fileID: 8300000, guid: 3734dfb7a5475c84984f6aa0c5099e92, type: 3}
+  - {fileID: 8300000, guid: 6daab7bbdc62f9947916dd9b5d9ec894, type: 3}
+  - {fileID: 8300000, guid: 42a40fd906dd99d46bd1431c7f042785, type: 3}
+  - {fileID: 8300000, guid: 3dbcba231967f224280233b9396ad984, type: 3}
+  - {fileID: 8300000, guid: a25f648460993bb49a3e7e35fa35a2e3, type: 3}
   SfxAudio: {fileID: 20677464}
-  MediumTankMove: {fileID: 8300000, guid: 6e9965e8ecc7d504da05a6a238103ef9, type: 3}
-  MediumTankAttack: {fileID: 8300000, guid: 73f81cc14b7ec6943a4a1ee2bd865bb1, type: 3}
-  HeavyTankMove: {fileID: 8300000, guid: 2935d1d76f4b77548a067a5cc0dffd1b, type: 3}
-  HeavyTankAttack: {fileID: 8300000, guid: 92be67543cd8a2d4f857d8527f4695b3, type: 3}
-  DecreaseActionCost: {fileID: 8300000, guid: 62d0e02fa17ecb748952cd103c9f6ce7, type: 3}
-  Trigger: {fileID: 8300000, guid: 23197092b3eabaf428853cad6f3dab06, type: 3}
-  sovLashen: {fileID: 8300000, guid: 4188adaad2edace4893ec48652842f2e, type: 3}
-  sovSu: {fileID: 8300000, guid: fba4d67d82e4e434ab5a15a0fedb68ed, type: 3}
-  japTaiko2: {fileID: 8300000, guid: 16e994be34e0bdd4e85f51ee5e3cd723, type: 3}
-  japSurpriseAttack: {fileID: 8300000, guid: 559c1900c4125f14db5ea40827ab62f1, type: 3}
-  gerMillitaryMusic: {fileID: 8300000, guid: 8ea3d468458c7dd41bf070da114a8ca4, type: 3}
-  gerBlitzDoctrine: {fileID: 8300000, guid: e163052171a322c47bd1ce0b4be0d6e7, type: 3}
-  gerContestDoctrine: {fileID: 8300000, guid: 505e8644f67b73e4aaf25996a13db09f, type: 3}
-  engNavalPower: {fileID: 8300000, guid: c269fd6cec62a3249b62fafca7fef612, type: 3}
+  sfxList:
+  - {fileID: 8300000, guid: 6e9965e8ecc7d504da05a6a238103ef9, type: 3}
+  - {fileID: 8300000, guid: 73f81cc14b7ec6943a4a1ee2bd865bb1, type: 3}
+  - {fileID: 8300000, guid: 2935d1d76f4b77548a067a5cc0dffd1b, type: 3}
+  - {fileID: 8300000, guid: 92be67543cd8a2d4f857d8527f4695b3, type: 3}
+  - {fileID: 8300000, guid: 62d0e02fa17ecb748952cd103c9f6ce7, type: 3}
+  - {fileID: 8300000, guid: 23197092b3eabaf428853cad6f3dab06, type: 3}
+  - {fileID: 8300000, guid: 4188adaad2edace4893ec48652842f2e, type: 3}
+  - {fileID: 8300000, guid: fba4d67d82e4e434ab5a15a0fedb68ed, type: 3}
+  - {fileID: 8300000, guid: 16e994be34e0bdd4e85f51ee5e3cd723, type: 3}
+  - {fileID: 8300000, guid: 559c1900c4125f14db5ea40827ab62f1, type: 3}
+  - {fileID: 8300000, guid: 8ea3d468458c7dd41bf070da114a8ca4, type: 3}
+  - {fileID: 8300000, guid: e163052171a322c47bd1ce0b4be0d6e7, type: 3}
+  - {fileID: 8300000, guid: 505e8644f67b73e4aaf25996a13db09f, type: 3}
+  - {fileID: 8300000, guid: c269fd6cec62a3249b62fafca7fef612, type: 3}
+  - {fileID: 8300000, guid: a816b9b5cb7b3ad4896a28b89d45bf18, type: 3}
+  - {fileID: 8300000, guid: 540446a0b0e146e44a07a6b9db2901f0, type: 3}
+  - {fileID: 8300000, guid: 5e0b4b6fa117e384a88b331fd3f0dfdb, type: 3}
+  - {fileID: 8300000, guid: d5553d4ef365a1749947725571a8c729, type: 3}
+  - {fileID: 8300000, guid: c08f99abd00232a49bc8c052a541b6bb, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1243054047
 Transform:
   m_ObjectHideFlags: 0
@@ -4223,6 +4244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7804a67946704a47a66ed11408cf5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManagerScript: {fileID: 1243054046}
   Enemy: {fileID: 799548250}
   tankDataScript: {fileID: 1497581441}
   tankEffect: {fileID: 6296102505115425674, guid: e1ef18ea359c6eb4bb749dec940857ac, type: 3}
@@ -4313,7 +4335,7 @@ MonoBehaviour:
   - USA INF
   - JAP ORDER
   - SOV TANK
-  - BRI ORDER
+  - ENG ORDER
   - SOV INF
   - GER ORDER
   - GER ORDER
@@ -4481,6 +4503,7 @@ MonoBehaviour:
   tankDataScript: {fileID: 1497581441}
   tankLogicScript: {fileID: 1497581440}
   rb: {fileID: 1497581442}
+  audioManagerScript: {fileID: 1243054046}
   bullet: {fileID: 6463646265346759255, guid: 64ecd618fa7bd564a965213c88be008d, type: 3}
   debug: 0
   degree: 180
@@ -5779,9 +5802,6 @@ MonoBehaviour:
   item1Image: {fileID: 1554209005}
   item2Image: {fileID: 342039876}
   item3Image: {fileID: 278197462}
-  item1Text: {fileID: 508119155}
-  item2Text: {fileID: 1358110572}
-  item3Text: {fileID: 993523870}
   sprites:
   - {fileID: 21300000, guid: 528755cdfa87a484ab30980b74d5964c, type: 3}
   - {fileID: 21300000, guid: 036811f4a84d4a6418710d9207c6cc2b, type: 3}

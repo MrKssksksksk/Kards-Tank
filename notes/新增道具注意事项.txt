@@ -7,3 +7,7 @@
 6. 如果使用后创造了限制条件，请把逻辑链条写在TankLogicScript中
 
 如果在TankDataScript中增加了新的public变量且需要在回合更替时传递，写进TankEssentialData.cs里面
+
+添加音效
+1. 写进Sfx id.txt里面
+2. 在Audio Manager里面添加

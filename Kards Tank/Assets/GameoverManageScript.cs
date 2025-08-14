@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameoverManageScript : MonoBehaviour
 {
     public GameObject p1, p2;
+    public AudioManagerScript audioManagerScript;
 
     private void Update()
     {
@@ -35,6 +36,7 @@ public class GameoverManageScript : MonoBehaviour
     [ContextMenu("p1 win")]
     public void p1Win()
     {
+        audioManagerScript.PlaySfx(17); // 总部爆炸
         p2.GetComponent<TankDataScript>().cHP = 9999; // 反正TankDataScript.Start()里面会重置，这里是防止再次触发Gameover
         saveData();
         StaticData.Instance.p1Score++;
@@ -45,6 +47,7 @@ public class GameoverManageScript : MonoBehaviour
     [ContextMenu("p2 win")]
     public void p2Win()
     {
+        audioManagerScript.PlaySfx(17); // 总部爆炸
         p1.GetComponent<TankDataScript>().cHP = 9999;
         saveData();
         StaticData.Instance.p2Score++;
