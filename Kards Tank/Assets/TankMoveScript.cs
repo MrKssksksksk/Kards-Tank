@@ -48,6 +48,7 @@ public class Tank1MoveScript : MonoBehaviour
             }
             direction = new Vector2(Mathf.Cos(degree * Mathf.Deg2Rad), Mathf.Sin(degree * Mathf.Deg2Rad));
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, degree));
+
             vertical = (Input.GetKey(UpKey) ? 1 : 0) - (Input.GetKey(DownKey) ? 1 : 0);
             if (vertical != 0 && (tankDataScript.cSupply > 0 || !tankLogicScript.doConsumeSupply()))
             {
@@ -72,7 +73,9 @@ public class Tank1MoveScript : MonoBehaviour
         if (fireCoolDownTimer > 0) fireCoolDownTimer -= Time.deltaTime;
         if (tankLogicScript.canFire())
         {
-            if (fireCoolDownTimer <= 0 && Input.GetKeyUp(FireKey) && (tankDataScript.cSupply > tankDataScript.FireConsumption[tankDataScript.specialBullets.Count != 0 ? tankDataScript.specialBullets.Peek() : 0] || !tankLogicScript.doConsumeSupply()))
+            if (fireCoolDownTimer <= 0 && Input.GetKeyUp(FireKey) && 
+                (tankDataScript.cSupply > tankDataScript.FireConsumption[tankDataScript.specialBullets.Count != 0 ? tankDataScript.specialBullets.Peek() : 0] || 
+                !tankLogicScript.doConsumeSupply()))
             {
                 fireCoolDownTimer = tankDataScript.reloadTime;
                 if (tankLogicScript.doConsumeSupply()) tankDataScript.cSupply -= tankDataScript.FireConsumption[tankDataScript.specialBullets.Count != 0 ? tankDataScript.specialBullets.Peek() : 0];
