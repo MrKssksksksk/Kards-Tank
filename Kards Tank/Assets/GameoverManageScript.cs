@@ -41,7 +41,7 @@ public class GameoverManageScript : MonoBehaviour
         saveData();
         StaticData.Instance.p1Score++;
         StaticData.Instance.turn++;
-        SceneManager.LoadScene("MainScene"); // change to "BetweenTurnScene" after its finished
+        SceneManager.LoadScene("BetweenTurnScene");
     }
 
     [ContextMenu("p2 win")]
@@ -52,6 +52,6 @@ public class GameoverManageScript : MonoBehaviour
         saveData();
         StaticData.Instance.p2Score++;
         StaticData.Instance.turn++;
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("BetweenTurnScene");
     }
 }
