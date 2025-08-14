@@ -12,14 +12,13 @@ public class UIManageScript : MonoBehaviour
     public GameObject normalPage;
     public Text nHP, nSupply, nArmorIntegrity, nEffectsText;
     public GameObject informationPage;
-    public Text iCountry, iAlly, iArmorThickness, iHardDamage, iSoftDamage, iSupplyCapacity, iSupplyBonus;
+    public Text iArmorThickness, iHardDamage, iSoftDamage;
+    public Image MainPower, Ally;
     public GameObject itemPage;
     public Image item1Image, item2Image, item3Image;
-    public Text item1Text, item2Text, item3Text;
     public List<Sprite> sprites = new List<Sprite>();
     public Text specialBulletsText;
     public int debugFixPageIndex;
-    private int pageIndex;
     /*
      * 1 Normal Page
      * 2 Information Page
@@ -39,7 +38,7 @@ public class UIManageScript : MonoBehaviour
         RenderItemPage();
         RenderInfoPage();
     }
-    
+
     //渲染普通交互界面
     private void RenderNormalPage()
     {
@@ -47,25 +46,25 @@ public class UIManageScript : MonoBehaviour
         nSupply.text = (Mathf.Round(tankDataScript.cSupply * 10f) / 10f).ToString() + "/" + tankDataScript.supplyCapacity.ToString() + ".0";
         nArmorIntegrity.text = (Mathf.Round(100f * tankDataScript.armorIntegrity) / 100f).ToString() + "/1.00";
         string text = "";
-        if (tankDataScript.effects[0]) text += "压制";
+        if (tankDataScript.effects[0]) text += "被压制";
         if (tankDataScript.effects[1])
         {
-            if (text != "") text += "，";
+            if (text != "") text += " ";
             text += "冲击";
         }
         if (tankDataScript.effects[2])
         {
-            if (text != "") text += "，";
+            if (text != "") text += " ";
             text += "伏击";
         }
         if (tankLogicScript.isImmune())
         {
-            if (text != "") text += "，";
+            if (text != "") text += " ";
             text += "免疫";
         }
         if (!tankLogicScript.canUseItem())
         {
-            if (text != "") text += "，";
+            if (text != "") text += " ";
             text += "无法使用道具";
         }
 
@@ -76,13 +75,11 @@ public class UIManageScript : MonoBehaviour
     //渲染信息界面
     private void RenderInfoPage()
     {
-        iCountry.text = tankDataScript.country;
-        iAlly.text = tankDataScript.ally;
+        _LoadCountryIcon(MainPower, tankDataScript.country);
+        _LoadCountryIcon(Ally, tankDataScript.ally);
         iArmorThickness.text = tankDataScript.armorThickness.ToString();
         iHardDamage.text = tankDataScript.hardDamage.ToString();
         iSoftDamage.text = tankDataScript.softDamage.ToString();
-        iSupplyCapacity.text = tankDataScript.supplyCapacity.ToString();
-        iSupplyBonus.text = tankDataScript.supplyComsumptionBonus.ToString();
         informationPage.SetActive(true);
     }
 
@@ -92,44 +89,29 @@ public class UIManageScript : MonoBehaviour
         if (tankDataScript.items.Count >= 1)
         {
             item1Image.sprite = sprites[tankDataScript.items[0]];
-            item1Text.text = tankDataScript.itemNames[tankDataScript.items[0]] + "\n" + tankDataScript.itemCosts[tankDataScript.items[0]] + "K";
-            if (tankDataScript.items[0] == 4) item1Text.text += " " + tankDataScript.itemDatas[0] + "/8";
-            if (tankDataScript.items[0] == 8) item1Text.text += " " + tankDataScript.itemDatas[0] + "/4";
             item1Image.enabled = true;
-            item1Text.enabled = true;
         }
         else
         {
             item1Image.enabled = false;
-            item1Text.enabled = false;
         }
         if (tankDataScript.items.Count >= 2)
         {
             item2Image.sprite = sprites[tankDataScript.items[1]];
-            item2Text.text = tankDataScript.itemNames[tankDataScript.items[1]] + "\n" + tankDataScript.itemCosts[tankDataScript.items[1]] + "K";
-            if (tankDataScript.items[1] == 4) item2Text.text += " " + tankDataScript.itemDatas[1] + "/8";
-            if (tankDataScript.items[0] == 8) item1Text.text += " " + tankDataScript.itemDatas[0] + "/4";
             item2Image.enabled = true;
-            item2Text.enabled = true;
         }
         else
         {
             item2Image.enabled = false;
-            item2Text.enabled = false;
         }
         if (tankDataScript.items.Count >= 3)
         {
             item3Image.sprite = sprites[tankDataScript.items[2]];
-            item3Text.text = tankDataScript.itemNames[tankDataScript.items[2]] + "\n" + tankDataScript.itemCosts[tankDataScript.items[2]] + "K";
-            if (tankDataScript.items[2] == 4) item3Text.text += " " + tankDataScript.itemDatas[2] + "/8";
-            if (tankDataScript.items[0] == 8) item1Text.text += " " + tankDataScript.itemDatas[0] + "/4";
             item3Image.enabled = true;
-            item3Text.enabled = true;
         }
         else
         {
             item3Image.enabled = false;
-            item3Text.enabled = false;
         }
 
         specialBulletsText.text = "";
@@ -140,5 +122,19 @@ public class UIManageScript : MonoBehaviour
         }
 
         itemPage.SetActive(true);
+    }
+
+    //加载图标主国盟国时用
+    private void _LoadCountryIcon(Image Image, string Country) //Country = 'GER'之类
+    {
+        Sprite icon = Resources.Load<Sprite>("CountriesIcon/" + Country);
+        if (icon != null)
+        {
+            Image.sprite = icon;
+        }
+        else
+        {
+            Debug.Log("Failed to load" + Country + ".png");
+        }
     }
 }
