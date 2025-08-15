@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourcePointSpawnerScript : MonoBehaviour
 {
+    //道具生成
     public GameObject resourcePoint;
     public int spawnTime;
     private float spawnTimer;
@@ -34,7 +37,7 @@ public class ResourcePointSpawnerScript : MonoBehaviour
         weightSum = spawnWeight.Sum();
         int x = Random.Range(1, weightSum + 1);
         int s = 0;
-        for (int i = 0;i < spawnWeight.Count;i++)
+        for (int i = 0; i < spawnWeight.Count; i++)
         {
             s += spawnWeight[i];
             if (x <= s)
@@ -57,4 +60,5 @@ public class ResourcePointSpawnerScript : MonoBehaviour
     {
         for (int i = 0; i < 5; i++) generateResourcePoint();
     }
+
 }

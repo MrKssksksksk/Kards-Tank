@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8591777859241881196}
   - component: {fileID: 338666740333780853}
   m_Layer: 0
-  m_Name: Resource Point
+  m_Name: Item On Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

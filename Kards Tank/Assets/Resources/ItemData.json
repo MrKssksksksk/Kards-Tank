@@ -1,0 +1,14 @@
+﻿{
+    "item":[
+        {
+            "Id":1,
+            "Cost":1,
+            "Weight":1,
+            "ExistenceTime":10,
+            "Name":"1",
+            "Description":"just 1",
+            "IconPath":"Just Path",
+            "Type":1
+        }
+    ]
+}
