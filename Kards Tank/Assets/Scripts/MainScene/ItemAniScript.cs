@@ -8,44 +8,46 @@ using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEditor.UI;
 using System.Threading.Tasks;
+using static UnityEditor.Progress;
 
-public class ItemScript : MonoBehaviour
+public class ItemAniScript : MonoBehaviour
 {
     public SpriteRenderer SelfRenderer;
-    public float P1Targetx = -11.45f;
-    public float P2Targetx = 11.45f;
-    public float Width = 1.1f;
-    public float Y = -5.6f;
-    public float TargetRotation = 10f;
-    public TankDataScript PlayerData;
-    public GameObject P1Tank; //test
+    public float P1Targetx;
+    public float P2Targetx;
+    public float Width;
+    public float Y;
+    public float TargetRotation;
+    public ItemLogicScript itemLogicScript;
+    public List<Sprite> sprites;
+    private int slot;
 
 
     async void Start() //test
     {
         DOTween.Init();
         SelfRenderer = GetComponent<SpriteRenderer>();
+        setSprite(itemLogicScript.id);
         ItemData e = GameObject.FindGameObjectWithTag("ItemManager")
         .GetComponent<ItemDataScript>()
         .Example1;
-        await DrawCard(P1Tank, e);
-        await UseCard(P1Tank, e);
+        await DrawCard();
+        await UseCard();
     }
 
-    public async Task DrawCard(GameObject Player, ItemData ItemData)
+    public async Task DrawCard()
     {
-        await DrawCardAmine(Player);
+        await DrawCardAmine(itemLogicScript.ownerIndex);
     }
 
-    public async Task DrawCardAmine(GameObject Player) //抽卡动画,异步函数，具体概念问ai
+    public async Task DrawCardAmine(int playerIndex) //抽卡动画,异步函数，具体概念问ai
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);
         Sequence seq = DOTween.Sequence();
-        PlayerData = Player.GetComponent<TankDataScript>();
-        float Target_x = PlayerData.playerIndex == 0 ?
-        P1Targetx + (Width * (PlayerData.items.Count())) :
-        P2Targetx - (Width * (PlayerData.items.Count())); //测试！测试！实际使用时.Count()需加上-1
+        float Target_x = playerIndex == 0 ?
+        P1Targetx + (Width * (slot)) :
+        P2Targetx - (Width * (slot)); 
         float Target_y = Y;
         //此行往下均为动画
         seq.Append(transform.DOLocalRotateQuaternion(
@@ -73,12 +75,12 @@ public class ItemScript : MonoBehaviour
         await seq.AsyncWaitForCompletion();
     }
 
-    public async Task UseCard(GameObject Player, ItemData ItemData = null)
+    public async Task UseCard()
     {
-        await UseCardAnime(Player);
+        await UseCardAnime();
     }
 
-    public async Task UseCardAnime(GameObject Player)
+    public async Task UseCardAnime()
     {
         Sequence seq = DOTween.Sequence();
         seq.Join(SelfRenderer.DOFade(0f, 0.8f)); //第一个是透明度
@@ -87,6 +89,31 @@ public class ItemScript : MonoBehaviour
         seq.Play();
 
         await seq.AsyncWaitForCompletion();
+    }
+
+    public async Task updatePosition()
+    {
+        
+    }
+
+    private int getSlot()
+    {
+        return itemLogicScript.slot;
+    }
+
+    public void setSprite(int itemId)
+    {
+        SelfRenderer.sprite = sprites[itemId];
+    }
+
+
+    private void Update()
+    {
+        if (getSlot() != slot) // 当前一个道具被使用时，需要平移  此时logicScript.slot会改变
+        {
+            slot = getSlot();
+            updatePosition();
+        }
     }
 
 }

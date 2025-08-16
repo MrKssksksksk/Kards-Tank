@@ -3389,6 +3389,7 @@ GameObject:
   - component: {fileID: 1193148265}
   - component: {fileID: 1193148264}
   - component: {fileID: 1193148263}
+  - component: {fileID: 1193148266}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -3408,14 +3409,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93118f747e37bdc4cb4006f1df297ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelfRenderer: {fileID: 0}
+  SelfRenderer: {fileID: 1193148264}
   P1Targetx: -11.45
   P2Targetx: 11.45
   Width: 1.1
   Y: -5.6
   TargetRotation: 10
-  PlayerData: {fileID: 799548259}
-  P1Tank: {fileID: 799548250}
+  itemLogicScript: {fileID: 1193148266}
+  sprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &1193148264
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3483,6 +3504,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 89.213, z: 0}
+--- !u!114 &1193148266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193148262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b63425eada2d754faa87d088a2e7849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  itemAniScript: {fileID: 1193148263}
+  ownerIndex: 0
+  id: 0
+  slot: 0
 --- !u!1 &1223660550
 GameObject:
   m_ObjectHideFlags: 0
@@ -5360,7 +5398,7 @@ MonoBehaviour:
     ExistenceTime: 1
     Description: 6
     IconPath: 1
-    Type: 0
+    Tags: GER TANK
   Example2:
     Id: 1
     Name: Name
@@ -5369,7 +5407,7 @@ MonoBehaviour:
     ExistenceTime: 1
     Description: 6
     IconPath: 1
-    Type: 0
+    Tags: GER TANK
   S: ss
 --- !u!1 &1659345174
 GameObject:
@@ -6837,8 +6875,8 @@ SceneRoots:
   - {fileID: 768979906}
   - {fileID: 1866137388}
   - {fileID: 1536434642}
-  - {fileID: 1073066321}
-  - {fileID: 823710616}
-  - {fileID: 1112182120}
   - {fileID: 1243054047}
   - {fileID: 1193148265}
+  - {fileID: 1112182120}
+  - {fileID: 823710616}
+  - {fileID: 1073066321}

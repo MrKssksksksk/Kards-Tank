@@ -10,15 +10,6 @@ public class ResourcePointScript : MonoBehaviour
     public int existenceTime;
     private float existenceTimer = 0;
 
-    /*
-     * type: 
-     * 1: 道具
-     * 2: 回血
-     * 
-     * id: 参照对照表
-     */
-
-
     private void Update()
     {
         existenceTimer += Time.deltaTime;

@@ -14,13 +14,10 @@ public class ResourcePointSpawnerScript : MonoBehaviour
     public List<int> spawnWeight = new List<int>(); // length not determined yet
     private int weightSum;
 
-    // Start is called before the first frame update
     void Start()
     {
         spawnTimer = 0;
     }
-
-    // Update is called once per frame
 
     void Update()
     {

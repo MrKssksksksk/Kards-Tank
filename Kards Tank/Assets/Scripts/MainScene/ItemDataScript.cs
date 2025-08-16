@@ -12,7 +12,7 @@ public class ItemData
     public int ExistenceTime;//存在时间;
     public string Description; //描述
     public string IconPath; //图标路径
-    public int Type;
+    public string Tags;
 }
 
 public class ItemDataScript : MonoBehaviour
@@ -28,7 +28,7 @@ public class ItemDataScript : MonoBehaviour
         Name = "Name",
         Description = "6",
         IconPath = "1",
-        Type = 0
+        Tags = "GER TANK"
     };
     public ItemData Example2 = new ItemData
     {
@@ -39,7 +39,7 @@ public class ItemDataScript : MonoBehaviour
         Name = "Name",
         Description = "6",
         IconPath = "1",
-        Type = 0
+        Tags = "GER TANK"
     };
 
     public string S = "ss";
