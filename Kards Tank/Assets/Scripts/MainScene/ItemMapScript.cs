@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ResourcePointScript : MonoBehaviour
 {
@@ -27,13 +28,19 @@ public class ResourcePointScript : MonoBehaviour
 
     private void Start() // actually run after getPointId()
     {
-        transform.position = new Vector3(-7.5f + Random.Range(0, 16), -3.5f + Random.Range(0, 8), 0);
+        randomizePosition();
         spriteRenderer.sprite = sprites[id];
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (existenceTimer < 0.1f)
+        {
+            existenceTimer = 0;
+            randomizePosition();
+            return;
+        }
+        if (collision.gameObject.layer == 6) // Player
         {
             // TankDataScript tankDataScript = collision.gameObject.GetComponent<TankDataScript>();
             TankLogicScript tankLogicScript = collision.gameObject.GetComponent<TankLogicScript>();
@@ -44,5 +51,10 @@ public class ResourcePointScript : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    private void randomizePosition()
+    {
+        transform.position = new Vector3(-7.5f + Random.Range(0, 16), -3.5f + Random.Range(0, 8), 0);
     }
 }

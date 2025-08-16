@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Progress;
+// using static UnityEditor.Progress;
 // using static UnityEditor.Progress;
 
 public class TankLogicScript : MonoBehaviour
@@ -17,10 +17,16 @@ public class TankLogicScript : MonoBehaviour
 
     private void Start()
     {
-        if (StaticData.Instance.turn > 1)
+        if (StaticData.Instance.turn > 1) // 多回合初始化
         {
             StaticData.Instance.playerDatas[tankDataScript.playerIndex].output(tankDataScript);
             tankDataScript.supplyCapacity += 1;
+            for (int i = 0; i < tankDataScript.items.Count; i++)
+            {
+                GameObject e = Instantiate(Item);
+                e.GetComponent<ItemLogicScript>().getData(gameObject, i, StaticData.Instance.playerDatas[tankDataScript.playerIndex].items[i]);
+                tankDataScript.items.Add(e);
+            }
         }
         supplyIncreaseTimer = 0;
         gameTimer = 0;

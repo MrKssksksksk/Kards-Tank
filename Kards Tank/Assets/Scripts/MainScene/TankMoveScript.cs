@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -11,7 +12,6 @@ public class Tank1MoveScript : MonoBehaviour
     public Rigidbody2D rb;
     public AudioManagerScript audioManagerScript;
     public GameObject bullet;
-    public bool debug = false;
     public float degree;
     public KeyCode UpKey, DownKey, LeftKey, RightKey, SpeedUpKey, FireKey, Item1Key, Item2Key, Item3Key;
     private int horizontal, vertical;
@@ -20,6 +20,9 @@ public class Tank1MoveScript : MonoBehaviour
     private float fireCoolDownTimer;
     private UnityEvent useItem = new UnityEvent();
 
+    private int chosenItem;
+    public float chooseLastingTime;
+    private float chooseLastingTimer;
     private float item0Timer, item3Timer;
     private bool item0TimerEnable = false, item3TimerEnable = false;
 
@@ -32,6 +35,7 @@ public class Tank1MoveScript : MonoBehaviour
         // right:0 up:90 left:180 down:270
         fireCoolDownTimer = 0;
         useItem.AddListener(tankLogicScript.Enemy.GetComponent<TankLogicScript>().OnEnemyUseItem);
+        chosenItem = 0;
     }
 
     // Update is called once per frame
@@ -86,34 +90,65 @@ public class Tank1MoveScript : MonoBehaviour
             }
         }
 
+        chooseLastingTimer += Time.deltaTime;
+        if (chosenItem != 0 && chooseLastingTimer > chooseLastingTime)
+        {
+            chosenItem = 0;
+            foreach (GameObject item in tankDataScript.items)
+            {
+                item.GetComponent<ItemLogicScript>().chooseCard(false);
+            }
+        }
         if (tankLogicScript.canUseItem())
         {
-            int cItem = 0;
+            bool choose = false;
             if (Input.GetKeyUp(Item1Key) && tankDataScript.items.Count >= 1 && tankDataScript.cSupply >= tankDataScript.getData(0).Cost)
             {
-                cItem = 1;
+                if (chosenItem == 1) choose = true;
+                else
+                {
+                    if (chosenItem != 0) tankDataScript.items[chosenItem - 1].GetComponent<ItemLogicScript>().chooseCard(false);
+                    chosenItem = 1;
+                    tankDataScript.items[0].GetComponent<ItemLogicScript>().chooseCard(true);
+                    chooseLastingTimer = 0;
+                }
             }
             else if (Input.GetKeyUp(Item2Key) && tankDataScript.items.Count >= 2 && tankDataScript.cSupply >= tankDataScript.getData(1).Cost)
             {
-                cItem = 2;
+                if (chosenItem == 2) choose = true;
+                else
+                {
+                    if (chosenItem != 0) tankDataScript.items[chosenItem - 1].GetComponent<ItemLogicScript>().chooseCard(false);
+                    chosenItem = 2;
+                    tankDataScript.items[1].GetComponent<ItemLogicScript>().chooseCard(true);
+                    chooseLastingTimer = 0;
+                }
             }
             else if (Input.GetKeyUp(Item3Key) && tankDataScript.items.Count >= 3 && tankDataScript.cSupply >= tankDataScript.getData(2).Cost)
             {
-                cItem = 3;
+                if (chosenItem == 3) choose = true;
+                else
+                {
+                    if (chosenItem != 0) tankDataScript.items[chosenItem - 1].GetComponent<ItemLogicScript>().chooseCard(false);
+                    chosenItem = 3;
+                    tankDataScript.items[2].GetComponent<ItemLogicScript>().chooseCard(true);
+                    chooseLastingTimer = 0;
+                }
             }
-            if (cItem != 0)
+            if (choose == true)
             {
                 useItem.Invoke();
 
                 
-                for (int i = cItem - 1; i < tankDataScript.items.Count; i++)
+                for (int i = chosenItem - 1; i < tankDataScript.items.Count; i++)
                 {
                     tankDataScript.items[i].GetComponent<ItemLogicScript>().changeSlot(-1);
                 }
 
-                int itemId = tankDataScript.getId(cItem - 1);
-                tankDataScript.cSupply -= tankDataScript.getData(cItem - 1).Cost;
-                tankLogicScript.useItem(cItem - 1);
+                int itemId = tankDataScript.getId(chosenItem - 1);
+                tankDataScript.cSupply -= tankDataScript.getData(chosenItem - 1).Cost;
+                tankLogicScript.useItem(chosenItem - 1);
+                chosenItem = 0;
 
                 if (itemId == 0) // ÒøÐÐ
                 {
@@ -223,12 +258,6 @@ public class Tank1MoveScript : MonoBehaviour
 
 
 
-        if (debug) // scripts only for debug
-        {
-            if (Input.GetKeyUp(KeyCode.O) && Input.GetKey(KeyCode.Keypad1)) tankLogicScript.pushBullet(1); // snow
-            if (Input.GetKeyUp(KeyCode.O) && Input.GetKey(KeyCode.Keypad2)) tankLogicScript.pushBullet(2); // 85mm
-            if (Input.GetKeyUp(KeyCode.O) && Input.GetKey(KeyCode.Keypad3)) tankLogicScript.pushBullet(3); // ib
-            if (Input.GetKeyUp(KeyCode.O) && Input.GetKey(KeyCode.Keypad4)) tankLogicScript.pushBullet(4); // li
-        }
+        
     }
 }

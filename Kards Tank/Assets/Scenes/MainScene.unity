@@ -516,6 +516,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206818860}
   m_CullTransparentMesh: 1
+--- !u!1 &229228801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 229228803}
+  - component: {fileID: 229228802}
+  m_Layer: 0
+  m_Name: DEBUG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &229228802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229228801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1600a9410b23446b2f4cc7e19b153b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 1
+  p1: {fileID: 799548250}
+  p2: {fileID: 1497581438}
+  debugPlayer: 0
+--- !u!4 &229228803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229228801}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1199.1876, y: 671.79816, z: 5.156044}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &234273330
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &234273331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -572,7 +620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &278197461
 RectTransform:
   m_ObjectHideFlags: 0
@@ -860,7 +908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &335995370
 RectTransform:
   m_ObjectHideFlags: 0
@@ -935,7 +983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &342039875
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1593,8 +1641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -758, y: -134.81}
-  m_SizeDelta: {x: 397.7205, y: 332.3881}
+  m_AnchoredPosition: {x: -758, y: -205}
+  m_SizeDelta: {x: 397.7205, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &616735381
 MonoBehaviour:
@@ -1917,9 +1965,9 @@ GameObject:
   - component: {fileID: 799548259}
   - component: {fileID: 799548258}
   - component: {fileID: 799548253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tank1
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1941,7 +1989,6 @@ MonoBehaviour:
   rb: {fileID: 799548254}
   audioManagerScript: {fileID: 1243054046}
   bullet: {fileID: 6463646265346759255, guid: 64ecd618fa7bd564a965213c88be008d, type: 3}
-  debug: 1
   degree: 0
   UpKey: 119
   DownKey: 115
@@ -1952,6 +1999,7 @@ MonoBehaviour:
   Item1Key: 49
   Item2Key: 50
   Item3Key: 51
+  chooseLastingTime: 1.5
 --- !u!50 &799548254
 Rigidbody2D:
   serializedVersion: 4
@@ -2162,49 +2210,6 @@ MonoBehaviour:
   - 
   - 
   items: []
-  itemCosts: 0300000003000000020000000500000001000000030000000100000002000000020000000100000002000000020000000600000000000000000000000000000000000000000000000000000000000000
-  itemNames:
-  - "\u5FB7\u610F\u5FD7\u5E1D\u56FD\u94F6\u884C"
-  - "85\u6BEB\u7C73\u91CE\u6218\u70AE"
-  - "\u4E00\u53F7\u5766\u514BB\u578B"
-  - "\u8F6C\u6298\u70B9"
-  - T-35
-  - "BP-43\u88C5\u7532\u5217\u8F66"
-  - "\u7EA2\u9B54\u7A7A\u964D\u6B65\u5175\u56E2"
-  - "\u5077\u88AD"
-  - KV-1 1941
-  - "\u6D77\u519B\u529B\u91CF"
-  - "\u8FD1\u536B\u6B65\u5175\u7B2C204\u56E2"
-  - "\u95EA\u51FB\u6218\u6CD5"
-  - "\u7ADE\u4E89\u6218\u6CD5"
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  itemTags:
-  - GER ORDER
-  - SOV ART
-  - GER TANK
-  - SOV ORDER
-  - SOV TANK
-  - SOV TANK
-  - USA INF
-  - JAP ORDER
-  - SOV TANK
-  - ENG ORDER
-  - SOV INF
-  - GER ORDER
-  - GER ORDER
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   effects: 00000000000000000000
   pinTime: 3
   effect1BulletNum: 0
@@ -2429,8 +2434,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 744, y: -134.81}
-  m_SizeDelta: {x: 397.7205, y: 332.3881}
+  m_AnchoredPosition: {x: 744, y: -205}
+  m_SizeDelta: {x: 397.7205, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &901217426
 MonoBehaviour:
@@ -3030,7 +3035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1073278530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4152,7 +4157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1494537149
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4225,9 +4230,9 @@ GameObject:
   - component: {fileID: 1497581441}
   - component: {fileID: 1497581440}
   - component: {fileID: 1497581446}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tank2
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4303,49 +4308,6 @@ MonoBehaviour:
   - 
   - 
   items: []
-  itemCosts: 0300000003000000020000000500000001000000030000000100000002000000020000000100000002000000020000000600000000000000000000000000000000000000000000000000000000000000
-  itemNames:
-  - "\u5FB7\u610F\u5FD7\u5E1D\u56FD\u94F6\u884C"
-  - "85\u6BEB\u7C73\u91CE\u6218\u70AE"
-  - "\u4E00\u53F7\u5766\u514BB\u578B"
-  - "\u8F6C\u6298\u70B9"
-  - T-35
-  - "BP-43\u88C5\u7532\u5217\u8F66"
-  - "\u7EA2\u9B54\u7A7A\u964D\u6B65\u5175\u56E2"
-  - "\u5077\u88AD"
-  - KV-1 1941
-  - "\u6D77\u519B\u529B\u91CF"
-  - "\u8FD1\u536B\u6B65\u5175\u7B2C204\u56E2"
-  - "\u95EA\u51FB\u6218\u6CD5"
-  - "\u7ADE\u4E89\u6218\u6CD5"
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  itemTags:
-  - GER ORDER
-  - SOV ART
-  - GER TANK
-  - SOV ORDER
-  - SOV TANK
-  - SOV TANK
-  - USA INF
-  - JAP ORDER
-  - SOV TANK
-  - ENG ORDER
-  - SOV INF
-  - GER ORDER
-  - GER ORDER
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   effects: 00000000000000000000
   pinTime: 3
   effect1BulletNum: 0
@@ -4505,7 +4467,6 @@ MonoBehaviour:
   rb: {fileID: 1497581442}
   audioManagerScript: {fileID: 1243054046}
   bullet: {fileID: 6463646265346759255, guid: 64ecd618fa7bd564a965213c88be008d, type: 3}
-  debug: 0
   degree: 180
   UpKey: 273
   DownKey: 274
@@ -4513,9 +4474,10 @@ MonoBehaviour:
   RightKey: 275
   SpeedUpKey: 256
   FireKey: 271
-  Item1Key: 263
+  Item1Key: 265
   Item2Key: 264
-  Item3Key: 265
+  Item3Key: 263
+  chooseLastingTime: 1.5
 --- !u!1 &1503554380
 GameObject:
   m_ObjectHideFlags: 0
@@ -4775,7 +4737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1554209004
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5327,103 +5289,85 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 223bf055d8a2b664e9d1043d101f9b4f, type: 3}
     Tags: ENG ORDER
     data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
-  Example1:
-    Id: 1
-    Name: Name
-    Cost: 1
+  - Id: 10
+    Name: "\u8FD1\u536B\u6B65\u5175\u7B2C204\u56E2"
+    Cost: 2
     Weight: 1
-    Description: 6
-    sprite: {fileID: 0}
-    Tags: GER TANK
+    Description: 
+    sprite: {fileID: 21300000, guid: 4a6dcc25dabf4fb42ac9cbd622e5ba83, type: 3}
+    Tags: SOV INF
     data: 0
-  Example2:
-    Id: 1
-    Name: Name
-    Cost: 1
+  - Id: 11
+    Name: "\u95EA\u51FB\u6218\u6CD5"
+    Cost: 2
     Weight: 1
-    Description: 6
+    Description: 
+    sprite: {fileID: 21300000, guid: 7583205833bd4ba48975df94fa236891, type: 3}
+    Tags: GER ORDER
+    data: 0
+  - Id: 12
+    Name: "\u7ADE\u4E89\u6218\u6CD5"
+    Cost: 6
+    Weight: 0
+    Description: 
+    sprite: {fileID: 21300000, guid: fb941a4f2cb01154aa94446b3ab4c9ae, type: 3}
+    Tags: GER ORDER
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
     sprite: {fileID: 0}
-    Tags: GER TANK
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
     data: 0
 --- !u!1 &1659345174
 GameObject:
@@ -6354,7 +6298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1921534705
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6895,3 +6839,4 @@ SceneRoots:
   - {fileID: 1112182120}
   - {fileID: 823710616}
   - {fileID: 1073066321}
+  - {fileID: 229228803}

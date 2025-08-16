@@ -37,9 +37,9 @@ public class TankDataScript : MonoBehaviour
     public List<GameObject> items = new List<GameObject>();
     // public List<int> items = new List<int>();
     // public List<int> itemDatas = new List<int>();
-    public List<int> itemCosts = new List<int>();
-    public List<string> itemNames = new List<string>();
-    public List<string> itemTags = new List<string>();
+    //public List<int> itemCosts = new List<int>();
+    //public List<string> itemNames = new List<string>();
+    //public List<string> itemTags = new List<string>();
     public List<bool> effects = new List<bool>();
     public float pinTime;
     public int effect1BulletNum = 0;

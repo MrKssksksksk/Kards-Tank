@@ -12,6 +12,7 @@ public class ItemLogicScript : MonoBehaviour
     public ItemDataScript itemDataScript;
     public ItemData data;
     public int ownerIndex, slot;
+    public bool chosen = false;
     private bool dodestory = false;
 
     public void getData(GameObject o, int _slot, int id)
@@ -20,6 +21,7 @@ public class ItemLogicScript : MonoBehaviour
         tankDataScript = owner.GetComponent<TankDataScript>();
         tankLogicScript = owner.GetComponent<TankLogicScript>();
         slot = _slot;
+        itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
         data = itemDataScript.items[id];
     }
 
@@ -30,6 +32,22 @@ public class ItemLogicScript : MonoBehaviour
         itemAniScript.DrawCard();
     }
 
+    public void chooseCard(bool c)
+    {
+        if (chosen != c)
+        {
+            chosen = c;
+            if (c == true)
+            {
+                itemAniScript.ChooseCard();
+            }
+            else
+            {
+                itemAniScript.UnChooseCard();
+            }
+        }
+    }
+
     public void changeSlot(int x = -1) // 使用道具时由Tank调用
     {
         slot += x;
@@ -37,18 +55,6 @@ public class ItemLogicScript : MonoBehaviour
 
     public async Task useItem()
     {
-        int id = data.Id;
-        if (id == 0)
-        {
-             // ...
-        }
-        else if (id == 1)
-        {
-            // ...
-            dodestory = true;
-        }
-        // ......
-
 
         await itemAniScript.UseCard();
     }
@@ -63,6 +69,8 @@ public class ItemLogicScript : MonoBehaviour
     private void Update()
     {
         if (dodestory) Destroy(gameObject);
+
+        
     }
 
 }

@@ -20,31 +20,9 @@ public class ItemDataScript : MonoBehaviour
 {
     [SerializeField]
     public List<ItemData> items = new List<ItemData>();
-    public ItemData Example1 = new ItemData
-    {
-        Id = 1,
-        Cost = 1,
-        Weight = 1,
-        Name = "Name",
-        Description = "6",
-        Tags = "GER TANK",
-        data = 0
-    };
-    public ItemData Example2 = new ItemData
-    {
-        Id = 1,
-        Cost = 1,
-        Weight = 1,
-        Name = "Name",
-        Description = "6",
-        Tags = "GER TANK",
-        data = 0
-    };
 
     public void Start()
     {
-        items.Add(Example1);
-        items.Add(Example2);
-        Debug.Log(Example1.Id);
+
     }
 }

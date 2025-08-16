@@ -27,13 +27,15 @@ public class P2UIManageScript : MonoBehaviour
     {
         tankDataScript = tank.GetComponent<TankDataScript>();
         tankLogicScript = tank.GetComponent<TankLogicScript>();
+
+        tank = GameObject.FindGameObjectWithTag("Player2").gameObject;
     }
 
     void Update()
     {
         RenderNormalPage();
         RenderInfoPage();
-        // RenderItemPage();
+        RenderItemPage();
     }
 
     //渲染普通交互界面
@@ -58,6 +60,11 @@ public class P2UIManageScript : MonoBehaviour
         {
             if (text != "") text += " ";
             text += "免疫";
+        }
+        if (!tankLogicScript.doConsumeSupply())
+        {
+            if (text != "") text += " ";
+            text += "移动与攻击花费为零";
         }
         if (!tankLogicScript.canUseItem())
         {

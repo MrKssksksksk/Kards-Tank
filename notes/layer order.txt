@@ -3,3 +3,6 @@ layer order
 1---Bullets & Resource Point
 2---Tank
 3---Tank Effect
+7---item1
+8---item2
+9---item3

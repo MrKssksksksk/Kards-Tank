@@ -115,7 +115,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (!enable && collision.gameObject.tag == "Player")
+        if (!enable && collision.gameObject.layer == 6) // player
         {
             enable = true;
         }
@@ -123,7 +123,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (enable && collision.gameObject.tag == "Player")
+        if (enable && collision.gameObject.layer == 6) // player
         {
             if (collision.gameObject != owner)
             {
