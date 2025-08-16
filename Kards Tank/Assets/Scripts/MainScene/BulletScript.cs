@@ -137,8 +137,8 @@ public class BulletScript : MonoBehaviour
             if (bulletType == 2) collision.gameObject.GetComponent<TankLogicScript>().pin(); // 85mm ันึฦ
             if (bulletType == 3) // ib
             {
-                collision.gameObject.GetComponent<TankLogicScript>().giveItem(2);
-                collision.gameObject.GetComponent<TankLogicScript>().giveItem(2);
+                owner.GetComponent<TankLogicScript>().giveItem(2);
+                owner.GetComponent<TankLogicScript>().giveItem(2);
             }
             if (collision.gameObject.GetComponent<TankLogicScript>().countItem(6) > 0)
             {
