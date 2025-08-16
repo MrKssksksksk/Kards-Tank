@@ -10,8 +10,7 @@ public class TankEssentialData
     public float supplyComsumptionBonus;
     public List<float> FireConsumption;
     // public Stack<int> specialBullets;
-    public List<int> items;
-    public List<int> itemDatas;
+    public List<GameObject> items;
     // public List<bool> effects;
 
     public TankEssentialData() { }
@@ -38,7 +37,6 @@ public class TankEssentialData
         FireConsumption = data.FireConsumption;
         // specialBullets = data.specialBullets;
         items = data.items;
-        itemDatas = data.itemDatas;
         // effects = data.effects;
     }
     public void output(TankDataScript data)
@@ -58,7 +56,6 @@ public class TankEssentialData
         data.FireConsumption = FireConsumption;
         // data.specialBullets = specialBullets;
         data.items = items;
-        data.itemDatas = itemDatas;
         // data.effects = effects;
     }
 }

@@ -157,9 +157,9 @@ public class TankLogicScript : MonoBehaviour
     public int developItem(string tag)
     {
         List<int> items = new List<int>();
-        for (int i = 0; i < tankDataScript.itemTags.Count; i++)
+        for (int i = 0; i < tankDataScript.items.Count; i++)
         {
-            if (tankDataScript.itemTags[i] != "" && tankDataScript.itemTags[i].Contains(tag))
+            if (tankDataScript.getData(i).Tags.Contains(tag))
             {
                 items.Add(i);
             }

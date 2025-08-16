@@ -9,9 +9,9 @@ public class ItemData
     public string Name;
     public int Cost; //花费
     public int Weight; //权重
-    public int ExistenceTime;//存在时间;
+    // public int ExistenceTime;//存在时间;
     public string Description; //描述
-    public string IconPath; //图标路径
+    public Sprite sprite;
     public string Tags;
     public int data;
 }
@@ -25,10 +25,8 @@ public class ItemDataScript : MonoBehaviour
         Id = 1,
         Cost = 1,
         Weight = 1,
-        ExistenceTime = 1,
         Name = "Name",
         Description = "6",
-        IconPath = "1",
         Tags = "GER TANK",
         data = 0
     };
@@ -37,10 +35,8 @@ public class ItemDataScript : MonoBehaviour
         Id = 1,
         Cost = 1,
         Weight = 1,
-        ExistenceTime = 1,
         Name = "Name",
         Description = "6",
-        IconPath = "1",
         Tags = "GER TANK",
         data = 0
     };

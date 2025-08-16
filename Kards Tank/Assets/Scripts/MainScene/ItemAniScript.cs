@@ -19,7 +19,7 @@ public class ItemAniScript : MonoBehaviour
     public float Y;
     public float TargetRotation;
     public ItemLogicScript itemLogicScript;
-    public List<Sprite> sprites;
+    // public List<Sprite> sprites;
     private int slot;
 
 
@@ -104,7 +104,8 @@ public class ItemAniScript : MonoBehaviour
 
     public void setSprite(int itemId)
     {
-        SelfRenderer.sprite = sprites[itemId];
+        // SelfRenderer.sprite = sprites[itemId];
+        SelfRenderer.sprite = itemLogicScript.data.sprite;
     }
 
 

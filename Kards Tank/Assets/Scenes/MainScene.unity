@@ -531,7 +531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &234273331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2161,8 +2161,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  items: 
-  itemDatas: 
+  items: []
   itemCosts: 0300000003000000020000000500000001000000030000000100000002000000020000000100000002000000020000000600000000000000000000000000000000000000000000000000000000000000
   itemNames:
   - "\u5FB7\u610F\u5FD7\u5E1D\u56FD\u94F6\u884C"
@@ -3031,7 +3030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1073278530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4303,8 +4302,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  items: 
-  itemDatas: 
+  items: []
   itemCosts: 0300000003000000020000000500000001000000030000000100000002000000020000000100000002000000020000000600000000000000000000000000000000000000000000000000000000000000
   itemNames:
   - "\u5FB7\u610F\u5FD7\u5E1D\u56FD\u94F6\u884C"
@@ -5248,26 +5246,185 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9345d62828d0e45bbca71a99d274f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: []
+  items:
+  - Id: 0
+    Name: "\u5FB7\u610F\u5FD7\u5E1D\u56FD\u94F6\u884C"
+    Cost: 3
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: 528755cdfa87a484ab30980b74d5964c, type: 3}
+    Tags: GER ORDER
+    data: 0
+  - Id: 1
+    Name: "85\u6BEB\u7C73\u91CE\u6218\u70AE"
+    Cost: 3
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: 036811f4a84d4a6418710d9207c6cc2b, type: 3}
+    Tags: SOV ART
+    data: 0
+  - Id: 2
+    Name: "\u4E00\u53F7\u5766\u514BB\u578B"
+    Cost: 2
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: a77f254598f52504a8478943ac011aef, type: 3}
+    Tags: GER TANK
+    data: 0
+  - Id: 3
+    Name: "\u8F6C\u6298\u70B9"
+    Cost: 5
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: cce86177e6bc4304aa0300ccd08484cf, type: 3}
+    Tags: SOV ORDER
+    data: 0
+  - Id: 4
+    Name: T-35
+    Cost: 1
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: 1e965c79ee4f0024db69dd5ec6a38942, type: 3}
+    Tags: SOV TANK
+    data: 0
+  - Id: 5
+    Name: "BP-43\u88C5\u7532\u5217\u8F66"
+    Cost: 3
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: 3422fbe7d5818d14b96eb6bf16a446cd, type: 3}
+    Tags: SOV TANK
+    data: 0
+  - Id: 6
+    Name: "\u7EA2\u9B54\u7A7A\u964D\u6B65\u5175\u56E2"
+    Cost: 1
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: e70450053a3f58d4186eb91fd73f6b03, type: 3}
+    Tags: USA INF
+    data: 0
+  - Id: 7
+    Name: "\u5077\u88AD"
+    Cost: 2
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: e915451455eb91643a564c09638cdc07, type: 3}
+    Tags: JAP ORDER
+    data: 0
+  - Id: 8
+    Name: KV-1 1941
+    Cost: 2
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: 88bf21dc215264c458902cb42bcec60c, type: 3}
+    Tags: SOV TANK
+    data: 0
+  - Id: 9
+    Name: "\u6D77\u519B\u529B\u91CF"
+    Cost: 1
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: 223bf055d8a2b664e9d1043d101f9b4f, type: 3}
+    Tags: ENG ORDER
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
+  - Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
   Example1:
     Id: 1
     Name: Name
     Cost: 1
     Weight: 1
-    ExistenceTime: 1
     Description: 6
-    IconPath: 1
+    sprite: {fileID: 0}
     Tags: GER TANK
+    data: 0
   Example2:
     Id: 1
     Name: Name
     Cost: 1
     Weight: 1
-    ExistenceTime: 1
     Description: 6
-    IconPath: 1
+    sprite: {fileID: 0}
     Tags: GER TANK
-  S: ss
+    data: 0
 --- !u!1 &1659345174
 GameObject:
   m_ObjectHideFlags: 0

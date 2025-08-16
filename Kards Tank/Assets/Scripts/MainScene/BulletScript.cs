@@ -140,9 +140,9 @@ public class BulletScript : MonoBehaviour
                 collision.gameObject.GetComponent<TankLogicScript>().giveItem(2);
                 collision.gameObject.GetComponent<TankLogicScript>().giveItem(2);
             }
-            if (collision.gameObject.GetComponent<TankDataScript>().items.Contains(6))
+            if (collision.gameObject.GetComponent<TankLogicScript>().countItem(6) > 0)
             {
-                int c = collision.gameObject.GetComponent<TankDataScript>().items.FindAll(t => t == 6).Count;
+                int c = collision.gameObject.GetComponent<TankLogicScript>().countItem(6);
                 Debug.Log(c);
                 owner.GetComponent<TankDataScript>().cSupply -= c;
             }
