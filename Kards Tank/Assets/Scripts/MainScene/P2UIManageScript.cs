@@ -33,7 +33,7 @@ public class P2UIManageScript : MonoBehaviour
     {
         RenderNormalPage();
         RenderInfoPage();
-        RenderItemPage();
+        // RenderItemPage();
     }
 
     //渲染普通交互界面
@@ -85,7 +85,7 @@ public class P2UIManageScript : MonoBehaviour
     {
         if (tankDataScript.items.Count >= 1)
         {
-            item1Image.sprite = sprites[tankDataScript.items[0]];
+            item1Image.sprite = sprites[tankDataScript.getId(0)];
             item1Image.enabled = true;
         }
         else
@@ -94,7 +94,7 @@ public class P2UIManageScript : MonoBehaviour
         }
         if (tankDataScript.items.Count >= 2)
         {
-            item2Image.sprite = sprites[tankDataScript.items[1]];
+            item2Image.sprite = sprites[tankDataScript.getId(1)];
             item2Image.enabled = true;
         }
         else
@@ -103,7 +103,7 @@ public class P2UIManageScript : MonoBehaviour
         }
         if (tankDataScript.items.Count >= 3)
         {
-            item3Image.sprite = sprites[tankDataScript.items[2]];
+            item3Image.sprite = sprites[tankDataScript.getId(2)];
             item3Image.enabled = true;
         }
         else

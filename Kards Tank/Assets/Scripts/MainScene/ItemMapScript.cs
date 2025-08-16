@@ -35,7 +35,7 @@ public class ResourcePointScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            TankDataScript tankDataScript = collision.gameObject.GetComponent<TankDataScript>();
+            // TankDataScript tankDataScript = collision.gameObject.GetComponent<TankDataScript>();
             TankLogicScript tankLogicScript = collision.gameObject.GetComponent<TankLogicScript>();
             
             tankLogicScript.giveItem(id);

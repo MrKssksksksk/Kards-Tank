@@ -13,12 +13,13 @@ public class ItemData
     public string Description; //描述
     public string IconPath; //图标路径
     public string Tags;
+    public int data;
 }
 
 public class ItemDataScript : MonoBehaviour
 {
     [SerializeField]
-    public List<ItemData> Item = new List<ItemData>();
+    public List<ItemData> items = new List<ItemData>();
     public ItemData Example1 = new ItemData
     {
         Id = 1,
@@ -28,7 +29,8 @@ public class ItemDataScript : MonoBehaviour
         Name = "Name",
         Description = "6",
         IconPath = "1",
-        Tags = "GER TANK"
+        Tags = "GER TANK",
+        data = 0
     };
     public ItemData Example2 = new ItemData
     {
@@ -39,15 +41,14 @@ public class ItemDataScript : MonoBehaviour
         Name = "Name",
         Description = "6",
         IconPath = "1",
-        Tags = "GER TANK"
+        Tags = "GER TANK",
+        data = 0
     };
-
-    public string S = "ss";
 
     public void Start()
     {
-        Item.Add(Example1);
-        Item.Add(Example2);
+        items.Add(Example1);
+        items.Add(Example2);
         Debug.Log(Example1.Id);
     }
 }

@@ -23,16 +23,17 @@ public class ItemAniScript : MonoBehaviour
     private int slot;
 
 
-    async void Start() //test
+    async void Start()
     {
         DOTween.Init();
         SelfRenderer = GetComponent<SpriteRenderer>();
-        setSprite(itemLogicScript.id);
-        ItemData e = GameObject.FindGameObjectWithTag("ItemManager")
-        .GetComponent<ItemDataScript>()
-        .Example1;
-        await DrawCard();
-        await UseCard();
+        slot = getSlot();
+        setSprite(itemLogicScript.data.Id);
+        // await DrawCard();
+
+        // test
+        // ItemData e = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>().Example1;
+        // await UseCard();
     }
 
     public async Task DrawCard()
@@ -40,7 +41,7 @@ public class ItemAniScript : MonoBehaviour
         await DrawCardAmine(itemLogicScript.ownerIndex);
     }
 
-    public async Task DrawCardAmine(int playerIndex) //抽卡动画,异步函数，具体概念问ai
+    private async Task DrawCardAmine(int playerIndex) //抽卡动画,异步函数，具体概念问ai
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);
@@ -80,7 +81,7 @@ public class ItemAniScript : MonoBehaviour
         await UseCardAnime();
     }
 
-    public async Task UseCardAnime()
+    private async Task UseCardAnime()
     {
         Sequence seq = DOTween.Sequence();
         seq.Join(SelfRenderer.DOFade(0f, 0.8f)); //第一个是透明度
@@ -91,7 +92,7 @@ public class ItemAniScript : MonoBehaviour
         await seq.AsyncWaitForCompletion();
     }
 
-    public async Task updatePosition()
+    private async Task updatePosition()
     {
         
     }

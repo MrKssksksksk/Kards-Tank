@@ -34,8 +34,9 @@ public class TankDataScript : MonoBehaviour
     public float armorIntegrity;
     public Stack<int> specialBullets = new Stack<int>();
     public List<string> bulletNames = new List<string>();
-    public List<int> items = new List<int>();
-    public List<int> itemDatas = new List<int>();
+    public List<GameObject> items = new List<GameObject>();
+    // public List<int> items = new List<int>();
+    // public List<int> itemDatas = new List<int>();
     public List<int> itemCosts = new List<int>();
     public List<string> itemNames = new List<string>();
     public List<string> itemTags = new List<string>();
@@ -49,6 +50,26 @@ public class TankDataScript : MonoBehaviour
         cHP = HP;
         if (country == "JAP") armorIntegrity = 0.8f;
         else armorIntegrity = 1.0f;
+    }
+
+    public int getId(int index)
+    {
+        return items[index].GetComponent<ItemLogicScript>().data.Id;
+    }
+
+    public int getItemData(int index)
+    {
+        return items[index].GetComponent<ItemLogicScript>().data.data;
+    }
+
+    public void addItemData(int index, int x)
+    {
+        items[index].GetComponent<ItemLogicScript>().data.data += x;
+    }
+
+    public ItemData getData(int index)
+    {
+        return items[index].GetComponent<ItemLogicScript>().data;
     }
 
 }

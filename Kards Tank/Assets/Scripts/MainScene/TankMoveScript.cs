@@ -89,15 +89,15 @@ public class Tank1MoveScript : MonoBehaviour
         if (tankLogicScript.canUseItem())
         {
             int cItem = 0;
-            if (Input.GetKeyUp(Item1Key) && tankDataScript.items.Count >= 1 && tankDataScript.cSupply >= tankDataScript.itemCosts[tankDataScript.items[0]])
+            if (Input.GetKeyUp(Item1Key) && tankDataScript.items.Count >= 1 && tankDataScript.cSupply >= tankDataScript.getData(0).Cost)
             {
                 cItem = 1;
             }
-            else if (Input.GetKeyUp(Item2Key) && tankDataScript.items.Count >= 2 && tankDataScript.cSupply >= tankDataScript.itemCosts[tankDataScript.items[1]])
+            else if (Input.GetKeyUp(Item2Key) && tankDataScript.items.Count >= 2 && tankDataScript.cSupply >= tankDataScript.getData(1).Cost)
             {
                 cItem = 2;
             }
-            else if (Input.GetKeyUp(Item3Key) && tankDataScript.items.Count >= 3 && tankDataScript.cSupply >= tankDataScript.itemCosts[tankDataScript.items[2]])
+            else if (Input.GetKeyUp(Item3Key) && tankDataScript.items.Count >= 3 && tankDataScript.cSupply >= tankDataScript.getData(2).Cost)
             {
                 cItem = 3;
             }
@@ -105,9 +105,16 @@ public class Tank1MoveScript : MonoBehaviour
             {
                 useItem.Invoke();
 
-                int itemId = tankDataScript.items[cItem - 1];
-                tankLogicScript.removeItem(cItem - 1);
-                tankDataScript.cSupply -= tankDataScript.itemCosts[itemId];
+                
+                for (int i = cItem - 1; i < tankDataScript.items.Count; i++)
+                {
+                    tankDataScript.items[i].GetComponent<ItemLogicScript>().changeSlot(-1);
+                }
+
+                int itemId = tankDataScript.getId(cItem - 1);
+                tankDataScript.cSupply -= tankDataScript.getData(cItem - 1).Cost;
+                tankLogicScript.useItem(cItem - 1);
+
                 if (itemId == 0) // “¯––
                 {
                     // “Ù–ß
