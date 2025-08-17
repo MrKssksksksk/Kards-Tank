@@ -18,6 +18,8 @@ public class ItemAniScript : MonoBehaviour
     public float P2Targetx;
     public float Width;
     public float Y;
+    public float P1SurplusX;
+    public float P2SurplusX;
     public float ChooseHeight; // 被选中时升高的高度
     public float TargetRotation;
     public ItemLogicScript itemLogicScript;
@@ -33,7 +35,6 @@ public class ItemAniScript : MonoBehaviour
         slot = getSlot();
         playerIndex = itemLogicScript.owner.GetComponent<TankDataScript>().playerIndex;
         setSprite(itemLogicScript.data);
-        // await DrawCard();
 
         // test
         // ItemData e = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>().Example1;
@@ -42,23 +43,26 @@ public class ItemAniScript : MonoBehaviour
 
     public async Task ChooseCard()
     {
-        Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y + ChooseHeight, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
-        seq.OnComplete(() => Debug.Log("card choose ani complete"));
-        seq.Play();
+        // Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y + ChooseHeight, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
+        // seq.OnComplete(() => Debug.Log("card choose ani complete"));
+        // seq.Play();
+        await transform.DOMoveY(Y + ChooseHeight, 0.1f)
+        .SetEase(Ease.InOutQuad)
+        .OnComplete(() => Debug.Log("ChooseCard Anime Complete"))
+        .AsyncWaitForCompletion();
 
-        await seq.AsyncWaitForCompletion();
+        // await seq.AsyncWaitForCompletion();
     }
 
     public async Task UnChooseCard()
     {
-        Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
-        seq.OnComplete(() => Debug.Log("card unchoose ani complete"));
-        seq.Play();
-
-        await seq.AsyncWaitForCompletion();
+        await transform.DOMoveY(Y, 0.1f)
+        .SetEase(Ease.InOutQuad)
+        .OnComplete(() => Debug.Log("card unchoose anime complete"))
+        .AsyncWaitForCompletion();
     }
 
-    public async Task DrawCard()
+    public async Task DrawCard() //这个封装是多余的
     {
         await DrawCardAmine();
     }
@@ -69,6 +73,41 @@ public class ItemAniScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 90f, 0);
         //此行往下均为动画
         await gotoSlot(slot);
+    }
+
+    private async Task DrawSurplusCardAnime(bool doRotate = true) //爆牌动画
+    {
+        transform.position = new Vector3(0, -5.6f, 0);
+        transform.rotation = Quaternion.Euler(0, 90f, 0);
+        Sequence seq = DOTween.Sequence();
+        float Target_x = playerIndex == 0 ? P1SurplusX : P2SurplusX;
+        float Target_y = Y;
+        if (doRotate)
+        {
+            if (transform.position.x > Target_x)
+            {
+                seq.Append(transform.DOLocalRotateQuaternion(
+                    Quaternion.Euler(new Vector3(0, 0, TargetRotation)),
+                    0.1f)); //第一个角度，第二个是在n秒内,移动是一样的
+            }
+            else
+            {
+                seq.Append(transform.DOLocalRotateQuaternion(
+                    Quaternion.Euler(new Vector3(0, 0, -TargetRotation)),
+                    0.1f));
+            }
+        }
+        seq.Append(transform.DOMoveX(Target_x, 1f)).SetEase(Ease.InOutQuad);
+        seq.Append(transform.DOLocalRotateQuaternion(
+                Quaternion.Euler(Vector3.zero),
+                0.1f));
+        seq.AppendInterval(0.3f);
+        seq.Append(transform.DOMoveX(transform.position.x + 0.2f, 0.3f)).SetEase(Ease.InOutQuad);
+        seq.Append(transform.DOMoveX(transform.position.x - 2f, 0.5f)).SetEase(Ease.InOutQuad);
+        seq.OnComplete(() => Debug.Log("Card use animation completed"));
+        seq.Play();
+
+        await seq.AsyncWaitForCompletion();
     }
 
     public async Task UseCard()
@@ -91,8 +130,8 @@ public class ItemAniScript : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
         float Target_x = playerIndex == 0 ?
-        P1Targetx + (Width * (targetSlot)) :
-        P2Targetx - (Width * (targetSlot));
+        P1Targetx + (Width * targetSlot) :
+        P2Targetx - (Width * targetSlot);
         float Target_y = Y;
         //此行往下均为动画
         seq.Append(transform.DOLocalRotateQuaternion(

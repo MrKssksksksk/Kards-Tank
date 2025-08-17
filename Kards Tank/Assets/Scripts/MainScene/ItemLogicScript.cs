@@ -69,8 +69,6 @@ public class ItemLogicScript : MonoBehaviour
     private void Update()
     {
         if (dodestory) Destroy(gameObject);
-
-        
     }
 
 }
