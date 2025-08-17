@@ -29,6 +29,7 @@ public class ItemLogicScript : MonoBehaviour
     private void Start()
     {
         ownerIndex = tankDataScript.playerIndex;
+        itemAniScript.DrawCard();
     }
 
     public void chooseCard(bool isChosen)
