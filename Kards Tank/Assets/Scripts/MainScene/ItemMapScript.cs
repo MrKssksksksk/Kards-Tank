@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class ResourcePointScript : MonoBehaviour
+public class ItemMapScript : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public List<Sprite> sprites = new List<Sprite>();

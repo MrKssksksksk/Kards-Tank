@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourcePointSpawnerScript : MonoBehaviour
+public class ItemManagerScript : MonoBehaviour
 {
     //道具生成
     public GameObject resourcePoint;
@@ -49,7 +49,7 @@ public class ResourcePointSpawnerScript : MonoBehaviour
     private void generateResourcePoint()
     {
         GameObject r = Instantiate(resourcePoint);
-        r.GetComponent<ResourcePointScript>().getPointId(randomId());
+        r.GetComponent<ItemMapScript>().getPointId(randomId());
     }
 
     [ContextMenu("Generate 5 Resource Point")]
