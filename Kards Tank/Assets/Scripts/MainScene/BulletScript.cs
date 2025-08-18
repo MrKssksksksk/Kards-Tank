@@ -107,7 +107,7 @@ public class BulletScript : MonoBehaviour
         if (enable) timer += Time.deltaTime;
         if (timer > runningTime)
         {
-            bulletHitSelf.Invoke();
+            bulletHitNothing.Invoke();
             if (effect1) owner.GetComponent<TankDataScript>().effect1BulletNum--;
             Destroy(gameObject);
         }

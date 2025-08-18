@@ -13,7 +13,7 @@ public class ItemLogicScript : MonoBehaviour
     public ItemData data;
     public int ownerIndex, slot;
     public bool chosen = false;
-    private bool dodestory = false;
+    private bool doDestory = false;
 
     public void getData(GameObject o, int _slot, int id)
     {
@@ -57,18 +57,20 @@ public class ItemLogicScript : MonoBehaviour
     {
 
         await itemAniScript.UseCard();
+
+        doDestory = true;
     }
 
     public async Task removeItem()
     {
         await itemAniScript.UseCard(); // 暂时用同一个
 
-        dodestory = true;
+        doDestory = true;
     }
 
     private void Update()
     {
-        if (dodestory) Destroy(gameObject);
+        if (doDestory) Destroy(gameObject);
 
         
     }

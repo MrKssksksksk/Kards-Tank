@@ -101,10 +101,10 @@ public class Tank1MoveScript : MonoBehaviour
         }
         if (tankLogicScript.canUseItem())
         {
-            bool choose = false;
+            bool use = false;
             if (Input.GetKeyUp(Item1Key) && tankDataScript.items.Count >= 1 && tankDataScript.cSupply >= tankDataScript.getData(0).Cost)
             {
-                if (chosenItem == 1) choose = true;
+                if (chosenItem == 1) use = true;
                 else
                 {
                     if (chosenItem != 0) tankDataScript.items[chosenItem - 1].GetComponent<ItemLogicScript>().chooseCard(false);
@@ -115,7 +115,7 @@ public class Tank1MoveScript : MonoBehaviour
             }
             else if (Input.GetKeyUp(Item2Key) && tankDataScript.items.Count >= 2 && tankDataScript.cSupply >= tankDataScript.getData(1).Cost)
             {
-                if (chosenItem == 2) choose = true;
+                if (chosenItem == 2) use = true;
                 else
                 {
                     if (chosenItem != 0) tankDataScript.items[chosenItem - 1].GetComponent<ItemLogicScript>().chooseCard(false);
@@ -126,7 +126,7 @@ public class Tank1MoveScript : MonoBehaviour
             }
             else if (Input.GetKeyUp(Item3Key) && tankDataScript.items.Count >= 3 && tankDataScript.cSupply >= tankDataScript.getData(2).Cost)
             {
-                if (chosenItem == 3) choose = true;
+                if (chosenItem == 3) use = true;
                 else
                 {
                     if (chosenItem != 0) tankDataScript.items[chosenItem - 1].GetComponent<ItemLogicScript>().chooseCard(false);
@@ -135,7 +135,7 @@ public class Tank1MoveScript : MonoBehaviour
                     chooseLastingTimer = 0;
                 }
             }
-            if (choose == true)
+            if (use == true)
             {
                 useItem.Invoke();
 
