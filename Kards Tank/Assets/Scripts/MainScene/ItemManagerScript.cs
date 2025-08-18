@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class ItemManagerScript : MonoBehaviour
 {
     //侧边栏道具管理
+    public GameObject Item;
     public GameObject Player1;
     public GameObject Player2;
     public ItemLogicScript itemLogic;
@@ -127,6 +129,24 @@ public class ItemManagerScript : MonoBehaviour
         }
     }
 
+    public void DevelopItem(GameObject Player, string tag)
+    {
+        if (PlayerItems[Player].Count > 2)
+            return;
+        List<ItemData> StandardItems = new();
+        GetComponent<ItemDataScript>().items.ForEach((item) =>
+        {
+            if (item.Tags.Contains(tag)) StandardItems.Add(item);
+        });
+        int randomIndex = Random.Range(0, StandardItems.Count);
+        ItemData _data = StandardItems[randomIndex];
+        GameObject newItem = Instantiate(Item);
+        PlayerItems[Player].Add(newItem);
+        newItem.GetComponent<ItemAniScript>().slot = PlayerItems[Player].Count - 1;
+        newItem.GetComponent<ItemAniScript>().DrawCardAmine();
+    }
+    
+    //道具生成
     private int randomId()
     {
         weightSum = spawnWeight.Sum();

@@ -108,6 +108,20 @@ public class ItemAniScript : MonoBehaviour
         seq.Play();
     }
 
+    private void DevelopeCardAnime(int targetSlot)
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        Sequence seq = DOTween.Sequence();
+        float Target_x = playerIndex == 0 ?
+        P1Targetx + (Width * targetSlot) :
+        P2Targetx - (Width * targetSlot);
+        float Target_y = Y + 1f;
+        transform.position = new Vector3(Target_x, Target_y, 0f);
+        seq.Append(SelfRenderer.material.DOFade(0f, 0f));
+        seq.Join(SelfRenderer.DOFade(100f, 0.8f)); //第一个是透明度
+        seq.Join(transform.DOLocalMoveY(Y, 0.8f));
+    }
+
     private void gotoSlot(int targetSlot, bool doRotate = true)
     {
         Sequence seq = DOTween.Sequence();
