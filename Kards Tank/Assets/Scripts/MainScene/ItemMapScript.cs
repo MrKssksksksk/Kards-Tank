@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,7 +8,8 @@ using UnityEngine.Rendering;
 public class ItemMapScript : MonoBehaviour
 {
     public AudioManagerScript AMS;
-    public GameObject IM; // ItemManager
+    public ItemManagerScript itemManager;
+    public ItemDataScript itemData;
     public GameObject Item;
     public SpriteRenderer spriteRenderer;
     public int id;
@@ -33,13 +35,13 @@ public class ItemMapScript : MonoBehaviour
     void Awake()
     {
         AMS = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagerScript>();
-        IM = GameObject.FindGameObjectWithTag("ItemManager");
+        itemManager = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemManagerScript>();
+        itemData = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
     }
 
     void Start() // actually run after getPointId()
     {
-        Debug.Log(IM);
-        IM.GetComponent<ItemDataScript>().items.ForEach((itemData) =>
+        itemData.items.ForEach((itemData) =>
         {
             if (id == itemData.Id) MyData = itemData;
         });
@@ -77,24 +79,27 @@ public class ItemMapScript : MonoBehaviour
     {
         AMS.PlaySfx(15); //抽牌
         GameObject newItem = Instantiate(Item);
-        newItem.GetComponent<ItemLogicScript>().InitData(Player, MyData);
+        ItemLogicScript itemLogic = newItem.GetComponent<ItemLogicScript>();
+        ItemAniScript itemAni = newItem.GetComponent<ItemAniScript>();
+        itemLogic.InitData(Player, MyData);
 
         //空检查
-        if (!IM.GetComponent<ItemManagerScript>().PlayerItems.ContainsKey(Player))
+        if (!itemManager.PlayerItems.ContainsKey(Player))
         {
-            IM.GetComponent<ItemManagerScript>().PlayerItems[Player] = new List<GameObject>();
+            itemManager.PlayerItems[Player] = new List<GameObject>();
         }
 
 
-        if (IM.GetComponent<ItemManagerScript>().PlayerItems[Player].Count < 3)
+        if (itemManager.PlayerItems[Player].Count < 3)
         {
-            IM.GetComponent<ItemManagerScript>().PlayerItems[Player].Add(newItem);
-            newItem.GetComponent<ItemAniScript>().slot = IM.GetComponent<ItemManagerScript>().PlayerItems[Player].Count - 1;
+            itemManager.PlayerItems[Player].Add(newItem);
+            itemAni.slot = itemManager.PlayerItems[Player].Count - 1;
             newItem.GetComponent<ItemAniScript>().DrawCardAmine();
         }
         else
         {
-            newItem.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
+            itemLogic.isSurplus = true;
+            itemAni.DrawSurplusCardAnime();
         }
     } 
 }

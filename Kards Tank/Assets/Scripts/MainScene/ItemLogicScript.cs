@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 
 public class ItemLogicScript : MonoBehaviour
 {
@@ -9,17 +11,20 @@ public class ItemLogicScript : MonoBehaviour
     public GameObject IM;
     private TankDataScript tankDataScript;
     private TankLogicScript tankLogicScript;
-    public ItemAniScript itemAniScript;
+    public ItemAniScript itemAni;
     public ItemDataScript itemDataScript;
     public ItemData MyData;
 
     public int ownerIndex, slot;
-    public bool chosen = false;
-    private bool isDestoried = false;
+    public bool isChosen = false;
+    public bool chosen = false; //辅助判断软更新变量
+    public bool isSurplus;
+    public bool isDestoried = false;
 
     void Awake()
     {
         IM = GameObject.FindGameObjectWithTag("ItemManager");
+        itemAni = GetComponent<ItemAniScript>();
     }
     public void getData(GameObject Player, int _slot, int id)
     {
@@ -48,20 +53,28 @@ public class ItemLogicScript : MonoBehaviour
 
     public void chooseCard(bool isChosen)
     {
+        // if (chosen != isChosen)
+        // {
+        //     chosen = isChosen;
+        //     if (isChosen == true)
+        //     {
+        //         itemAniScript.ChooseCard();
+        //     }
+        //     else
+        //     {
+        //         itemAniScript.UnChooseCard();
+        //     }
+        // }
+    }
+
+    public void HandleChosen()
+    {
         if (chosen != isChosen)
         {
             chosen = isChosen;
-            if (isChosen == true)
-            {
-                itemAniScript.ChooseCard();
-            }
-            else
-            {
-                itemAniScript.UnChooseCard();
-            }
+            if (isChosen) itemAni.ChooseCard();
+            else itemAni.UnChooseCard();
         }
-
-        
     }
 
     public void changeSlot(int x = -1) // 使用道具时由Tank调用
@@ -72,19 +85,22 @@ public class ItemLogicScript : MonoBehaviour
     public void useItem()
     {
 
-        itemAniScript.UseCard();
+        itemAni.UseCard();
     }
 
     public void removeItem()
     {
-        itemAniScript.UseCard(); // 暂时用同一个
-
+        itemAni.UseCard(); // 暂时用同一个
         isDestoried = true;
     }
 
     private void Update()
     {
-        if (isDestoried) Destroy(gameObject);
+        if (!isSurplus)
+        {
+            HandleChosen();
+            if (isDestoried) Destroy(gameObject);
+        }
     }
 
 }

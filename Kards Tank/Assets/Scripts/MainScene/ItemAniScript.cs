@@ -24,7 +24,6 @@ public class ItemAniScript : MonoBehaviour
     public float TargetRotation;
     public ItemLogicScript itemLogicScript;
     // public List<Sprite> sprites;
-    private int cacheSlot = 1;
     public int slot;
     public int playerIndex;
 
@@ -154,6 +153,15 @@ public class ItemAniScript : MonoBehaviour
         SelfRenderer.sprite = itemData.sprite;
     }
 
+    public void HandleSlotAnime()
+    {
+        int TargetSlot = GetComponent<ItemLogicScript>().slot;
+        if (slot != TargetSlot)
+        {
+            slot = TargetSlot;
+            gotoSlot(slot,false);
+        }
+    }
 
     private void Update()
     {
@@ -169,8 +177,8 @@ public class ItemAniScript : MonoBehaviour
         //     slot = getSlot();
         //     gotoSlot(slot, false);
         // }
-        //
+        if (!GetComponent<ItemLogicScript>().isSurplus)
+            HandleSlotAnime();
     }
-
 }
 
