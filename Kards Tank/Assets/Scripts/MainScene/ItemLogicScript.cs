@@ -13,9 +13,10 @@ public class ItemLogicScript : MonoBehaviour
     public ItemData data;
     public int ownerIndex, slot;
     public bool chosen = false;
-    private bool isDestoried = false;
+    private bool doDestroy = false;
+    private bool surplus;
 
-    public void getData(GameObject Player, int _slot, int id)
+    public void getData(GameObject Player, int _slot, int id, bool _surplus = false)
     {
         owner = Player;
         tankDataScript = owner.GetComponent<TankDataScript>();
@@ -23,13 +24,22 @@ public class ItemLogicScript : MonoBehaviour
         slot = _slot;
         itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
         data = itemDataScript.items[id];
+        surplus = _surplus;
     }
 
 
     private void Start()
     {
         ownerIndex = tankDataScript.playerIndex;
-        itemAniScript.DrawCard();
+        if (surplus)
+        {
+            itemAniScript.DrawSurplusCardAnime();
+            Destroy(gameObject);
+        }
+        else
+        {
+            itemAniScript.DrawCard();
+        }
     }
 
     public void chooseCard(bool isChosen)
@@ -65,12 +75,12 @@ public class ItemLogicScript : MonoBehaviour
     {
         itemAniScript.UseCard(); // 暂时用同一个
 
-        isDestoried = true;
+        doDestroy = true;
     }
 
     private void Update()
     {
-        if (isDestoried) Destroy(gameObject);
+        if (doDestroy) Destroy(gameObject);
     }
 
 }

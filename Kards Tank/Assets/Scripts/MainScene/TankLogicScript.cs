@@ -137,18 +137,15 @@ public class TankLogicScript : MonoBehaviour
     public void giveItem(int id)
     {
         audioManagerScript.PlaySfx(15);
+            GameObject e = Instantiate(Item);
         if (tankDataScript.items.Count < 3)
         {
-            GameObject e = Instantiate(Item);
-            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // 参数： owner, slot, id
-            e.GetComponent<ItemAniScript>().DrawCard();
+            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id, false); // 参数： owner, slot, id，surplus
             tankDataScript.items.Add(e);
         }
         else
         {
-            GameObject e = Instantiate(Item);
-            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
-            e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
+            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id, true);
         }
     }
 

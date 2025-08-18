@@ -6,7 +6,8 @@ using UnityEngine.Rendering;
 public class ResourcePointScript : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
-    public List<Sprite> sprites = new List<Sprite>();
+    private ItemDataScript itemDataScript;
+    // public List<Sprite> sprites = new List<Sprite>();
     public int id;
     public int existenceTime;
     private float existenceTimer = 0;
@@ -28,8 +29,10 @@ public class ResourcePointScript : MonoBehaviour
 
     private void Start() // actually run after getPointId()
     {
+        itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
         randomizePosition();
-        spriteRenderer.sprite = sprites[id];
+        // spriteRenderer.sprite = sprites[id];
+        spriteRenderer.sprite = itemDataScript.items[id].sprite;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
