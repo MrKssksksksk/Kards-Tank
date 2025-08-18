@@ -7,6 +7,7 @@ TagManager:
   - ItemManager
   - Player1
   - Player2
+  - Timer
   layers:
   - Default
   - TransparentFX

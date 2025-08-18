@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 public class ItemLogicScript : MonoBehaviour
 {
+    private TimerScript timerScript;
     public GameObject owner;
     private TankDataScript tankDataScript;
     private TankLogicScript tankLogicScript;
@@ -30,11 +31,12 @@ public class ItemLogicScript : MonoBehaviour
 
     private void Start()
     {
+        timerScript = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScript>();
         ownerIndex = tankDataScript.playerIndex;
         if (surplus)
         {
             itemAniScript.DrawSurplusCardAnime();
-            Destroy(gameObject);
+            timerScript.addTimer(3f, destroySelf);
         }
         else
         {
@@ -81,6 +83,12 @@ public class ItemLogicScript : MonoBehaviour
     private void Update()
     {
         if (doDestroy) Destroy(gameObject);
+    }
+
+    private void destroySelf()
+    {
+        Debug.Log("Item Destroyed");
+        doDestroy = true;
     }
 
 }
