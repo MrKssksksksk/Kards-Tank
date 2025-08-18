@@ -18,6 +18,8 @@ public class ItemAniScript : MonoBehaviour
     public float P2Targetx;
     public float Width;
     public float Y;
+    public float P1SurplusX;
+    public float P2SurplusX;
     public float ChooseHeight; // 被选中时升高的高度
     public float TargetRotation;
     public ItemLogicScript itemLogicScript;
@@ -26,73 +28,103 @@ public class ItemAniScript : MonoBehaviour
     private int playerIndex;
 
 
-    async void Start()
+    void Start()
     {
         DOTween.Init();
         SelfRenderer = GetComponent<SpriteRenderer>();
         slot = getSlot();
         playerIndex = itemLogicScript.owner.GetComponent<TankDataScript>().playerIndex;
         setSprite(itemLogicScript.data);
-        // await DrawCard();
 
         // test
         // ItemData e = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>().Example1;
         // await UseCard();
     }
 
-    public async Task ChooseCard()
+    public void ChooseCard()
     {
-        Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y + ChooseHeight, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
-        seq.OnComplete(() => Debug.Log("card choose ani complete"));
-        seq.Play();
+        // Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y + ChooseHeight, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
+        // seq.OnComplete(() => Debug.Log("card choose ani complete"));
+        // seq.Play();
+        transform.DOMoveY(Y + ChooseHeight, 0.1f)
+        .SetEase(Ease.InOutQuad)
+        .OnComplete(() => Debug.Log("ChooseCard Anime Complete"));
 
-        await seq.AsyncWaitForCompletion();
+        // await seq.AsyncWaitForCompletion();
     }
 
-    public async Task UnChooseCard()
+    public void UnChooseCard()
     {
-        Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
-        seq.OnComplete(() => Debug.Log("card unchoose ani complete"));
-        seq.Play();
-
-        await seq.AsyncWaitForCompletion();
+        transform.DOMoveY(Y, 0.1f)
+        .SetEase(Ease.InOutQuad)
+        .OnComplete(() => Debug.Log("card unchoose anime complete"));
     }
 
-    public async Task DrawCard()
+    public void DrawCard() //这个封装是多余的
     {
-        await DrawCardAmine();
+        DrawCardAmine();
     }
 
-    private async Task DrawCardAmine() //抽卡动画,异步函数，具体概念问ai
+    private void DrawCardAmine() //抽卡动画,异步函数，具体概念问ai
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);
-        //此行往下均为动画
-        await gotoSlot(slot);
+        gotoSlot(slot);
     }
 
-    public async Task UseCard()
+    public void DrawSurplusCardAnime(bool doRotate = true) //爆牌动画
     {
-        await UseCardAnime();
+        transform.position = new Vector3(0, -5.6f, 0);
+        transform.rotation = Quaternion.Euler(0, 90f, 0);
+        Sequence seq = DOTween.Sequence();
+        float Target_x = playerIndex == 0 ? P1SurplusX : P2SurplusX;
+        float Target_y = Y;
+        if (doRotate)
+        {
+            if (transform.position.x > Target_x)
+            {
+                seq.Append(transform.DOLocalRotateQuaternion(
+                    Quaternion.Euler(new Vector3(0, 0, TargetRotation)),
+                    0.1f)); //第一个角度，第二个是在n秒内,移动是一样的
+            }
+            else
+            {
+                seq.Append(transform.DOLocalRotateQuaternion(
+                    Quaternion.Euler(new Vector3(0, 0, -TargetRotation)),
+                    0.1f));
+            }
+        }
+        seq.Append(transform.DOMoveX(Target_x, 1f)).SetEase(Ease.InOutQuad);
+        seq.Append(transform.DOLocalRotateQuaternion(
+                Quaternion.Euler(Vector3.zero),
+                0.1f));
+        seq.AppendInterval(0.3f);
+        seq.Append(transform.DOMoveY(transform.position.y + 0.2f, 0.3f)).SetEase(Ease.InOutQuad);
+        seq.Append(transform.DOMoveY(transform.position.y - 4f, 0.5f)).SetEase(Ease.InOutQuad);
+        seq.OnComplete(() => Debug.Log("Card use animation completed"));
+        seq.Play();
     }
 
-    private async Task UseCardAnime()
+    public void UseCard()
+    {
+        UseCardAnime();
+    }
+
+    private void UseCardAnime()
     {
         Sequence seq = DOTween.Sequence();
         seq.Join(SelfRenderer.DOFade(0f, 0.8f)); //第一个是透明度
         seq.Join(transform.DOLocalMoveY(transform.localPosition.y + 1f, 0.8f));
         seq.OnComplete(() => Debug.Log("Card use animation completed"));
         seq.Play();
-
-        await seq.AsyncWaitForCompletion();
     }
 
-    private async Task gotoSlot(int targetSlot, bool doRotate = true)
+    private void gotoSlot(int targetSlot, bool doRotate = true)
     {
         Sequence seq = DOTween.Sequence();
         float Target_x = playerIndex == 0 ?
-        P1Targetx + (Width * (targetSlot)) :
-        P2Targetx - (Width * (targetSlot));
+        P1Targetx + (Width * targetSlot) :
+        P2Targetx - (Width * targetSlot);
         float Target_y = Y;
         //此行往下均为动画
         seq.Append(transform.DOLocalRotateQuaternion(
@@ -119,8 +151,6 @@ public class ItemAniScript : MonoBehaviour
                 0.1f)); //旋转到0度
         seq.OnComplete(() => Debug.Log("Card draw animation completed"));
         seq.Play();
-
-        await seq.AsyncWaitForCompletion();
     }
 
     private int getSlot()

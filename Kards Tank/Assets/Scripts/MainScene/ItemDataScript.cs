@@ -9,7 +9,6 @@ public class ItemData
     public string Name;
     public int Cost; //花费
     public int Weight; //权重
-    // public int ExistenceTime;//存在时间;
     public string Description; //描述
     public Sprite sprite;
     public string Tags;

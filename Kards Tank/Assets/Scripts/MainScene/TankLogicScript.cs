@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,7 +17,7 @@ public class TankLogicScript : MonoBehaviour
 
     private void Start()
     {
-        if (StaticData.Instance.turn > 1) // ¶à»ØºÏ³õÊ¼»¯
+        if (StaticData.Instance.turn > 1) // å¤šå›åˆåˆå§‹åŒ–
         {
             StaticData.Instance.playerDatas[tankDataScript.playerIndex].output(tankDataScript);
             tankDataScript.supplyCapacity += 1;
@@ -35,7 +35,7 @@ public class TankLogicScript : MonoBehaviour
     private void Update()
     {
         gameTimer += Time.deltaTime;
-        // ²¹¸ø
+        // è¡¥ç»™
         if (supplyIncreaseTimer > tankDataScript.supplyIncreaseTime)
         {
             supplyIncreaseTimer = 0;
@@ -46,10 +46,10 @@ public class TankLogicScript : MonoBehaviour
         if (tankDataScript.cSupply <= tankDataScript.supplyCapacity)
         {
             supplyIncreaseTimer += Time.deltaTime;
-            if (tankDataScript.effects[3] == true) tankDataScript.effects[3] = false; // ÒøĞĞ
+            if (tankDataScript.effects[3] == true) tankDataScript.effects[3] = false; // é“¶è¡Œ
         }
 
-        // Ñ¹ÖÆ
+        // å‹åˆ¶
         if (tankDataScript.effects[0] == true) 
         {
             pinTimer += Time.deltaTime;
@@ -59,7 +59,7 @@ public class TankLogicScript : MonoBehaviour
             }
         }
 
-        // ³å»÷
+        // å†²å‡»
         if (tankDataScript.effect1BulletNum > 0)
         {
             tankDataScript.effects[4] = true;
@@ -70,13 +70,13 @@ public class TankLogicScript : MonoBehaviour
         }
 
         // T-35
-        if (gameTimer % 5 < Time.deltaTime) // Ã¿5sÒ»´Î ¹²8´Î
+        if (gameTimer % 5 < Time.deltaTime) // æ¯5sä¸€æ¬¡ å…±8æ¬¡
         {
             int t35Num = 0;
             if (tankDataScript.items.Count >= 1 && tankDataScript.getId(0) == 4) 
             {
                 t35Num++;
-                tankDataScript.addItemData(0, 1); // µÈÍ¬ÓÚ item[0].....data+=1
+                tankDataScript.addItemData(0, 1); // ç­‰åŒäº item[0].....data+=1
                 if (tankDataScript.getItemData(0) >= 8) removeItem(0);
             }
             if (tankDataScript.items.Count >= 2 && tankDataScript.getId(1) == 4)
@@ -93,14 +93,14 @@ public class TankLogicScript : MonoBehaviour
             }
             for (int i = 0; i < t35Num; i++)
             {
-                audioManagerScript.PlaySfx(1); // Ğ¡Ì¹¿ËÉä»÷
+                audioManagerScript.PlaySfx(1); // å°å¦å…‹å°„å‡»
                 Enemy.GetComponent<TankLogicScript>().damage(5);
                 damage(5);
             }
         }
 
-        // ×°¼×ÁĞ³µ
-        if (gameTimer % 10 < Time.deltaTime) // Ã¿10sÒ»´Î
+        // è£…ç”²åˆ—è½¦
+        if (gameTimer % 10 < Time.deltaTime) // æ¯10sä¸€æ¬¡
         {
             int trainNum = countItem(5);
             for (int i = 0; i < trainNum; i++)
@@ -110,7 +110,7 @@ public class TankLogicScript : MonoBehaviour
             }
         }
 
-        // ÊØ³å
+        // å®ˆå†²
         if (countItem(10) > 0)
         {
             tankDataScript.effects[1] = true;
@@ -140,12 +140,15 @@ public class TankLogicScript : MonoBehaviour
         if (tankDataScript.items.Count < 3)
         {
             GameObject e = Instantiate(Item);
-            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // ²ÎÊı£º owner, slot, id
+            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // å‚æ•°ï¼š owner, slot, id
+            e.GetComponent<ItemAniScript>().DrawCard();
             tankDataScript.items.Add(e);
         }
         else
         {
-            // ¶ªÆú¶¯»­
+            GameObject e = Instantiate(Item);
+            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
+            e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
         }
     }
 
@@ -184,7 +187,7 @@ public class TankLogicScript : MonoBehaviour
 
     public void pushBullet(int id)
     {
-        // ¶¯»­
+        // åŠ¨ç”»
         tankDataScript.specialBullets.Push(id);
     }
 
@@ -247,19 +250,19 @@ public class TankLogicScript : MonoBehaviour
 
     public bool canMove()
     {
-        if (tankDataScript.effects[0] == false) return true; // Ñ¹ÖÆ
+        if (tankDataScript.effects[0] == false) return true; // å‹åˆ¶
         return false;
     }
 
     public bool canFire()
     {
-        if (tankDataScript.effects[0] == false) return true; // Ñ¹ÖÆ
+        if (tankDataScript.effects[0] == false) return true; // å‹åˆ¶
         return false;
     }
 
     public bool doConsumeSupply() // do not work when use items
     {
-        if (tankDataScript.effects[5] == false) return true; // ×ªÕÛµã
+        if (tankDataScript.effects[5] == false) return true; // è½¬æŠ˜ç‚¹
         return false;
     }
 

@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -13,11 +13,11 @@ public class ItemLogicScript : MonoBehaviour
     public ItemData data;
     public int ownerIndex, slot;
     public bool chosen = false;
-    private bool doDestory = false;
+    private bool isDestoried = false;
 
-    public void getData(GameObject o, int _slot, int id)
+    public void getData(GameObject Player, int _slot, int id)
     {
-        owner = o;
+        owner = Player;
         tankDataScript = owner.GetComponent<TankDataScript>();
         tankLogicScript = owner.GetComponent<TankLogicScript>();
         slot = _slot;
@@ -32,12 +32,12 @@ public class ItemLogicScript : MonoBehaviour
         itemAniScript.DrawCard();
     }
 
-    public void chooseCard(bool c)
+    public void chooseCard(bool isChosen)
     {
-        if (chosen != c)
+        if (chosen != isChosen)
         {
-            chosen = c;
-            if (c == true)
+            chosen = isChosen;
+            if (isChosen == true)
             {
                 itemAniScript.ChooseCard();
             }
@@ -46,33 +46,31 @@ public class ItemLogicScript : MonoBehaviour
                 itemAniScript.UnChooseCard();
             }
         }
+
+        
     }
 
-    public void changeSlot(int x = -1) //  π”√µ¿æﬂ ±”…Tankµ˜”√
+    public void changeSlot(int x = -1) // ‰ΩøÁî®ÈÅìÂÖ∑Êó∂Áî±TankË∞ÉÁî®
     {
         slot += x;
     }
 
-    public async Task useItem()
+    public void useItem()
     {
 
-        await itemAniScript.UseCard();
-
-        doDestory = true;
+        itemAniScript.UseCard();
     }
 
-    public async Task removeItem()
+    public void removeItem()
     {
-        await itemAniScript.UseCard(); // ‘› ±”√Õ¨“ª∏ˆ
+        itemAniScript.UseCard(); // ÊöÇÊó∂Áî®Âêå‰∏Ä‰∏™
 
-        doDestory = true;
+        isDestoried = true;
     }
 
     private void Update()
     {
-        if (doDestory) Destroy(gameObject);
-
-        
+        if (isDestoried) Destroy(gameObject);
     }
 
 }

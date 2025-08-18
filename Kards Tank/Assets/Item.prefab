@@ -103,6 +103,8 @@ MonoBehaviour:
   P2Targetx: 11.45
   Width: 1.1
   Y: -5.6
+  P1SurplusX: -7
+  P2SurplusX: 7
   ChooseHeight: 1
   TargetRotation: 10
   itemLogicScript: {fileID: 2239963314858567681}
