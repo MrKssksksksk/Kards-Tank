@@ -13,6 +13,7 @@ public class ItemData
     public Sprite sprite;
     public string Tags;
     public int data;
+    public bool canDevelop;
 }
 
 public class ItemDataScript : MonoBehaviour

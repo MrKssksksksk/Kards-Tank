@@ -2200,6 +2200,7 @@ MonoBehaviour:
   tankDataScript: {fileID: 799548259}
   tankEffect: {fileID: 6296102505115425674, guid: e1ef18ea359c6eb4bb749dec940857ac, type: 3}
   Item: {fileID: 4284078569861760127, guid: 4e7c7b8c42cf24544854b7116872e6cd, type: 3}
+  itemDataScript: {fileID: 0}
 --- !u!114 &799548259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4298,6 +4299,7 @@ MonoBehaviour:
   tankDataScript: {fileID: 1497581441}
   tankEffect: {fileID: 6296102505115425674, guid: e1ef18ea359c6eb4bb749dec940857ac, type: 3}
   Item: {fileID: 4284078569861760127, guid: 4e7c7b8c42cf24544854b7116872e6cd, type: 3}
+  itemDataScript: {fileID: 0}
 --- !u!114 &1497581441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5261,6 +5263,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 528755cdfa87a484ab30980b74d5964c, type: 3}
     Tags: GER ORDER
     data: 0
+    canDevelop: 1
   - Id: 1
     Name: "85\u6BEB\u7C73\u91CE\u6218\u70AE"
     Cost: 3
@@ -5269,6 +5272,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 036811f4a84d4a6418710d9207c6cc2b, type: 3}
     Tags: SOV ART
     data: 0
+    canDevelop: 1
   - Id: 2
     Name: "\u4E00\u53F7\u5766\u514BB\u578B"
     Cost: 2
@@ -5277,6 +5281,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: a77f254598f52504a8478943ac011aef, type: 3}
     Tags: GER TANK
     data: 0
+    canDevelop: 1
   - Id: 3
     Name: "\u8F6C\u6298\u70B9"
     Cost: 5
@@ -5285,6 +5290,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: cce86177e6bc4304aa0300ccd08484cf, type: 3}
     Tags: SOV ORDER
     data: 0
+    canDevelop: 1
   - Id: 4
     Name: T-35
     Cost: 1
@@ -5293,6 +5299,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 1e965c79ee4f0024db69dd5ec6a38942, type: 3}
     Tags: SOV TANK
     data: 0
+    canDevelop: 1
   - Id: 5
     Name: "BP-43\u88C5\u7532\u5217\u8F66"
     Cost: 3
@@ -5301,6 +5308,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 3422fbe7d5818d14b96eb6bf16a446cd, type: 3}
     Tags: SOV TANK
     data: 0
+    canDevelop: 1
   - Id: 6
     Name: "\u7EA2\u9B54\u7A7A\u964D\u6B65\u5175\u56E2"
     Cost: 1
@@ -5309,6 +5317,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e70450053a3f58d4186eb91fd73f6b03, type: 3}
     Tags: USA INF
     data: 0
+    canDevelop: 1
   - Id: 7
     Name: "\u5077\u88AD"
     Cost: 2
@@ -5317,6 +5326,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e915451455eb91643a564c09638cdc07, type: 3}
     Tags: JAP ORDER
     data: 0
+    canDevelop: 1
   - Id: 8
     Name: KV-1 1941
     Cost: 2
@@ -5325,6 +5335,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 88bf21dc215264c458902cb42bcec60c, type: 3}
     Tags: SOV TANK
     data: 0
+    canDevelop: 1
   - Id: 9
     Name: "\u6D77\u519B\u529B\u91CF"
     Cost: 1
@@ -5333,6 +5344,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 223bf055d8a2b664e9d1043d101f9b4f, type: 3}
     Tags: ENG ORDER
     data: 0
+    canDevelop: 1
   - Id: 10
     Name: "\u8FD1\u536B\u6B65\u5175\u7B2C204\u56E2"
     Cost: 2
@@ -5341,6 +5353,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 4a6dcc25dabf4fb42ac9cbd622e5ba83, type: 3}
     Tags: SOV INF
     data: 0
+    canDevelop: 1
   - Id: 11
     Name: "\u95EA\u51FB\u6218\u6CD5"
     Cost: 2
@@ -5349,6 +5362,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 7583205833bd4ba48975df94fa236891, type: 3}
     Tags: GER ORDER
     data: 0
+    canDevelop: 1
   - Id: 12
     Name: "\u7ADE\u4E89\u6218\u6CD5"
     Cost: 6
@@ -5357,6 +5371,16 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: fb941a4f2cb01154aa94446b3ab4c9ae, type: 3}
     Tags: GER ORDER
     data: 0
+    canDevelop: 0
+  - Id: 13
+    Name: "\u8499\u54E5\u9A6C\u5229"
+    Cost: 1
+    Weight: 1
+    Description: 
+    sprite: {fileID: 21300000, guid: 37b72db78346eba4298d5ebecb494bf2, type: 3}
+    Tags: ENG ORDER
+    data: 0
+    canDevelop: 1
   - Id: 0
     Name: 
     Cost: 0
@@ -5365,6 +5389,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     Tags: 
     data: 0
+    canDevelop: 0
   - Id: 0
     Name: 
     Cost: 0
@@ -5373,6 +5398,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     Tags: 
     data: 0
+    canDevelop: 0
   - Id: 0
     Name: 
     Cost: 0
@@ -5381,6 +5407,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     Tags: 
     data: 0
+    canDevelop: 0
   - Id: 0
     Name: 
     Cost: 0
@@ -5389,6 +5416,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     Tags: 
     data: 0
+    canDevelop: 0
   - Id: 0
     Name: 
     Cost: 0
@@ -5397,6 +5425,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     Tags: 
     data: 0
+    canDevelop: 0
   - Id: 0
     Name: 
     Cost: 0
@@ -5405,14 +5434,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     Tags: 
     data: 0
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
-    Description: 
-    sprite: {fileID: 0}
-    Tags: 
-    data: 0
+    canDevelop: 0
 --- !u!1 &1659345174
 GameObject:
   m_ObjectHideFlags: 0

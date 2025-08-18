@@ -230,6 +230,16 @@ public class Tank1MoveScript : MonoBehaviour
                     tankDataScript.armorThickness += 5;
                     tankDataScript.hardDamage += 5;
                 }
+                else if (itemId == 13)
+                {
+                    // “Ù–ß
+                    tankLogicScript.Enemy.GetComponent<TankLogicScript>().pin();
+                    int x = tankLogicScript.developItem("ORDER");
+                    if (x != -1)
+                    {
+                        tankLogicScript.giveItem(x);
+                    }
+                }
 
             }
         }

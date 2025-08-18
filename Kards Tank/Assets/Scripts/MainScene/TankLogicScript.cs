@@ -12,11 +12,13 @@ public class TankLogicScript : MonoBehaviour
     public TankDataScript tankDataScript;
     public GameObject tankEffect;
     public GameObject Item;
+    public ItemDataScript itemDataScript;
     private float supplyIncreaseTimer, pinTimer;
     private float gameTimer;
 
     private void Start()
     {
+        itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
         if (StaticData.Instance.turn > 1) // 多回合初始化
         {
             StaticData.Instance.playerDatas[tankDataScript.playerIndex].output(tankDataScript);
@@ -164,9 +166,9 @@ public class TankLogicScript : MonoBehaviour
     public int developItem(string tag)
     {
         List<int> items = new List<int>();
-        for (int i = 0; i < tankDataScript.items.Count; i++)
+        for (int i = 0; i < itemDataScript.items.Count; i++)
         {
-            if (tankDataScript.getData(i).Tags.Contains(tag))
+            if (itemDataScript.items[i].Tags.Contains(tag) && itemDataScript.items[i].canDevelop)
             {
                 items.Add(i);
             }
@@ -174,7 +176,7 @@ public class TankLogicScript : MonoBehaviour
         if (items.Count > 0)
         {
             int x = UnityEngine.Random.Range(0, items.Count);
-            // Debug.Log("develop " + tankDataScript.itemNames[x]);
+            Debug.Log("develop " + items[x]);
             return items[x];
         }
         else

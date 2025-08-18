@@ -1,8 +1,6 @@
 新增道具注意事项
 1. 写进“items id.txt”里面
 2.  Item Manager中添加
-3. Item On Map中添加图片
-4. 在Item Manager中填写生成权重
 5. TankMoveScript中完成效果书写，
 如有需要，添加使用名为effect的bool列表并在"effects id.txt"中添加，若添加子弹类型，注意在BulletScript中书写相关内容以及在DEBUG中添加脚本
 6. 如果使用后创造了限制条件，请把逻辑链条写在TankLogicScript中
