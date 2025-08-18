@@ -27,6 +27,7 @@ public class TankLogicScript : MonoBehaviour
                 e.GetComponent<ItemLogicScript>().getData(gameObject, i, StaticData.Instance.playerDatas[tankDataScript.playerIndex].items[i]);
                 tankDataScript.items.Add(e);
             }
+            Enemy = GameObject.FindGameObjectWithTag(tankDataScript.playerIndex == 0 ? "Player2" : "Player1");
         }
         supplyIncreaseTimer = 0;
         gameTimer = 0;

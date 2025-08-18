@@ -10,6 +10,12 @@ public class DebugScript : MonoBehaviour
     TankLogicScript tankLogicScript;
     TankDataScript tankDataScript;
 
+    private void Start()
+    {
+        p1 = GameObject.FindGameObjectWithTag("Player1");
+        p2 = GameObject.FindGameObjectWithTag("Player2");
+    }
+
     void Update() // scripts only for debug
     {
         if (debug) 

@@ -8,6 +8,12 @@ public class GameoverManageScript : MonoBehaviour
     public GameObject p1, p2;
     public AudioManagerScript audioManagerScript;
 
+    private void Start()
+    {
+        p1 = GameObject.FindGameObjectWithTag("Player1");
+        p2 = GameObject.FindGameObjectWithTag("Player2");
+    }
+
     private void Update()
     {
         if (p1.GetComponent<TankDataScript>().cHP < 0)
