@@ -23,9 +23,9 @@ public class TankLogicScript : MonoBehaviour
             tankDataScript.supplyCapacity += 1;
             for (int i = 0; i < tankDataScript.items.Count; i++)
             {
-                GameObject e = Instantiate(Item);
-                e.GetComponent<ItemLogicScript>().getData(gameObject, i, StaticData.Instance.playerDatas[tankDataScript.playerIndex].items[i]);
-                tankDataScript.items.Add(e);
+                //GameObject e = Instantiate(Item);
+                //e.GetComponent<ItemLogicScript>().getData(gameObject, i, StaticData.Instance.playerDatas[tankDataScript.playerIndex].items[i]);
+                //tankDataScript.items.Add(e);
             }
         }
         supplyIncreaseTimer = 0;
@@ -139,16 +139,16 @@ public class TankLogicScript : MonoBehaviour
         audioManagerScript.PlaySfx(15);
         if (tankDataScript.items.Count < 3)
         {
-            GameObject e = Instantiate(Item);
-            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // 参数： owner, slot, id
-            e.GetComponent<ItemAniScript>().DrawCard();
-            tankDataScript.items.Add(e);
+            //GameObject e = Instantiate(Item);
+            //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // 参数： owner, slot, id
+            //e.GetComponent<ItemAniScript>().DrawCard();
+            //tankDataScript.items.Add(e);
         }
         else
         {
-            GameObject e = Instantiate(Item);
-            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
-            e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
+            //GameObject e = Instantiate(Item);
+            //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
+            //e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
         }
     }
 

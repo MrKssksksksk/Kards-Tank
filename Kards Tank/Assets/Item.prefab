@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7583205833bd4ba48975df94fa236891, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88bf21dc215264c458902cb42bcec60c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,17 +121,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  IM: {fileID: 0}
   itemAniScript: {fileID: 5303412778961751063}
   itemDataScript: {fileID: 0}
-  data:
-    Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
+  MyData:
+    Id: 8
+    Name: KV-1 1941
+    Cost: 2
+    Weight: 1
     Description: 
-    sprite: {fileID: 0}
-    Tags: 
+    sprite: {fileID: 21300000, guid: 88bf21dc215264c458902cb42bcec60c, type: 3}
+    Tags: SOV TANK
     data: 0
   ownerIndex: 0
-  slot: 0
+  slot: 1
   chosen: 0

@@ -6,11 +6,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEditor.Search;
+using Unity.VisualScripting;
 
 public class ItemManagerScript : MonoBehaviour
 {
     //侧边栏道具管理
-    public Dictionary<GameObject,List<GameObject>> PlayerItems = new();
+    public Dictionary<GameObject, List<GameObject>> PlayerItems = new();
+    public KeyCode P1First, P1Second, P1Third, P2First, P2Second, P2Third;
     //道具生成
     public GameObject ItemOnMap;
     public int spawnTime;
@@ -31,12 +33,24 @@ public class ItemManagerScript : MonoBehaviour
 
     void Update()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer > spawnTime)
+        HandleGenerateItem();
+        HandlePlayerItem();
+    }
+
+    private void HandlePlayerItem()
+    {
+        foreach (KeyValuePair<GameObject, List<GameObject>> pair in PlayerItems)
         {
-            spawnTimer = 0;
-            generateItemOnMap();
+            int index = 0;
+            foreach (GameObject itm in pair.Value)
+            {
+                itm.GetComponent<ItemLogicScript>().slot = index;
+                Debug.Log(itm.GetComponent<ItemLogicScript>().slot);
+                index++;
+            }
         }
+
+        
     }
 
     private int randomId()
@@ -66,6 +80,16 @@ public class ItemManagerScript : MonoBehaviour
     private void generate5ItemOnMap()
     {
         for (int i = 0; i < 5; i++) generateItemOnMap();
+    }
+
+    private void HandleGenerateItem()
+    {
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer > spawnTime)
+        {
+            spawnTimer = 0;
+            generateItemOnMap();
+        }
     }
 
 }

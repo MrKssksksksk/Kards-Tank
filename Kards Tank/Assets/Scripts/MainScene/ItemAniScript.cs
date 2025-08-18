@@ -24,16 +24,15 @@ public class ItemAniScript : MonoBehaviour
     public float TargetRotation;
     public ItemLogicScript itemLogicScript;
     // public List<Sprite> sprites;
-    private int slot;
-    private int playerIndex;
-
+    private int cacheSlot = 1;
+    public int slot;
+    public int playerIndex;
 
     void Start()
     {
         DOTween.Init();
-        //SelfRenderer = GetComponent<SpriteRenderer>();
-        //slot = getSlot();
         //playerIndex = itemLogicScript.owner.GetComponent<TankDataScript>().playerIndex;
+        //slot = getSlot();
         //setSprite(itemLogicScript.MyData);
     }
 
@@ -56,7 +55,7 @@ public class ItemAniScript : MonoBehaviour
         DrawCardAmine();
     }
 
-    public void DrawCardAmine() //抽卡动画,异步函数，具体概念问ai
+    public void DrawCardAmine() 
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);
@@ -85,15 +84,15 @@ public class ItemAniScript : MonoBehaviour
                     0.1f));
             }
         }
-        seq.Append(transform.DOMoveX(Target_x, 1f)).SetEase(Ease.InOutQuad);
+        seq.Append(transform.DOMoveX(Target_x, 0.7f)).SetEase(Ease.InOutQuad);
         seq.Append(transform.DOLocalRotateQuaternion(
                 Quaternion.Euler(Vector3.zero),
                 0.1f));
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMoveY(transform.position.y + 0.2f, 0.3f)).SetEase(Ease.InOutQuad);
         seq.Append(transform.DOMoveY(transform.position.y - 4f, 0.5f)).SetEase(Ease.InOutQuad);
-        seq.OnComplete(() => Debug.Log("Card use animation completed"));
-        seq.Play();
+        seq.OnComplete(() => Destroy(gameObject));
+        seq.Play();;
     }
 
     public void UseCard()
@@ -165,11 +164,12 @@ public class ItemAniScript : MonoBehaviour
          * 7为item1，8为item2，9为item3
          * 
          */
-        if (getSlot() != slot) // 当前一个道具被使用时，需要平移  此时logicScript.slot会改变
-        {
-            slot = getSlot();
-            gotoSlot(slot, false);
-        }
+        // if (getSlot() != slot) // 当前一个道具被使用时，需要平移  此时logicScript.slot会改变
+        // {
+        //     slot = getSlot();
+        //     gotoSlot(slot, false);
+        // }
+        //
     }
 
 }

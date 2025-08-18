@@ -3432,7 +3432,7 @@ GameObject:
   - component: {fileID: 1243054046}
   m_Layer: 0
   m_Name: Audio Manager
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5178,6 +5178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a775b826338cd7a4d8e7beedb79dd576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  P1First: 49
+  P1Second: 50
+  P1Third: 51
+  P2First: 265
+  P2Second: 264
+  P2Third: 263
   ItemOnMap: {fileID: 5203449934896719952, guid: d0a0b2a36a0f36144b4ddbb99390b910, type: 3}
   spawnTime: 10
   spawnWeight: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

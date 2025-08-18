@@ -17,33 +17,33 @@ public class ItemLogicScript : MonoBehaviour
     public bool chosen = false;
     private bool isDestoried = false;
 
-    public void getData(GameObject Player, int _slot, int id)
-    {
-        owner = Player;
-        tankDataScript = owner.GetComponent<TankDataScript>();
-        tankLogicScript = owner.GetComponent<TankLogicScript>();
-        slot = _slot;
-        itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
-        //data = itemDataScript.items[id];
-    }
-
-    public void InitData(GameObject Player, ItemData ItemData, int _slot)
-    {
-        owner = Player;
-        MyData = ItemData;
-        slot = _slot;
-        ownerIndex = Player.GetComponent<TankDataScript>().playerIndex;
-    }
-
     void Awake()
     {
         IM = GameObject.FindGameObjectWithTag("ItemManager");
     }
+    public void getData(GameObject Player, int _slot, int id)
+    {
+        //owner = Player;
+        //tankDataScript = owner.GetComponent<TankDataScript>();
+        //tankLogicScript = owner.GetComponent<TankLogicScript>();
+        //slot = _slot;
+        //itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
+        //data = itemDataScript.items[id];
+    }
+
+    public void InitData(GameObject Player, ItemData ItemData)
+    {
+        owner = Player;
+        MyData = ItemData;
+        GetComponent<SpriteRenderer>().sprite = MyData.sprite;
+        ownerIndex = Player.GetComponent<TankDataScript>().playerIndex;
+        GetComponent<ItemAniScript>().playerIndex = ownerIndex;
+    }
+
 
     private void Start()
     {
-        // ownerIndex = tankDataScript.playerIndex;
-        // itemAniScript.DrawCard();
+        
     }
 
     public void chooseCard(bool isChosen)
