@@ -31,26 +31,17 @@ public class ItemAniScript : MonoBehaviour
     void Start()
     {
         DOTween.Init();
-        SelfRenderer = GetComponent<SpriteRenderer>();
-        slot = getSlot();
-        playerIndex = itemLogicScript.owner.GetComponent<TankDataScript>().playerIndex;
-        setSprite(itemLogicScript.data);
-
-        // test
-        // ItemData e = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>().Example1;
-        // await UseCard();
+        //SelfRenderer = GetComponent<SpriteRenderer>();
+        //slot = getSlot();
+        //playerIndex = itemLogicScript.owner.GetComponent<TankDataScript>().playerIndex;
+        //setSprite(itemLogicScript.MyData);
     }
 
     public void ChooseCard()
     {
-        // Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y + ChooseHeight, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
-        // seq.OnComplete(() => Debug.Log("card choose ani complete"));
-        // seq.Play();
         transform.DOMoveY(Y + ChooseHeight, 0.1f)
         .SetEase(Ease.InOutQuad)
         .OnComplete(() => Debug.Log("ChooseCard Anime Complete"));
-
-        // await seq.AsyncWaitForCompletion();
     }
 
     public void UnChooseCard()
@@ -65,7 +56,7 @@ public class ItemAniScript : MonoBehaviour
         DrawCardAmine();
     }
 
-    private void DrawCardAmine() //抽卡动画,异步函数，具体概念问ai
+    public void DrawCardAmine() //抽卡动画,异步函数，具体概念问ai
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);

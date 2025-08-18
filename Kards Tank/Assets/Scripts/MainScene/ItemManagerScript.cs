@@ -1,21 +1,31 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using UnityEditor.Search;
 
 public class ItemManagerScript : MonoBehaviour
 {
+    //侧边栏道具管理
+    public Dictionary<GameObject,List<GameObject>> PlayerItems = new();
     //道具生成
-    public GameObject resourcePoint;
+    public GameObject ItemOnMap;
     public int spawnTime;
     private float spawnTimer;
-    public List<int> spawnWeight = new List<int>(); // length not determined yet
+    public List<int> spawnWeight; // length not determined yet
     private int weightSum;
 
     void Start()
     {
+        //权重
+        spawnWeight = new();
+        GetComponent<ItemDataScript>().items.ForEach((item) =>
+        {
+            spawnWeight.Add(item.Weight);
+        });
         spawnTimer = 0;
     }
 
@@ -25,14 +35,14 @@ public class ItemManagerScript : MonoBehaviour
         if (spawnTimer > spawnTime)
         {
             spawnTimer = 0;
-            generateResourcePoint();
+            generateItemOnMap();
         }
     }
 
     private int randomId()
     {
         weightSum = spawnWeight.Sum();
-        int x = Random.Range(1, weightSum + 1);
+        int x = UnityEngine.Random.Range(1, weightSum + 1);
         int s = 0;
         for (int i = 0; i < spawnWeight.Count; i++)
         {
@@ -42,20 +52,20 @@ public class ItemManagerScript : MonoBehaviour
                 return i;
             }
         }
-        return -1;
+        return 0;
     }
 
-    [ContextMenu("Generate Resource Point")]
-    private void generateResourcePoint()
+    [ContextMenu("Generate Item")]
+    private void generateItemOnMap()
     {
-        GameObject r = Instantiate(resourcePoint);
-        r.GetComponent<ItemMapScript>().getPointId(randomId());
+        GameObject itemOnMap = Instantiate(ItemOnMap);
+        itemOnMap.GetComponent<ItemMapScript>().getPointId(randomId());
     }
 
-    [ContextMenu("Generate 5 Resource Point")]
-    private void generate5ResourcePoint()
+    [ContextMenu("Generate 5 Item")]
+    private void generate5ItemOnMap()
     {
-        for (int i = 0; i < 5; i++) generateResourcePoint();
+        for (int i = 0; i < 5; i++) generateItemOnMap();
     }
 
 }

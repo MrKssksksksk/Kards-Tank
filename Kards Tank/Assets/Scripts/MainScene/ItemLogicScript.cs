@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 public class ItemLogicScript : MonoBehaviour
 {
     public GameObject owner;
+    public GameObject IM;
     private TankDataScript tankDataScript;
     private TankLogicScript tankLogicScript;
     public ItemAniScript itemAniScript;
     public ItemDataScript itemDataScript;
-    public ItemData data;
+    public ItemData MyData;
+
     public int ownerIndex, slot;
     public bool chosen = false;
     private bool isDestoried = false;
@@ -22,14 +24,26 @@ public class ItemLogicScript : MonoBehaviour
         tankLogicScript = owner.GetComponent<TankLogicScript>();
         slot = _slot;
         itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
-        data = itemDataScript.items[id];
+        //data = itemDataScript.items[id];
     }
 
+    public void InitData(GameObject Player, ItemData ItemData, int _slot)
+    {
+        owner = Player;
+        MyData = ItemData;
+        slot = _slot;
+        ownerIndex = Player.GetComponent<TankDataScript>().playerIndex;
+    }
+
+    void Awake()
+    {
+        IM = GameObject.FindGameObjectWithTag("ItemManager");
+    }
 
     private void Start()
     {
-        ownerIndex = tankDataScript.playerIndex;
-        itemAniScript.DrawCard();
+        // ownerIndex = tankDataScript.playerIndex;
+        // itemAniScript.DrawCard();
     }
 
     public void chooseCard(bool isChosen)

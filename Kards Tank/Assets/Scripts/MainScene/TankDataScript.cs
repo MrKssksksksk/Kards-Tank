@@ -34,12 +34,7 @@ public class TankDataScript : MonoBehaviour
     public float armorIntegrity;
     public Stack<int> specialBullets = new Stack<int>();
     public List<string> bulletNames = new List<string>();
-    public List<GameObject> items = new List<GameObject>();
-    // public List<int> items = new List<int>();
-    // public List<int> itemDatas = new List<int>();
-    //public List<int> itemCosts = new List<int>();
-    //public List<string> itemNames = new List<string>();
-    //public List<string> itemTags = new List<string>();
+    public List<GameObject> items = new();
     public List<bool> effects = new List<bool>();
     public float pinTime;
     public int effect1BulletNum = 0;
@@ -54,22 +49,22 @@ public class TankDataScript : MonoBehaviour
 
     public int getId(int index)
     {
-        return items[index].GetComponent<ItemLogicScript>().data.Id;
+        return items[index].GetComponent<ItemLogicScript>().MyData.Id;
     }
 
     public int getItemData(int index)
     {
-        return items[index].GetComponent<ItemLogicScript>().data.data;
+        return items[index].GetComponent<ItemLogicScript>().MyData.data;
     }
 
     public void addItemData(int index, int x)
     {
-        items[index].GetComponent<ItemLogicScript>().data.data += x;
+        items[index].GetComponent<ItemLogicScript>().MyData.data += x;
     }
 
     public ItemData getData(int index)
     {
-        return items[index].GetComponent<ItemLogicScript>().data;
+        return items[index].GetComponent<ItemLogicScript>().MyData;
     }
 
 }

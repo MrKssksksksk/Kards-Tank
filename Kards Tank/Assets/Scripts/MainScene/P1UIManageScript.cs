@@ -38,7 +38,7 @@ public class UIManageScript : MonoBehaviour
     {
         RenderNormalPage();
         RenderInfoPage();
-        RenderItemPage();
+        // RenderItemPage();
     }
 
     //渲染普通交互界面
@@ -91,45 +91,45 @@ public class UIManageScript : MonoBehaviour
     }
 
     //渲染道具界面
-    private void RenderItemPage()
-    {
-        if (tankDataScript.items.Count >= 1)
-        {
-            item1Image.sprite = sprites[tankDataScript.getId(0)];
-            item1Image.enabled = true;
-        }
-        else
-        {
-            item1Image.enabled = false;
-        }
-        if (tankDataScript.items.Count >= 2)
-        {
-            item2Image.sprite = sprites[tankDataScript.getId(1)];
-            item2Image.enabled = true;
-        }
-        else
-        {
-            item2Image.enabled = false;
-        }
-        if (tankDataScript.items.Count >= 3)
-        {
-            item3Image.sprite = sprites[tankDataScript.getId(2)];
-            item3Image.enabled = true;
-        }
-        else
-        {
-            item3Image.enabled = false;
-        }
+    // private void RenderItemPage()
+    // {
+    //     if (tankDataScript.items.Count >= 1)
+    //     {
+    //         item1Image.sprite = sprites[tankDataScript.getId(0)];
+    //         item1Image.enabled = true;
+    //     }
+    //     else
+    //     {
+    //         item1Image.enabled = false;
+    //     }
+    //     if (tankDataScript.items.Count >= 2)
+    //     {
+    //         item2Image.sprite = sprites[tankDataScript.getId(1)];
+    //         item2Image.enabled = true;
+    //     }
+    //     else
+    //     {
+    //         item2Image.enabled = false;
+    //     }
+    //     if (tankDataScript.items.Count >= 3)
+    //     {
+    //         item3Image.sprite = sprites[tankDataScript.getId(2)];
+    //         item3Image.enabled = true;
+    //     }
+    //     else
+    //     {
+    //         item3Image.enabled = false;
+    //     }
 
-        specialBulletsText.text = "";
-        int[] specialBullets = tankDataScript.specialBullets.ToArray();
-        for (int i = 0; i < specialBullets.Length; i++)
-        {
-            specialBulletsText.text += tankDataScript.bulletNames[specialBullets[i]] + " " + tankDataScript.FireConsumption[specialBullets[i]] + "K" + "\n";
-        }
+    //     specialBulletsText.text = "";
+    //     int[] specialBullets = tankDataScript.specialBullets.ToArray();
+    //     for (int i = 0; i < specialBullets.Length; i++)
+    //     {
+    //         specialBulletsText.text += tankDataScript.bulletNames[specialBullets[i]] + " " + tankDataScript.FireConsumption[specialBullets[i]] + "K" + "\n";
+    //     }
 
-        itemPage.SetActive(true);
-    }
+    //     itemPage.SetActive(true);
+    // }
 
     //加载图标主国盟国时用
     private void _LoadCountryIcon(Image Image, string Country) //Country = 'GER'之类

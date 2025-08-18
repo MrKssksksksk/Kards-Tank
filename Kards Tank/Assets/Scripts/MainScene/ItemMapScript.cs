@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class ItemMapScript : MonoBehaviour
 {
+    public GameObject IM; // ItemManager
+    public GameObject Item;
     public SpriteRenderer spriteRenderer;
-    public List<Sprite> sprites = new List<Sprite>();
     public int id;
+    public ItemData MyData;
     public int existenceTime;
     private float existenceTimer = 0;
 
-    private void Update()
+    void Update()
     {
         existenceTimer += Time.deltaTime;
         if (existenceTimer > existenceTime)
@@ -26,10 +29,20 @@ public class ItemMapScript : MonoBehaviour
         id = _id;
     }
 
-    private void Start() // actually run after getPointId()
+    void Awake()
     {
+        IM = GameObject.FindGameObjectWithTag("ItemManager");
+    }
+
+    void Start() // actually run after getPointId()
+    {
+        Debug.Log(IM);
+        IM.GetComponent<ItemDataScript>().items.ForEach((itemData) =>
+        {
+            if (id == itemData.Id) MyData = itemData;
+        });
         randomizePosition();
-        spriteRenderer.sprite = sprites[id];
+        spriteRenderer.sprite = MyData.sprite;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,9 +56,11 @@ public class ItemMapScript : MonoBehaviour
         if (collision.gameObject.layer == 6) // Player
         {
             // TankDataScript tankDataScript = collision.gameObject.GetComponent<TankDataScript>();
-            TankLogicScript tankLogicScript = collision.gameObject.GetComponent<TankLogicScript>();
-            
-            tankLogicScript.giveItem(id);
+            //TankLogicScript tankLogicScript = collision.gameObject.GetComponent<TankLogicScript>();
+            GameObject player = collision.gameObject;
+            HandlerPickedItem(player);
+            // Item.GetComponent<ItemLogicScript>().owner = player;
+            //tankLogicScript.giveItem(id);
             // 后续音效可以添加
 
 
@@ -57,4 +72,30 @@ public class ItemMapScript : MonoBehaviour
     {
         transform.position = new Vector3(-7.5f + Random.Range(0, 16), -3.5f + Random.Range(0, 8), 0);
     }
+
+    private void HandlerPickedItem(GameObject Player)
+    {
+        Instantiate(Item);
+
+        //空检查
+        if (!IM.GetComponent<ItemManagerScript>().PlayerItems.ContainsKey(Player))
+        {
+            IM.GetComponent<ItemManagerScript>().PlayerItems[Player] = new List<GameObject>();
+            Debug.Log($"Created new category: {Player}");
+        }
+        
+
+        if (IM.GetComponent<ItemManagerScript>().PlayerItems[Player].Count <= 3)
+        {
+            Debug.Log(Player);
+
+            int slot = IM.GetComponent<ItemManagerScript>().PlayerItems[Player].Count;
+            IM.GetComponent<ItemManagerScript>().PlayerItems[Player].Add(Item);
+            Item.GetComponent<ItemLogicScript>().InitData(Player, MyData, slot);
+        }
+        else
+        {
+
+        }
+    } 
 }

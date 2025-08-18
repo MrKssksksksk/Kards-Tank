@@ -239,7 +239,7 @@ public class TankLogicScript : MonoBehaviour
 
     public int countItem(int id)
     {
-        return tankDataScript.items.FindAll(t => t.GetComponent<ItemLogicScript>().data.Id == 5).Count;
+        return tankDataScript.items.FindAll(t => t.GetComponent<ItemLogicScript>().MyData.Id == 5).Count;
     }
 
     public bool canUseItem()
