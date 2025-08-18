@@ -9,13 +9,21 @@ public class ResourcePointSpawnerScript : MonoBehaviour
 {
     //道具生成
     public GameObject resourcePoint;
+    private ItemDataScript itemDataScript;
     public int spawnTime;
     private float spawnTimer;
-    public List<int> spawnWeight = new List<int>(); // length not determined yet
+    public List<int> spawnWeight = new List<int>(); // 设定为public，但此列表会被初始化，public的目的是为了调试时随时修改
     private int weightSum;
 
     void Start()
     {
+        itemDataScript = GetComponent<ItemDataScript>();
+        spawnWeight = new List<int>();
+        
+        foreach (ItemData i in itemDataScript.items) // 只读取一次，确保可以游戏内调试
+        {
+            spawnWeight.Add(i.Weight);
+        }
         spawnTimer = 0;
     }
 
@@ -31,7 +39,7 @@ public class ResourcePointSpawnerScript : MonoBehaviour
 
     private int randomId()
     {
-        weightSum = spawnWeight.Sum();
+        weightSum = spawnWeight.Sum(); // 每次都重新计算，方便调试
         int x = Random.Range(1, weightSum + 1);
         int s = 0;
         for (int i = 0; i < spawnWeight.Count; i++)
