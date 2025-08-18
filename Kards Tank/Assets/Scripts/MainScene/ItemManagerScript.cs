@@ -15,13 +15,13 @@ public class ItemManagerScript : MonoBehaviour
     public GameObject ItemOnMap;
     public int spawnTime;
     private float spawnTimer;
-    public List<int> spawnWeight; // length not determined yet
+    private List<int> spawnWeight;
     private int weightSum;
 
     void Start()
     {
         //权重
-        spawnWeight = new();
+        spawnWeight = new List<int>();
         GetComponent<ItemDataScript>().items.ForEach((item) =>
         {
             spawnWeight.Add(item.Weight);
