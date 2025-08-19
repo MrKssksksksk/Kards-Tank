@@ -351,6 +351,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Up Edge
       objectReference: {fileID: 0}
+    - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x
       value: 8
@@ -2316,6 +2320,10 @@ PrefabInstance:
     - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_Name
       value: Left Edge
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x
@@ -4853,6 +4861,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Edge
       objectReference: {fileID: 0}
+    - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -5381,15 +5393,15 @@ MonoBehaviour:
     Tags: ENG ORDER
     data: 0
     canDevelop: 1
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
+  - Id: 14
+    Name: "\u6C99\u6F20\u4E4B\u9F20"
+    Cost: 1
+    Weight: 1
     Description: 
-    sprite: {fileID: 0}
-    Tags: 
+    sprite: {fileID: 21300000, guid: a4a5f0985fc08e34dac75e2edd3c0be7, type: 3}
+    Tags: ENG ORDER
     data: 0
-    canDevelop: 0
+    canDevelop: 1
   - Id: 0
     Name: 
     Cost: 0
@@ -5683,6 +5695,10 @@ PrefabInstance:
     - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_Name
       value: Down Edge
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x

@@ -13,11 +13,13 @@ public class TankLogicScript : MonoBehaviour
     public GameObject tankEffect;
     public GameObject Item;
     public ItemDataScript itemDataScript;
+    private SpriteRenderer spriteRenderer;
     private float supplyIncreaseTimer, pinTimer;
     private float gameTimer;
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
         if (StaticData.Instance.turn > 1) // 多回合初始化
         {
@@ -137,6 +139,18 @@ public class TankLogicScript : MonoBehaviour
         e.GetComponent<TankEffectScript>().getType(0, tankDataScript.pinTime, transform);
     }
 
+    public void giveSmokescreen() // 烟幕
+    {
+        tankDataScript.effects[7] = true;
+        setTransparent();
+    }
+
+    public void removeSmokescreen()
+    {
+        tankDataScript.effects[7] = false;
+        setTransparent();
+    }
+
     public void giveItem(int id)
     {
         audioManagerScript.PlaySfx(15);
@@ -189,6 +203,21 @@ public class TankLogicScript : MonoBehaviour
     {
         // 动画
         tankDataScript.specialBullets.Push(id);
+    }
+
+    public void setTransparent()
+    {
+        Color color = spriteRenderer.color;
+        if (tankDataScript.effects[7] == false)
+        {
+            color.a = 1f; // 透明度 0透明 1实心
+        } 
+        else
+        {
+            color.a = 0.5f;
+        }
+        
+        spriteRenderer.color = color;
     }
 
     public void OnBulletHitEnemy()

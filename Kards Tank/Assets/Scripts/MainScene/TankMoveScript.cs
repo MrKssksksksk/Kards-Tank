@@ -57,6 +57,8 @@ public class Tank1MoveScript : MonoBehaviour
             vertical = (Input.GetKey(UpKey) ? 1 : 0) - (Input.GetKey(DownKey) ? 1 : 0);
             if (vertical != 0 && (tankDataScript.cSupply > 0 || !tankLogicScript.doConsumeSupply()))
             {
+                if (tankDataScript.effects[7] == true) tankLogicScript.removeSmokescreen(); // 烟幕
+
                 if (Input.GetKey(SpeedUpKey))
                 {
                     rb.velocity = direction * tankDataScript.moveSpeed * vertical * 1.5f;
@@ -82,6 +84,8 @@ public class Tank1MoveScript : MonoBehaviour
                 (tankDataScript.cSupply > tankDataScript.FireConsumption[tankDataScript.specialBullets.Count != 0 ? tankDataScript.specialBullets.Peek() : 0] || 
                 !tankLogicScript.doConsumeSupply()))
             {
+                if (tankDataScript.effects[7] == true) tankLogicScript.removeSmokescreen(); // 烟幕
+
                 fireCoolDownTimer = tankDataScript.reloadTime;
                 if (tankLogicScript.doConsumeSupply()) tankDataScript.cSupply -= tankDataScript.FireConsumption[tankDataScript.specialBullets.Count != 0 ? tankDataScript.specialBullets.Peek() : 0];
                 rb.velocity -= direction * 5;
@@ -138,7 +142,6 @@ public class Tank1MoveScript : MonoBehaviour
             if (use == true)
             {
                 useItem.Invoke();
-
                 
                 for (int i = chosenItem - 1; i < tankDataScript.items.Count; i++)
                 {
@@ -150,6 +153,7 @@ public class Tank1MoveScript : MonoBehaviour
                 tankLogicScript.useItem(chosenItem - 1);
                 chosenItem = 0;
 
+                TankLogicScript enemyTankLogicScript = tankLogicScript.Enemy.GetComponent<TankLogicScript>();
                 if (itemId == 0) // 银行
                 {
                     // 音效
@@ -198,7 +202,7 @@ public class Tank1MoveScript : MonoBehaviour
                 else if (itemId == 9) // 海军力量
                 {
                     audioManagerScript.PlaySfx(13); // 海军力量
-                    tankLogicScript.Enemy.GetComponent<TankLogicScript>().pin();
+                    enemyTankLogicScript.pin();
                     tankDataScript.cHP += 30;
                 }
                 else if (itemId == 10) // 守冲
@@ -233,12 +237,18 @@ public class Tank1MoveScript : MonoBehaviour
                 else if (itemId == 13)
                 {
                     // 音效
-                    tankLogicScript.Enemy.GetComponent<TankLogicScript>().pin();
+                    enemyTankLogicScript.pin();
                     int x = tankLogicScript.developItem("ORDER");
                     if (x != -1)
                     {
                         tankLogicScript.giveItem(x);
                     }
+                }
+                else if (itemId == 14)
+                {
+                    // 音效
+                    enemyTankLogicScript.pin();
+                    enemyTankLogicScript.damage(10);
                 }
 
             }
