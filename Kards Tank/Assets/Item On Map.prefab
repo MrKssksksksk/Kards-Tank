@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7430651860903831604}
   - component: {fileID: 8104518071169101960}
   - component: {fileID: 8591777859241881196}
-  - component: {fileID: 338666740333780853}
+  - component: {fileID: -8074662355160677889}
   m_Layer: 0
   m_Name: Item On Map
   m_TagString: Untagged
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 7.02}
   m_EdgeRadius: 0
---- !u!114 &338666740333780853
+--- !u!114 &-8074662355160677889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,27 +143,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0188289c29d80c847aa2a4bcf0501a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IM: {fileID: 0}
+  Item: {fileID: 4284078569861760127, guid: 4e7c7b8c42cf24544854b7116872e6cd, type: 3}
   spriteRenderer: {fileID: 8104518071169101960}
-  sprites:
-  - {fileID: 21300000, guid: 528755cdfa87a484ab30980b74d5964c, type: 3}
-  - {fileID: 21300000, guid: 036811f4a84d4a6418710d9207c6cc2b, type: 3}
-  - {fileID: 21300000, guid: a77f254598f52504a8478943ac011aef, type: 3}
-  - {fileID: 21300000, guid: cce86177e6bc4304aa0300ccd08484cf, type: 3}
-  - {fileID: 21300000, guid: 1e965c79ee4f0024db69dd5ec6a38942, type: 3}
-  - {fileID: 21300000, guid: 3422fbe7d5818d14b96eb6bf16a446cd, type: 3}
-  - {fileID: 21300000, guid: e70450053a3f58d4186eb91fd73f6b03, type: 3}
-  - {fileID: 21300000, guid: e915451455eb91643a564c09638cdc07, type: 3}
-  - {fileID: 21300000, guid: 88bf21dc215264c458902cb42bcec60c, type: 3}
-  - {fileID: 21300000, guid: 223bf055d8a2b664e9d1043d101f9b4f, type: 3}
-  - {fileID: 21300000, guid: 4a6dcc25dabf4fb42ac9cbd622e5ba83, type: 3}
-  - {fileID: 21300000, guid: 7583205833bd4ba48975df94fa236891, type: 3}
-  - {fileID: 21300000, guid: fb941a4f2cb01154aa94446b3ab4c9ae, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   id: 0
+  MyItemData:
+    Id: 0
+    Name: 
+    Cost: 0
+    Weight: 0
+    Description: 
+    sprite: {fileID: 0}
+    Tags: 
+    data: 0
   existenceTime: 60

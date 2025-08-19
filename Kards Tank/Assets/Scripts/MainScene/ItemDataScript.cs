@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +20,4 @@ public class ItemDataScript : MonoBehaviour
 {
     [SerializeField]
     public List<ItemData> items = new List<ItemData>();
-
-    public void Start()
-    {
-
-    }
 }

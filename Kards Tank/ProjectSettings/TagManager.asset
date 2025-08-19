@@ -7,7 +7,11 @@ TagManager:
   - ItemManager
   - Player1
   - Player2
+<<<<<<< HEAD
   - Timer
+=======
+  - Audio
+>>>>>>> origin/道具系统重做
   layers:
   - Default
   - TransparentFX

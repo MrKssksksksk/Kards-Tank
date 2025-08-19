@@ -27,9 +27,9 @@ public class TankLogicScript : MonoBehaviour
             tankDataScript.supplyCapacity += 1;
             for (int i = 0; i < tankDataScript.items.Count; i++)
             {
-                GameObject e = Instantiate(Item);
-                e.GetComponent<ItemLogicScript>().getData(gameObject, i, StaticData.Instance.playerDatas[tankDataScript.playerIndex].items[i]);
-                tankDataScript.items.Add(e);
+                //GameObject e = Instantiate(Item);
+                //e.GetComponent<ItemLogicScript>().getData(gameObject, i, StaticData.Instance.playerDatas[tankDataScript.playerIndex].items[i]);
+                //tankDataScript.items.Add(e);
             }
             Enemy = GameObject.FindGameObjectWithTag(tankDataScript.playerIndex == 0 ? "Player2" : "Player1");
         }
@@ -157,12 +157,16 @@ public class TankLogicScript : MonoBehaviour
             GameObject e = Instantiate(Item);
         if (tankDataScript.items.Count < 3)
         {
-            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id, false); // 参数： owner, slot, id，surplus
-            tankDataScript.items.Add(e);
+            //GameObject e = Instantiate(Item);
+            //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // 参数： owner, slot, id
+            //e.GetComponent<ItemAniScript>().DrawCard();
+            //tankDataScript.items.Add(e);
         }
         else
         {
-            e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id, true);
+            //GameObject e = Instantiate(Item);
+            //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
+            //e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
         }
     }
 
@@ -268,7 +272,7 @@ public class TankLogicScript : MonoBehaviour
 
     public int countItem(int id)
     {
-        return tankDataScript.items.FindAll(t => t.GetComponent<ItemLogicScript>().data.Id == 5).Count;
+        return tankDataScript.items.FindAll(t => t.GetComponent<ItemLogicScript>().MyData.Id == 5).Count;
     }
 
     public bool canUseItem()

@@ -24,33 +24,22 @@ public class ItemAniScript : MonoBehaviour
     public float TargetRotation;
     public ItemLogicScript itemLogicScript;
     // public List<Sprite> sprites;
-    private int slot;
-    private int playerIndex;
-
+    public int slot;
+    public int playerIndex;
 
     void Start()
     {
         DOTween.Init();
-        SelfRenderer = GetComponent<SpriteRenderer>();
-        slot = getSlot();
-        playerIndex = itemLogicScript.owner.GetComponent<TankDataScript>().playerIndex;
-        setSprite(itemLogicScript.data);
-
-        // test
-        // ItemData e = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>().Example1;
-        // await UseCard();
+        //playerIndex = itemLogicScript.owner.GetComponent<TankDataScript>().playerIndex;
+        //slot = getSlot();
+        //setSprite(itemLogicScript.MyData);
     }
 
     public void ChooseCard()
     {
-        // Sequence seq = DOTween.Sequence().Append(transform.DOMoveY(Y + ChooseHeight, 0.1f)).SetEase(Ease.InOutQuad); //坐标移动
-        // seq.OnComplete(() => Debug.Log("card choose ani complete"));
-        // seq.Play();
         transform.DOMoveY(Y + ChooseHeight, 0.1f)
         .SetEase(Ease.InOutQuad)
         .OnComplete(() => Debug.Log("ChooseCard Anime Complete"));
-
-        // await seq.AsyncWaitForCompletion();
     }
 
     public void UnChooseCard()
@@ -65,19 +54,21 @@ public class ItemAniScript : MonoBehaviour
         DrawCardAmine();
     }
 
-    private void DrawCardAmine() //抽卡动画,异步函数，具体概念问ai
+    public void DrawCardAmine() 
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);
         gotoSlot(slot);
     }
 
-    public void DrawSurplusCardAnime(bool doRotate = true) //爆牌动画
+    public void DrawSurplusCardAnime(int ItemUpperLimit,bool doRotate = true) //爆牌动画
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);
         Sequence seq = DOTween.Sequence();
-        float Target_x = playerIndex == 0 ? P1SurplusX : P2SurplusX;
+        float Target_x = playerIndex == 0
+        ? P1Targetx + (Width * ItemUpperLimit + 1)
+        : P2Targetx - (Width * ItemUpperLimit + 1);
         float Target_y = Y;
         if (doRotate)
         {
@@ -94,15 +85,15 @@ public class ItemAniScript : MonoBehaviour
                     0.1f));
             }
         }
-        seq.Append(transform.DOMoveX(Target_x, 1f)).SetEase(Ease.InOutQuad);
+        seq.Append(transform.DOMoveX(Target_x, 0.7f)).SetEase(Ease.InOutQuad);
         seq.Append(transform.DOLocalRotateQuaternion(
                 Quaternion.Euler(Vector3.zero),
                 0.1f));
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMoveY(transform.position.y + 0.2f, 0.3f)).SetEase(Ease.InOutQuad);
         seq.Append(transform.DOMoveY(transform.position.y - 4f, 0.5f)).SetEase(Ease.InOutQuad);
-        seq.OnComplete(() => Debug.Log("Card use animation completed"));
-        seq.Play();
+        seq.OnComplete(() => Destroy(gameObject));
+        seq.Play();;
     }
 
     public void UseCard()
@@ -117,6 +108,20 @@ public class ItemAniScript : MonoBehaviour
         seq.Join(transform.DOLocalMoveY(transform.localPosition.y + 1f, 0.8f));
         seq.OnComplete(() => Debug.Log("Card use animation completed"));
         seq.Play();
+    }
+
+    private void DevelopeCardAnime(int targetSlot)
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        Sequence seq = DOTween.Sequence();
+        float Target_x = playerIndex == 0 ?
+        P1Targetx + (Width * targetSlot) :
+        P2Targetx - (Width * targetSlot);
+        float Target_y = Y + 1f;
+        transform.position = new Vector3(Target_x, Target_y, 0f);
+        seq.Append(SelfRenderer.material.DOFade(0f, 0f));
+        seq.Join(SelfRenderer.DOFade(100f, 0.8f)); //第一个是透明度
+        seq.Join(transform.DOLocalMoveY(Y, 0.8f));
     }
 
     private void gotoSlot(int targetSlot, bool doRotate = true)
@@ -164,6 +169,15 @@ public class ItemAniScript : MonoBehaviour
         SelfRenderer.sprite = itemData.sprite;
     }
 
+    public void HandleSlotAnime()
+    {
+        int TargetSlot = GetComponent<ItemLogicScript>().slot;
+        if (slot != TargetSlot)
+        {
+            slot = TargetSlot;
+            gotoSlot(slot,false);
+        }
+    }
 
     private void Update()
     {
@@ -174,12 +188,13 @@ public class ItemAniScript : MonoBehaviour
          * 7为item1，8为item2，9为item3
          * 
          */
-        if (getSlot() != slot) // 当前一个道具被使用时，需要平移  此时logicScript.slot会改变
-        {
-            slot = getSlot();
-            gotoSlot(slot, false);
-        }
+        // if (getSlot() != slot) // 当前一个道具被使用时，需要平移  此时logicScript.slot会改变
+        // {
+        //     slot = getSlot();
+        //     gotoSlot(slot, false);
+        // }
+        if (!GetComponent<ItemLogicScript>().isSurplus)
+            HandleSlotAnime();
     }
-
 }
 
