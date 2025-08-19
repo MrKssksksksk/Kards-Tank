@@ -139,15 +139,18 @@ public class TankLogicScript : MonoBehaviour
         e.GetComponent<TankEffectScript>().getType(0, tankDataScript.pinTime, transform);
     }
 
+    [ContextMenu("give Smokescreen")]
     public void giveSmokescreen() // 烟幕
     {
         tankDataScript.effects[7] = true;
+        gameObject.layer = LayerMask.NameToLayer("Smokescreen");
         setTransparent();
     }
 
     public void removeSmokescreen()
     {
         tankDataScript.effects[7] = false;
+        gameObject.layer = LayerMask.NameToLayer("Player");
         setTransparent();
     }
 

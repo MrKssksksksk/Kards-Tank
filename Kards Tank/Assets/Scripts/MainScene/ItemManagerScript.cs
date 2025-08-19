@@ -8,6 +8,8 @@ using UnityEngine.UIElements.Experimental;
 
 public class ItemManagerScript : MonoBehaviour
 {
+    private ItemDataScript itemDataScript;
+
     //侧边栏道具管理
     public int ItemUpperLimit; //道具上限
     public GameObject Item;
@@ -29,6 +31,7 @@ public class ItemManagerScript : MonoBehaviour
 
     void Start()
     {
+        itemDataScript = GetComponent<ItemDataScript>();
         PlayerItems.Add(Player1, new List<GameObject>());
         PlayerItems.Add(Player2, new List<GameObject>());
         SelectedSlots.Add(Player1, -1);
@@ -138,7 +141,7 @@ public class ItemManagerScript : MonoBehaviour
         List<ItemData> StandardItems = new();
         GetComponent<ItemDataScript>().items.ForEach((item) =>
         {
-            if (item.Tags.Contains(tag)) StandardItems.Add(item);
+            if (item.Tags.Contains(tag) && item.canDevelop) StandardItems.Add(item);
         });
         int randomIndex = Random.Range(0, StandardItems.Count);
         ItemData _data = StandardItems[randomIndex];
@@ -168,6 +171,11 @@ public class ItemManagerScript : MonoBehaviour
             itemLogic.isSurplus = true;
             itemAni.DrawSurplusCardAnime(ItemUpperLimit);
         }
+    }
+
+    public void GiveItem(GameObject Player, int index)
+    {
+        GiveItem(Player, itemDataScript.items[index]);
     }
 
     //道具生成

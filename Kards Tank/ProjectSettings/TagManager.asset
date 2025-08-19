@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Timer
+  - Player1
+  - Audio
+  - Player2
+  - ItemManager
   layers:
   - Default
   - TransparentFX
@@ -11,12 +16,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Wall
+  - Bullet
+  - Smokescreen
+  - ItemOnMap
+  - Item
   - 
   - 
   - 

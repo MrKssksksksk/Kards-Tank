@@ -353,7 +353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x
@@ -2013,6 +2013,7 @@ GameObject:
   - component: {fileID: 799548259}
   - component: {fileID: 799548258}
   - component: {fileID: 799548253}
+  - component: {fileID: 799548260}
   m_Layer: 6
   m_Name: Tank1
   m_TagString: Player1
@@ -2262,6 +2263,18 @@ MonoBehaviour:
   effects: 00000000000000000000
   pinTime: 3
   effect1BulletNum: 0
+--- !u!114 &799548260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799548250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6072bed784d8e0c478ebf8e69e096759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &823710614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,7 +2336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x
@@ -4283,6 +4296,7 @@ GameObject:
   - component: {fileID: 1497581441}
   - component: {fileID: 1497581440}
   - component: {fileID: 1497581446}
+  - component: {fileID: 1497581447}
   m_Layer: 6
   m_Name: Tank2
   m_TagString: Player2
@@ -4532,6 +4546,18 @@ MonoBehaviour:
   Item2Key: 264
   Item3Key: 263
   chooseLastingTime: 1.5
+--- !u!114 &1497581447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497581438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6072bed784d8e0c478ebf8e69e096759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1503554380
 GameObject:
   m_ObjectHideFlags: 0
@@ -4863,7 +4889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x
@@ -5236,9 +5262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a775b826338cd7a4d8e7beedb79dd576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemUpperLimit: 3
+  Item: {fileID: 4284078569861760127, guid: 4e7c7b8c42cf24544854b7116872e6cd, type: 3}
   Player1: {fileID: 799548250}
   Player2: {fileID: 1497581438}
-  itemLogic: {fileID: 0}
   P1First: 49
   P1Second: 50
   P1Third: 51
@@ -5706,7 +5733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738306604286582608, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6698905384752620627, guid: bdb46ae45b9ddf741bf4469440a59567, type: 3}
       propertyPath: m_LocalScale.x

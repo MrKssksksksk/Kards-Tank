@@ -27,15 +27,6 @@ public class ItemLogicScript : MonoBehaviour
         IM = GameObject.FindGameObjectWithTag("ItemManager");
         itemAni = GetComponent<ItemAniScript>();
     }
-    public void getData(GameObject Player, int _slot, int id)
-    {
-        //owner = Player;
-        //tankDataScript = owner.GetComponent<TankDataScript>();
-        //tankLogicScript = owner.GetComponent<TankLogicScript>();
-        //slot = _slot;
-        //itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
-        //data = itemDataScript.items[id];
-    }
 
     public void InitData(GameObject Player, ItemData ItemData)
     {
@@ -85,7 +76,7 @@ public class ItemLogicScript : MonoBehaviour
 
     public void useItem()
     {
-
+        owner.GetComponent<TankItemEffectScript>().functions[MyData.Id]();
         itemAni.UseCard();
     }
 
