@@ -41,12 +41,11 @@ public class ItemMapScript : MonoBehaviour
 
     void Start() // actually run after getPointId()
     {
-        itemData.items.ForEach((itemData) =>
-        {
-            if (id == itemData.Id) MyData = itemData;
-        });
+        // itemData.items.ForEach((itemData) =>
+        // {
+        //     if (id == itemData.Id) MyData = itemData;
+        // });
         randomizePosition();
-        spriteRenderer.sprite = MyData.sprite;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -78,28 +77,34 @@ public class ItemMapScript : MonoBehaviour
     private void HandlerPickedItem(GameObject Player)
     {
         AMS.PlaySfx(15); //抽牌
-        GameObject newItem = Instantiate(Item);
-        ItemLogicScript itemLogic = newItem.GetComponent<ItemLogicScript>();
-        ItemAniScript itemAni = newItem.GetComponent<ItemAniScript>();
-        itemLogic.InitData(Player, MyData);
+        itemManager.GiveItem(Player, MyData);
+        // GameObject newItem = Instantiate(Item);
+        // ItemLogicScript itemLogic = newItem.GetComponent<ItemLogicScript>();
+        // ItemAniScript itemAni = newItem.GetComponent<ItemAniScript>();
+        // itemLogic.InitData(Player, MyData);
 
-        //空检查
-        if (!itemManager.PlayerItems.ContainsKey(Player))
-        {
-            itemManager.PlayerItems[Player] = new List<GameObject>();
-        }
+        // //空检查
+        // if (!itemManager.PlayerItems.ContainsKey(Player))
+        // {
+        //     itemManager.PlayerItems[Player] = new List<GameObject>();
+        // }
 
 
-        if (itemManager.PlayerItems[Player].Count < 3)
-        {
-            itemManager.PlayerItems[Player].Add(newItem);
-            itemAni.slot = itemManager.PlayerItems[Player].Count - 1;
-            newItem.GetComponent<ItemAniScript>().DrawCardAmine();
-        }
-        else
-        {
-            itemLogic.isSurplus = true;
-            itemAni.DrawSurplusCardAnime();
-        }
-    } 
+        // if (itemManager.PlayerItems[Player].Count < 3)
+        // {
+        //     itemManager.PlayerItems[Player].Add(newItem);
+        //     itemAni.slot = itemManager.PlayerItems[Player].Count - 1;
+        //     newItem.GetComponent<ItemAniScript>().DrawCardAmine();
+        // }
+        // else
+        // {
+        //     itemLogic.isSurplus = true;
+        //     itemAni.DrawSurplusCardAnime();
+        // }
+    }
+    public void InitData(ItemData _data)
+    {
+        MyData = _data;
+        spriteRenderer.sprite = MyData.sprite;
+    }
 }

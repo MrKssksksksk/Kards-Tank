@@ -61,12 +61,14 @@ public class ItemAniScript : MonoBehaviour
         gotoSlot(slot);
     }
 
-    public void DrawSurplusCardAnime(bool doRotate = true) //爆牌动画
+    public void DrawSurplusCardAnime(int ItemUpperLimit,bool doRotate = true) //爆牌动画
     {
         transform.position = new Vector3(0, -5.6f, 0);
         transform.rotation = Quaternion.Euler(0, 90f, 0);
         Sequence seq = DOTween.Sequence();
-        float Target_x = playerIndex == 0 ? P1SurplusX : P2SurplusX;
+        float Target_x = playerIndex == 0
+        ? P1Targetx + (Width * ItemUpperLimit + 1)
+        : P2Targetx - (Width * ItemUpperLimit + 1);
         float Target_y = Y;
         if (doRotate)
         {

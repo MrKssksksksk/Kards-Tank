@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class ItemManagerScript : MonoBehaviour
 {
     //侧边栏道具管理
+    public int ItemUpperLimit; //道具上限
     public GameObject Item;
     public GameObject Player1;
     public GameObject Player2;
@@ -141,33 +144,62 @@ public class ItemManagerScript : MonoBehaviour
         int randomIndex = Random.Range(0, StandardItems.Count);
         ItemData _data = StandardItems[randomIndex];
         GameObject newItem = Instantiate(Item);
+        ItemLogicScript itemLogic = newItem.GetComponent<ItemLogicScript>();
+        ItemAniScript itemAni = newItem.GetComponent<ItemAniScript>();
+        itemLogic.InitData(Player, _data);
         PlayerItems[Player].Add(newItem);
-        newItem.GetComponent<ItemAniScript>().slot = PlayerItems[Player].Count - 1;
-        newItem.GetComponent<ItemAniScript>().DrawCardAmine();
+        itemAni.DrawCardAmine();
     }
-    
-    //道具生成
-    private int randomId()
+
+    public void GiveItem(GameObject Player, ItemData _data)
     {
-        weightSum = spawnWeight.Sum();
-        int x = Random.Range(1, weightSum + 1);
-        int s = 0;
-        for (int i = 0; i < spawnWeight.Count; i++)
+        GameObject newItem = Instantiate(Item);
+        ItemLogicScript itemLogic = newItem.GetComponent<ItemLogicScript>();
+        ItemAniScript itemAni = newItem.GetComponent<ItemAniScript>();
+        itemLogic.InitData(Player, _data);
+        Debug.Log(PlayerItems[Player].Count);
+        if (PlayerItems[Player].Count < ItemUpperLimit)
         {
-            s += spawnWeight[i];
-            if (x <= s)
-            {
-                return i;
-            }
+            PlayerItems[Player].Add(newItem);
+            itemAni.slot = PlayerItems[Player].Count - 1;
+            itemAni.DrawCardAmine();
         }
-        return 0;
+        else
+        {
+            itemLogic.isSurplus = true;
+            itemAni.DrawSurplusCardAnime(ItemUpperLimit);
+        }
+    }
+
+    //道具生成
+    private ItemData RandomItem()
+    {
+        // weightSum = spawnWeight.Sum();
+        // int x = Random.Range(1, weightSum + 1);
+        // int s = 0;
+        // for (int i = 0; i < spawnWeight.Count; i++)
+        // {
+        //     s += spawnWeight[i];
+        //     if (x <= s)
+        //     {
+        //         return i;
+        //     }
+        // }
+        // return 0;
+        List<ItemData> WeightedItems = new();
+        GetComponent<ItemDataScript>().items.ForEach((item) =>
+        {
+            for (int i = 1; i <= item.Weight; i++) WeightedItems.Add(item);
+        });
+        ItemData RandomData = WeightedItems[Random.Range(0, WeightedItems.Count)];
+        return RandomData;
     }
 
     [ContextMenu("Generate Item")]
     private void generateItemOnMap()
     {
         GameObject itemOnMap = Instantiate(ItemOnMap);
-        itemOnMap.GetComponent<ItemMapScript>().getPointId(randomId());
+        itemOnMap.GetComponent<ItemMapScript>().InitData(RandomItem());
     }
 
     [ContextMenu("Generate 5 Item")]
