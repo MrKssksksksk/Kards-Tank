@@ -89,7 +89,7 @@ public class ItemAniScript : MonoBehaviour
         seq.Append(transform.DOLocalRotateQuaternion(
                 Quaternion.Euler(Vector3.zero),
                 0.1f));
-        seq.AppendInterval(0.3f);
+        seq.AppendInterval(1f);
         seq.Append(transform.DOMoveY(transform.position.y + 0.2f, 0.3f)).SetEase(Ease.InOutQuad);
         seq.Append(transform.DOMoveY(transform.position.y - 4f, 0.5f)).SetEase(Ease.InOutQuad);
         seq.OnComplete(() => Destroy(gameObject));
@@ -110,7 +110,7 @@ public class ItemAniScript : MonoBehaviour
         seq.Play();
     }
 
-    private void DevelopeCardAnime(int targetSlot)
+    public void DevelopeCardAnime(int targetSlot)
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         Sequence seq = DOTween.Sequence();

@@ -3,25 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - ItemManager
-  - Player1
-  - Player2
-<<<<<<< HEAD
-  - Timer
-=======
-  - Audio
->>>>>>> origin/道具系统重做
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Effect
+  - 
   - Water
   - UI
-  - Player
-  - Smokescreen
-  - Wall
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -13,7 +13,6 @@ public class ItemManagerScript : MonoBehaviour
     public GameObject Item;
     public GameObject Player1;
     public GameObject Player2;
-    public ItemLogicScript itemLogic;
     public Dictionary<GameObject, List<GameObject>> PlayerItems = new();
     public KeyCode P1First, P1Second, P1Third, P2First, P2Second, P2Third;
     //道具生成
@@ -59,10 +58,10 @@ public class ItemManagerScript : MonoBehaviour
             foreach (GameObject itm in pair.Value)
             {
                 GameObject player = pair.Key;
-                itemLogic = itm.GetComponent<ItemLogicScript>();
+                ItemLogicScript itemLogic = itm.GetComponent<ItemLogicScript>();
                 itemLogic.slot = index;
                 itemLogic.isChosen = (SelectedSlots[player] == index);
-                Debug.Log($"{player}的道具槽{itemLogic.slot}中的{itemLogic.MyData.Name}是否被选中 {itemLogic.isChosen}");
+                //Debug.Log($"{player}的道具槽{itemLogic.slot}中的{itemLogic.MyData.Name}是否被选中 {itemLogic.isChosen}");
                 index++;
             }
         }
