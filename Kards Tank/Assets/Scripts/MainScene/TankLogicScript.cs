@@ -13,6 +13,7 @@ public class TankLogicScript : MonoBehaviour
     public GameObject tankEffect;
     public GameObject Item;
     public ItemDataScript itemDataScript;
+    private ItemManagerScript itemManagerScript;
     private SpriteRenderer spriteRenderer;
     private float supplyIncreaseTimer, pinTimer;
     private float gameTimer;
@@ -21,6 +22,7 @@ public class TankLogicScript : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
+        itemManagerScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemManagerScript>();
         if (StaticData.Instance.turn > 1) // 多回合初始化
         {
             StaticData.Instance.playerDatas[tankDataScript.playerIndex].output(tankDataScript);
@@ -64,7 +66,7 @@ public class TankLogicScript : MonoBehaviour
             }
         }
 
-        // 冲击
+        // 子弹冲击免疫
         if (tankDataScript.effect1BulletNum > 0)
         {
             tankDataScript.effects[4] = true;
@@ -73,6 +75,8 @@ public class TankLogicScript : MonoBehaviour
         {
             tankDataScript.effects[4] = false;
         }
+
+
 
         // T-35
         if (gameTimer % 5 < Time.deltaTime) // 每5s一次 共8次
@@ -115,11 +119,11 @@ public class TankLogicScript : MonoBehaviour
             }
         }
 
-        // 守冲
-        if (countItem(10) > 0)
-        {
-            tankDataScript.effects[1] = true;
-        }
+        //// 守冲
+        //if (countItem(10) > 0)
+        //{
+        //    tankDataScript.effects[1] = true;
+        //}
 
         
 
@@ -152,6 +156,30 @@ public class TankLogicScript : MonoBehaviour
         tankDataScript.effects[7] = false;
         gameObject.layer = LayerMask.NameToLayer("Player");
         setTransparent();
+    }
+
+    public void giveShock()
+    {
+        tankDataScript.effects[1] = true;
+    }
+
+    public void removeShock()
+    {
+        if (countItem(10) > 0)
+        {
+
+        }
+        else
+        {
+            tankDataScript.effects[1] = false;
+
+            if (tankDataScript.effects[8] == true) // 暗隐袭击
+            {
+                tankDataScript.effects[8] = false;
+                giveSmokescreen();
+            }
+        }
+        
     }
 
     public void giveItem(int id)
@@ -275,7 +303,13 @@ public class TankLogicScript : MonoBehaviour
 
     public int countItem(int id)
     {
-        return tankDataScript.items.FindAll(t => t.GetComponent<ItemLogicScript>().MyData.Id == 5).Count;
+        // return tankDataScript.items.FindAll(t => t.GetComponent<ItemLogicScript>().MyData.Id == id).Count;
+        int count = 0;
+        itemManagerScript.PlayerItems[gameObject].ForEach(item =>
+        {
+            if (item.GetComponent<ItemLogicScript>().MyData.Id == id) count++;
+        });
+        return count;
     }
 
     public bool canUseItem()

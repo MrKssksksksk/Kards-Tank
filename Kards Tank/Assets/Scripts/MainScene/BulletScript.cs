@@ -50,7 +50,7 @@ public class BulletScript : MonoBehaviour
         if (o.GetComponent<TankDataScript>().effects[1] == true) // ³å»÷
         {
             effect1 = true;
-            o.GetComponent<TankDataScript>().effects[1] = false;
+            o.GetComponent<TankLogicScript>().removeShock();
             o.GetComponent<TankDataScript>().effect1BulletNum++;
         }
 

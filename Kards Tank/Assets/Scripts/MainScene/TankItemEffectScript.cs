@@ -25,7 +25,7 @@ public class TankItemEffectScript : MonoBehaviour
             itemEffect0, itemEffect1, itemEffect2, itemEffect3,
             itemEffect4, itemEffect5, itemEffect6, itemEffect7,
             itemEffect8, itemEffect9, itemEffect10, itemEffect11,
-            itemEffect12, itemEffect13, itemEffect14
+            itemEffect12, itemEffect13, itemEffect14, itemEffect15
         };
     }
 
@@ -99,7 +99,7 @@ public class TankItemEffectScript : MonoBehaviour
 
     void itemEffect10() // ÊØ³å
     {
-        // nothing happens
+        tankLogicScript.giveShock();
     }
 
     void itemEffect11() // ÉÁ»÷Õ½·¨
@@ -133,5 +133,12 @@ public class TankItemEffectScript : MonoBehaviour
         // ÒôÐ§
         enemyTankLogicScript.pin();
         enemyTankLogicScript.damage(10);
+    }
+
+    void itemEffect15() // °µÒþÏ®»÷
+    {
+        // 
+        tankLogicScript.giveShock();
+        tankDataScript.effects[8] = true; // °µÒþÏ®»÷£º³å»÷½áÊøºó¸øÒ»¸öÑÌÄ»
     }
 }

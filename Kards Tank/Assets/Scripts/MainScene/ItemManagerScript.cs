@@ -86,7 +86,7 @@ public class ItemManagerScript : MonoBehaviour
     private void HandleItemInput(GameObject Player, int slot)
     {
         List<GameObject> items = PlayerItems[Player];
-        if (slot >= 0 && slot < items.Count)
+        if (slot >= 0 && slot < items.Count && Player.GetComponent<TankDataScript>().cSupply >= PlayerItems[Player][slot].GetComponent<ItemLogicScript>().MyData.Cost)
         {
             if (SelectedSlots[Player] != slot) //选中了新的道具！
             {
@@ -105,6 +105,7 @@ public class ItemManagerScript : MonoBehaviour
                 Debug.Log($"{Player} 使用了道具槽 {slot} 的道具");
                 SelectedSlots[Player] = -1;
                 PlayerItems[Player][slot].GetComponent<ItemLogicScript>().useItem();
+                Player.GetComponent<TankDataScript>().cSupply -= PlayerItems[Player][slot].GetComponent<ItemLogicScript>().MyData.Cost;
                 PlayerItems[Player].RemoveAt(slot);
             }
         }

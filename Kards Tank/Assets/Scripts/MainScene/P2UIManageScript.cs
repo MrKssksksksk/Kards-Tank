@@ -56,6 +56,11 @@ public class P2UIManageScript : MonoBehaviour
             if (text != "") text += " ";
             text += "伏击";
         }
+        if (tankDataScript.effects[7])
+        {
+            if (text != "") text += " ";
+            text += "烟幕";
+        }
         if (tankLogicScript.isImmune())
         {
             if (text != "") text += " ";
@@ -70,6 +75,16 @@ public class P2UIManageScript : MonoBehaviour
         {
             if (text != "") text += " ";
             text += "无法使用道具";
+        }
+        if (tankDataScript.effects[6])
+        {
+            if (text != "") text += " ";
+            text += "偷袭";
+        }
+        if (tankDataScript.effects[8])
+        {
+            if (text != "") text += " ";
+            text += "暗隐袭击";
         }
 
         nEffectsText.text = text;

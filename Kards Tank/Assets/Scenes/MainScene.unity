@@ -5437,15 +5437,15 @@ MonoBehaviour:
     Tags: ENG ORDER
     data: 0
     canDevelop: 1
-  - Id: 0
-    Name: 
-    Cost: 0
-    Weight: 0
+  - Id: 15
+    Name: "\u6697\u9690\u88AD\u51FB"
+    Cost: 2
+    Weight: 1
     Description: 
-    sprite: {fileID: 0}
-    Tags: 
+    sprite: {fileID: 21300000, guid: 1af51410f15e58d41b66b874299acfe9, type: 3}
+    Tags: JAP ORDER
     data: 0
-    canDevelop: 0
+    canDevelop: 1
   - Id: 0
     Name: 
     Cost: 0
