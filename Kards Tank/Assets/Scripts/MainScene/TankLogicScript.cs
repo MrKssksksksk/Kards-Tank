@@ -184,55 +184,56 @@ public class TankLogicScript : MonoBehaviour
 
     public void giveItem(int id)
     {
-        audioManagerScript.PlaySfx(15);
-            GameObject e = Instantiate(Item);
-        if (tankDataScript.items.Count < 3)
-        {
-            //GameObject e = Instantiate(Item);
-            //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // 参数： owner, slot, id
-            //e.GetComponent<ItemAniScript>().DrawCard();
-            //tankDataScript.items.Add(e);
-        }
-        else
-        {
-            //GameObject e = Instantiate(Item);
-            //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
-            //e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
-        }
+        //audioManagerScript.PlaySfx(15);
+        //    GameObject e = Instantiate(Item);
+        //if (tankDataScript.items.Count < 3)
+        //{
+        //    //GameObject e = Instantiate(Item);
+        //    //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // 参数： owner, slot, id
+        //    //e.GetComponent<ItemAniScript>().DrawCard();
+        //    //tankDataScript.items.Add(e);
+        //}
+        //else
+        //{
+        //    //GameObject e = Instantiate(Item);
+        //    //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
+        //    //e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
+        //}
+        itemManagerScript.GiveItem(gameObject, id);
     }
 
-    public void useItem(int index)
-    {
-        tankDataScript.items[index].GetComponent<ItemLogicScript>().useItem();
-        tankDataScript.items.RemoveAt(index);
-    }
-    public void removeItem(int index)
-    {
-        tankDataScript.items[index].GetComponent<ItemLogicScript>().removeItem();
-        tankDataScript.items.RemoveAt(index);
-    }
+    //public void useItem(int index)
+    //{
+    //    tankDataScript.items[index].GetComponent<ItemLogicScript>().useItem();
+    //    tankDataScript.items.RemoveAt(index);
+    //}
+    //public void removeItem(int index)
+    //{
+    //    tankDataScript.items[index].GetComponent<ItemLogicScript>().removeItem();
+    //    tankDataScript.items.RemoveAt(index);
+    //}
 
-    public int developItem(string tag)
-    {
-        List<int> items = new List<int>();
-        for (int i = 0; i < itemDataScript.items.Count; i++)
-        {
-            if (itemDataScript.items[i].Tags.Contains(tag) && itemDataScript.items[i].canDevelop)
-            {
-                items.Add(i);
-            }
-        }
-        if (items.Count > 0)
-        {
-            int x = UnityEngine.Random.Range(0, items.Count);
-            Debug.Log("develop " + items[x]);
-            return items[x];
-        }
-        else
-        {
-            return -1;
-        }
-    }
+    //public int developItem(string tag)
+    //{
+    //    List<int> items = new List<int>();
+    //    for (int i = 0; i < itemDataScript.items.Count; i++)
+    //    {
+    //        if (itemDataScript.items[i].Tags.Contains(tag) && itemDataScript.items[i].canDevelop)
+    //        {
+    //            items.Add(i);
+    //        }
+    //    }
+    //    if (items.Count > 0)
+    //    {
+    //        int x = UnityEngine.Random.Range(0, items.Count);
+    //        Debug.Log("develop " + items[x]);
+    //        return items[x];
+    //    }
+    //    else
+    //    {
+    //        return -1;
+    //    }
+    //}
 
     public void pushBullet(int id)
     {
