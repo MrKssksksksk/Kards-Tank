@@ -81,30 +81,15 @@ public class TankLogicScript : MonoBehaviour
         // T-35
         if (gameTimer % 5 < Time.deltaTime) // 每5s一次 共8次
         {
-            int t35Num = 0;
-            if (tankDataScript.items.Count >= 1 && tankDataScript.getId(0) == 4) 
+            foreach (GameObject item in itemManagerScript.PlayerItems[gameObject])
             {
-                t35Num++;
-                tankDataScript.addItemData(0, 1); // 等同于 item[0].....data+=1
-                if (tankDataScript.getItemData(0) >= 8) removeItem(0);
-            }
-            if (tankDataScript.items.Count >= 2 && tankDataScript.getId(1) == 4)
-            {
-                t35Num++;
-                tankDataScript.addItemData(1, 1);
-                if (tankDataScript.getItemData(1) >= 8) removeItem(1);
-            }
-            if (tankDataScript.items.Count >= 3 && tankDataScript.getId(2) == 4)
-            {
-                t35Num++;
-                tankDataScript.addItemData(2, 1);
-                if (tankDataScript.getItemData(2) >= 8) removeItem(2);
-            }
-            for (int i = 0; i < t35Num; i++)
-            {
-                audioManagerScript.PlaySfx(1); // 小坦克射击
-                Enemy.GetComponent<TankLogicScript>().damage(5);
-                damage(5);
+                if (item.GetComponent<ItemLogicScript>().MyData.Id == 4) // T-35
+                {
+                    audioManagerScript.PlaySfx(1); // 小坦克射击
+                    Enemy.GetComponent<TankLogicScript>().damage(5);
+                    damage(5);
+                    if (item.GetComponent<ItemLogicScript>().MyData.data >= 8) itemManagerScript.PlayerItems[gameObject].Remove(item);
+                }
             }
         }
 
@@ -264,11 +249,13 @@ public class TankLogicScript : MonoBehaviour
     public void OnBulletNotHitEnemy()
     {
         Debug.Log("bullet not hit enemy");
-        if (countItem(10) > 0)
+        foreach (GameObject item in itemManagerScript.PlayerItems[gameObject])
         {
-            if (tankDataScript.items.Count >= 1 && tankDataScript.getId(0) == 10) removeItem(0);
-            if (tankDataScript.items.Count >= 2 && tankDataScript.getId(1) == 10) removeItem(1);
-            if (tankDataScript.items.Count >= 3 && tankDataScript.getId(2) == 10) removeItem(2);
+            if (item.GetComponent<ItemLogicScript>().MyData.Id == 10) // 守冲
+            {
+                // sfx
+                itemManagerScript.PlayerItems[gameObject].Remove(item);
+            }
         }
 
     }
@@ -276,29 +263,16 @@ public class TankLogicScript : MonoBehaviour
     public void OnEnemyUseItem()
     {
         Debug.Log("enemy use item"); 
-        int KV1Num = countItem(8);
-        if (tankDataScript.items.Count >= 1 && tankDataScript.getId(0) == 8)
+
+        foreach (GameObject item in itemManagerScript.PlayerItems[gameObject])
         {
-            KV1Num++;
-            tankDataScript.addItemData(0, 1);
-            if (tankDataScript.getId(0) >= 4) removeItem(0); // can use 4 times
-        }
-        if (tankDataScript.items.Count >= 2 && tankDataScript.getId(1) == 8)
-        {
-            KV1Num++;
-            tankDataScript.addItemData(1, 1);
-            if (tankDataScript.getId(1) >= 4) removeItem(1);
-        }
-        if (tankDataScript.items.Count >= 3 && tankDataScript.getId(2) == 8)
-        {
-            KV1Num++;
-            tankDataScript.addItemData(2, 1);
-            if (tankDataScript.getId(2) >= 4) removeItem(2);
-        }
-        for (int i = 0; i < KV1Num; i++)
-        {
-            audioManagerScript.PlaySfx(14);
-            Enemy.GetComponent<TankLogicScript>().damage(30);
+            if (item.GetComponent<ItemLogicScript>().MyData.Id == 8) // 金kv
+            {
+                audioManagerScript.PlaySfx(14);
+                Enemy.GetComponent<TankLogicScript>().damage(30);
+                item.GetComponent<ItemLogicScript>().MyData.data++;
+                if (item.GetComponent<ItemLogicScript>().MyData.data >= 4) itemManagerScript.PlayerItems[gameObject].Remove(item);
+            }
         }
     }
 

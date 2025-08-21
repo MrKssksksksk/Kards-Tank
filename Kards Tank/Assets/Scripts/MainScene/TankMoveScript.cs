@@ -23,8 +23,6 @@ public class Tank1MoveScript : MonoBehaviour
     private int chosenItem;
     public float chooseLastingTime;
     private float chooseLastingTimer;
-    private float item0Timer, item3Timer;
-    private bool item0TimerEnable = false, item3TimerEnable = false;
 
 
     // Start is called before the first frame update
