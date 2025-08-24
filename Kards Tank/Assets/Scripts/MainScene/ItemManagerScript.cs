@@ -104,6 +104,10 @@ public class ItemManagerScript : MonoBehaviour
                 //这里放使用道具的代码
                 Debug.Log($"{Player} 使用了道具槽 {slot} 的道具");
                 SelectedSlots[Player] = -1;
+
+                if (Player == Player1) Player2.GetComponent<TankLogicScript>().OnEnemyUseItem();
+                else Player1.GetComponent<TankLogicScript>().OnEnemyUseItem();
+
                 PlayerItems[Player][slot].GetComponent<ItemLogicScript>().useItem();
                 Player.GetComponent<TankDataScript>().cSupply -= PlayerItems[Player][slot].GetComponent<ItemLogicScript>().MyData.Cost;
                 PlayerItems[Player].RemoveAt(slot);
@@ -156,6 +160,9 @@ public class ItemManagerScript : MonoBehaviour
 
     public void GiveItem(GameObject Player, ItemData _data)
     {
+        if (Player == Player1) Player2.GetComponent<TankLogicScript>().OnEnemyDrawItem();
+        else Player1.GetComponent<TankLogicScript>().OnEnemyDrawItem();
+
         GameObject newItem = Instantiate(Item);
         ItemLogicScript itemLogic = newItem.GetComponent<ItemLogicScript>();
         ItemAniScript itemAni = newItem.GetComponent<ItemAniScript>();

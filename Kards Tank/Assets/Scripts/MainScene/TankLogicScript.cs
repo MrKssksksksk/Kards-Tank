@@ -7,12 +7,13 @@ using UnityEngine.Events;
 
 public class TankLogicScript : MonoBehaviour
 {
-    public AudioManagerScript audioManagerScript;
+    private AudioManagerScript audioManagerScript;
     public GameObject Enemy;
-    public TankDataScript tankDataScript;
+    private TankDataScript tankDataScript;
+    private TankItemEffectScript tankItemEffectScript;
     public GameObject tankEffect;
     public GameObject Item;
-    public ItemDataScript itemDataScript;
+    private ItemDataScript itemDataScript;
     private ItemManagerScript itemManagerScript;
     private SpriteRenderer spriteRenderer;
     private float supplyIncreaseTimer, pinTimer;
@@ -20,7 +21,10 @@ public class TankLogicScript : MonoBehaviour
 
     private void Start()
     {
+        audioManagerScript = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagerScript>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        tankDataScript = GetComponent<TankDataScript>();
+        tankItemEffectScript = GetComponent<TankItemEffectScript>();
         itemDataScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemDataScript>();
         itemManagerScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemManagerScript>();
         if (StaticData.Instance.turn > 1) // 多回合初始化
@@ -76,7 +80,7 @@ public class TankLogicScript : MonoBehaviour
             tankDataScript.effects[4] = false;
         }
 
-
+        foreach (UnityAction action in tankItemEffectScript.always) action();
 
         // T-35
         if (gameTimer % 5 < Time.deltaTime) // 每5s一次 共8次
@@ -88,6 +92,7 @@ public class TankLogicScript : MonoBehaviour
                     audioManagerScript.PlaySfx(1); // 小坦克射击
                     Enemy.GetComponent<TankLogicScript>().damage(5);
                     damage(5);
+                    item.GetComponent<ItemLogicScript>().MyData.data++;
                     if (item.GetComponent<ItemLogicScript>().MyData.data >= 8) itemManagerScript.PlayerItems[gameObject].Remove(item);
                 }
             }
@@ -150,75 +155,22 @@ public class TankLogicScript : MonoBehaviour
 
     public void removeShock()
     {
-        if (countItem(10) > 0)
-        {
+        tankDataScript.effects[1] = false;
 
-        }
-        else
+        if (tankDataScript.effects[8] == true) // 暗隐袭击
         {
-            tankDataScript.effects[1] = false;
-
-            if (tankDataScript.effects[8] == true) // 暗隐袭击
-            {
-                tankDataScript.effects[8] = false;
-                giveSmokescreen();
-            }
+            tankDataScript.effects[8] = false;
+            giveSmokescreen();
         }
-        
+
+        foreach (UnityAction action in tankItemEffectScript.removeShock) action();
+
     }
 
     public void giveItem(int id)
     {
-        //audioManagerScript.PlaySfx(15);
-        //    GameObject e = Instantiate(Item);
-        //if (tankDataScript.items.Count < 3)
-        //{
-        //    //GameObject e = Instantiate(Item);
-        //    //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id); // 参数： owner, slot, id
-        //    //e.GetComponent<ItemAniScript>().DrawCard();
-        //    //tankDataScript.items.Add(e);
-        //}
-        //else
-        //{
-        //    //GameObject e = Instantiate(Item);
-        //    //e.GetComponent<ItemLogicScript>().getData(gameObject, tankDataScript.items.Count, id);
-        //    //e.GetComponent<ItemAniScript>().DrawSurplusCardAnime();
-        //}
         itemManagerScript.GiveItem(gameObject, id);
     }
-
-    //public void useItem(int index)
-    //{
-    //    tankDataScript.items[index].GetComponent<ItemLogicScript>().useItem();
-    //    tankDataScript.items.RemoveAt(index);
-    //}
-    //public void removeItem(int index)
-    //{
-    //    tankDataScript.items[index].GetComponent<ItemLogicScript>().removeItem();
-    //    tankDataScript.items.RemoveAt(index);
-    //}
-
-    //public int developItem(string tag)
-    //{
-    //    List<int> items = new List<int>();
-    //    for (int i = 0; i < itemDataScript.items.Count; i++)
-    //    {
-    //        if (itemDataScript.items[i].Tags.Contains(tag) && itemDataScript.items[i].canDevelop)
-    //        {
-    //            items.Add(i);
-    //        }
-    //    }
-    //    if (items.Count > 0)
-    //    {
-    //        int x = UnityEngine.Random.Range(0, items.Count);
-    //        Debug.Log("develop " + items[x]);
-    //        return items[x];
-    //    }
-    //    else
-    //    {
-    //        return -1;
-    //    }
-    //}
 
     public void pushBullet(int id)
     {
@@ -243,42 +195,41 @@ public class TankLogicScript : MonoBehaviour
 
     public void OnBulletHitEnemy()
     {
+        Debug.Log("bullet hit enemy");
 
+        foreach (UnityAction action in tankItemEffectScript.bulletHitEnemy) action();
     }
 
-    public void OnBulletNotHitEnemy()
+    public void OnBulletSelf()
     {
-        Debug.Log("bullet not hit enemy");
-        foreach (GameObject item in itemManagerScript.PlayerItems[gameObject])
-        {
-            if (item.GetComponent<ItemLogicScript>().MyData.Id == 10) // 守冲
-            {
-                // sfx
-                itemManagerScript.PlayerItems[gameObject].Remove(item);
-            }
-        }
+        Debug.Log("bullet hit self");
 
+        foreach (UnityAction action in tankItemEffectScript.bulletHitSelf) action();
+    }
+
+    public void OnBulletHitNothing()
+    {
+        Debug.Log("bullet hit nothing");
+
+        foreach (UnityAction action in tankItemEffectScript.bulletHitNothing) action();
     }
 
     public void OnEnemyUseItem()
     {
         Debug.Log("enemy use item"); 
 
-        foreach (GameObject item in itemManagerScript.PlayerItems[gameObject])
-        {
-            if (item.GetComponent<ItemLogicScript>().MyData.Id == 8) // 金kv
-            {
-                audioManagerScript.PlaySfx(14);
-                Enemy.GetComponent<TankLogicScript>().damage(30);
-                item.GetComponent<ItemLogicScript>().MyData.data++;
-                if (item.GetComponent<ItemLogicScript>().MyData.data >= 4) itemManagerScript.PlayerItems[gameObject].Remove(item);
-            }
-        }
+        foreach (UnityAction action in tankItemEffectScript.enemyUseItem) action();
+    }
+
+    public void OnEnemyDrawItem()
+    {
+        Debug.Log("enemy use item");
+
+        foreach (UnityAction action in tankItemEffectScript.enemyDrawItem) action();
     }
 
     public int countItem(int id)
     {
-        // return tankDataScript.items.FindAll(t => t.GetComponent<ItemLogicScript>().MyData.Id == id).Count;
         int count = 0;
         itemManagerScript.PlayerItems[gameObject].ForEach(item =>
         {

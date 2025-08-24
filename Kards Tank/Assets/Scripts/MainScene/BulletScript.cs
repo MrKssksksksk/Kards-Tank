@@ -35,8 +35,8 @@ public class BulletScript : MonoBehaviour
     public void getBulletData(GameObject o, Vector2 d)
     {
         bulletHitEnemy.AddListener(o.GetComponent<TankLogicScript>().OnBulletHitEnemy);
-        bulletHitNothing.AddListener(o.gameObject.GetComponent<TankLogicScript>().OnBulletNotHitEnemy);
-        bulletHitSelf.AddListener(o.gameObject.GetComponent<TankLogicScript>().OnBulletNotHitEnemy);
+        bulletHitNothing.AddListener(o.gameObject.GetComponent<TankLogicScript>().OnBulletHitNothing);
+        bulletHitSelf.AddListener(o.gameObject.GetComponent<TankLogicScript>().OnBulletSelf);
 
         direction = d;
         owner = o;

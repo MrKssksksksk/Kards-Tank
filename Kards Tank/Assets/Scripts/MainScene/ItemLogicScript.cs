@@ -76,7 +76,7 @@ public class ItemLogicScript : MonoBehaviour
 
     public void useItem()
     {
-        owner.GetComponent<TankItemEffectScript>().functions[MyData.Id]();
+        owner.GetComponent<TankItemEffectScript>().useItem[MyData.Id]();
         itemAni.UseCard();
     }
 

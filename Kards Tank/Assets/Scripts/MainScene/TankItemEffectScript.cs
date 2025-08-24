@@ -10,7 +10,7 @@ public class TankItemEffectScript : MonoBehaviour
     private TankLogicScript enemyTankLogicScript;
     private ItemManagerScript itemManagerScript;
     private AudioManagerScript audioManagerScript;
-    public List<UnityAction> functions;
+    public List<UnityAction> always, useItem, drawItem, enemyUseItem, enemyDrawItem, removeShock, bulletHitEnemy, bulletHitSelf, bulletHitNothing;
     private Dictionary<int, Coroutine> effectLastingTime = new Dictionary<int, Coroutine>();
 
     private void Start()
@@ -20,12 +20,44 @@ public class TankItemEffectScript : MonoBehaviour
         enemyTankLogicScript = tankLogicScript.Enemy.GetComponent<TankLogicScript>();
         itemManagerScript = GameObject.FindGameObjectWithTag("ItemManager").GetComponent<ItemManagerScript>();
         audioManagerScript = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagerScript>();
-        functions = new List<UnityAction>
+        always = new List<UnityAction>
+        {
+            presenceEffect10_1
+        };
+        useItem = new List<UnityAction>
         {
             itemEffect0, itemEffect1, itemEffect2, itemEffect3,
             itemEffect4, itemEffect5, itemEffect6, itemEffect7,
             itemEffect8, itemEffect9, itemEffect10, itemEffect11,
             itemEffect12, itemEffect13, itemEffect14, itemEffect15
+        };
+        drawItem = new List<UnityAction>
+        {
+
+        };
+        enemyUseItem = new List<UnityAction>
+        {
+            presenceEffect8
+        };
+        enemyDrawItem = new List<UnityAction>
+        {
+
+        };
+        removeShock = new List<UnityAction>
+        {
+            
+        };
+        bulletHitEnemy = new List<UnityAction>
+        {
+
+        };
+        bulletHitSelf = new List<UnityAction>
+        {
+            presenceEffect10_2
+        };
+        bulletHitNothing = new List<UnityAction>
+        {
+            presenceEffect10_2
         };
     }
 
@@ -89,6 +121,19 @@ public class TankItemEffectScript : MonoBehaviour
     {
         // nothing happens
     }
+    void presenceEffect8()
+    {
+        foreach (GameObject item in itemManagerScript.PlayerItems[gameObject])
+        {
+            if (item.GetComponent<ItemLogicScript>().MyData.Id == 8) // 金kv
+            {
+                audioManagerScript.PlaySfx(14);
+                tankLogicScript.Enemy.GetComponent<TankLogicScript>().damage(30);
+                item.GetComponent<ItemLogicScript>().MyData.data++;
+                if (item.GetComponent<ItemLogicScript>().MyData.data >= 4) itemManagerScript.PlayerItems[gameObject].Remove(item);
+            }
+        }
+    }
 
     void itemEffect9() // 海军力量
     {
@@ -99,7 +144,22 @@ public class TankItemEffectScript : MonoBehaviour
 
     void itemEffect10() // 守冲
     {
-        tankLogicScript.giveShock();
+        // 无
+    }
+    void presenceEffect10_1() // 无法失去冲击
+    {
+        if (tankDataScript.effects[1] == false) tankLogicScript.giveShock();
+    }
+    void presenceEffect10_2() // 未命中时失去此道具
+    {
+        foreach (GameObject item in itemManagerScript.PlayerItems[gameObject])
+        {
+            if (item.GetComponent<ItemLogicScript>().MyData.Id == 10) // 守冲
+            {
+                // sfx
+                itemManagerScript.PlayerItems[gameObject].Remove(item);
+            }
+        }
     }
 
     void itemEffect11() // 闪击战法
